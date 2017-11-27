@@ -5,45 +5,41 @@ import com.inzynieria.insurance.dto.UserDto;
 import com.inzynieria.insurance.model.User;
 import com.inzynieria.insurance.repository.UserRepository;
 import com.inzynieria.insurance.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
 
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     UserRepository userRepository;
     @Autowired
     UserService userService;
 
-    @RequestMapping(value="/add")
-    public String createUser(){
 
-        System.out.println("Dodawanie informacji użytkownika do bazy");
-        User user= new User();
-        user.setUsername("krzychuj");
-        user.setName("Krzychu");
-        user.setSurname("Jarzyna");
-        user.setEmail("jarzyna@wp.pl");
-        user.setRole("USER");
+    @RequestMapping(value="/add", method = RequestMethod.POST)
+    public String createUser(@RequestBody User user){
+
+        LOGGER.info("Dodawanie informacji użytkownika do bazy");
         userRepository.save(user);
-        return "user/user";
+        return "Zarejestrowano pomyślnie";
     }
 
     @RequestMapping(value="/update/{id}/{username}")
     public String updateUser(@PathVariable(value="id") Integer id, @PathVariable(value="username") String username) throws ValidationException {
 
 
-        System.out.println("Update użytkownika w bazie o ID= "+id);
+        LOGGER.info("Update użytkownika w bazie o ID= "+id);
         User user= userRepository.findOne(id);
         UserDto userToUpdate= new UserDto();
         userToUpdate.setIdUser(user.getIdUser());
@@ -53,6 +49,6 @@ public class UserController {
         userToUpdate.setEmail("anna@wp.pl");
         userToUpdate.setRole("ADMIN");
         userService.updateUser(userToUpdate, id);
-        return "user/userAdd";
+        return "user/userUpdate";
     }
 }

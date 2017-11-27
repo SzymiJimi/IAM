@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
         @Autowired
         DataBaseController dataBaseController;
 
-//        @RequestMapping(value="/home")
-//        public void home(){
-//            dataBaseController.create();
-//        }
+       @RequestMapping(value="/home")
+        public String home(){
+            return "home";
+        }
 
 
 

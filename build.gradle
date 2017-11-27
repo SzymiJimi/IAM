@@ -19,10 +19,6 @@ group = 'com.inzynieria'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
-jar {
-	baseName = 'gs-serving-web-content'
-	version =  '0.1.0'
-}
 
 repositories {
 	mavenCentral()
@@ -30,11 +26,11 @@ repositories {
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-orm')
+
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-cache')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile('org.springframework.boot:spring-boot-starter-security')
@@ -43,8 +39,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-web-services')
 	compile('org.springframework.boot:spring-boot-devtools')
+    compile ('org.apache.tomcat:tomcat-dbcp:8.0.30')
 	runtime('org.springframework.boot:spring-boot-devtools')
-
 	compile ('mysql:mysql-connector-java')
 	runtime('mysql:mysql-connector-java')
 	compileOnly('org.projectlombok:lombok')
