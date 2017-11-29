@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
             return "home";
         }
 
+        @RequestMapping(value="/login")
+          public String login(){
+         return "login/login";
+            }
 
 
 }

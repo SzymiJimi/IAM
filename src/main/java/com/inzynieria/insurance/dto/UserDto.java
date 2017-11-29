@@ -10,8 +10,8 @@ import lombok.Data;
 public class UserDto {
 
     private Integer idUser;
-
     private String username;
+    private String password;
     private String name;
     private String surname;
     private String email;
@@ -21,9 +21,10 @@ public class UserDto {
 
     }
 
-    public UserDto(Integer idUser, String username, String name, String surname, String email, String role) {
+    public UserDto(Integer idUser, String username, String password ,String name, String surname, String email, String role) {
         this.idUser = idUser;
         this.username = username;
+        this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -44,6 +45,14 @@ public class UserDto {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

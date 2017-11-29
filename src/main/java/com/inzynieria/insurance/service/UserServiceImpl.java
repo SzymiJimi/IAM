@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = userRepository.findOne(id);
         user.setRole(userDto.getRole());
+        user.setPassword(userDto.getPassword());
         user.setName(userDto.getName());
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());

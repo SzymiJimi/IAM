@@ -4,6 +4,7 @@ package com.inzynieria.insurance.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
@@ -18,6 +19,7 @@ public class DataBaseConfig {
     @Autowired
     private Environment env;
 
+    @Primary
     @Bean(name = "mysqlDB")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

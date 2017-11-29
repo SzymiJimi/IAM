@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zakład ubezpieczen</title>
     <meta charset="utf-8" />
@@ -16,41 +16,75 @@
     <h3 style="color:blue">Zakład ubezpieczen pseudo rejestracja</h3>
 
     <div ng-controller="postcontroller">
-        <form class="form-horizontal" name="customerForm" ng-submit="submitForm()">
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="loginID">Login:</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="username" id="loginID"
-                           placeholder="Enter login" ng-model="username"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="nameID">Name:</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="name" id="nameID"
-                           placeholder="Enter name" ng-model="name"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="lastnameID">Surname:</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="surname" id="lastnameID"
-                           placeholder="Enter surname" ng-model="surname"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2" for="emailID">Email:</label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" name="email" id="emailID"
-                           placeholder="Enter email" ng-model="email"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Zarejestruj</button>
-                </div>
-            </div>
+
+
+        <form  name='f'  ng-controller="postcontroller" ng-submit="submitForm()">
+            <table>
+                <tr>
+                    <td>Login:</td>
+                    <td><input type="text" name="username" value="" ng-model="username"/> </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password" ng-model="password" /> </td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" value="" ng-model="name" /> </td>
+                </tr>
+                <tr>
+                    <td>Surname:</td>
+                    <td><input type="text" name="surname" value="" ng-model="surname"/> </td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="" ng-model="email"/> </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input name="submit" type="submit" value="Zarejestruj"/> </td>
+                </tr>
+            </table>
         </form>
+
+        <a th:href="@{/logout}">Wyloguj się</a>
+
+
+
+        <!--<form class="form-horizontal" name="customerForm" ng-submit="submitForm()">-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label col-sm-2" for="loginID">Login:</label>-->
+                <!--<div class="col-sm-5">-->
+                    <!--<input type="text" class="form-control" name="username" id="loginID"-->
+                           <!--placeholder="Enter login" ng-model="username"/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label col-sm-2" for="nameID">Name:</label>-->
+                <!--<div class="col-sm-5">-->
+                    <!--<input type="text" class="form-control" name="name" id="nameID"-->
+                           <!--placeholder="Enter name" ng-model="name"/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label col-sm-2" for="lastnameID">Surname:</label>-->
+                <!--<div class="col-sm-5">-->
+                    <!--<input type="text" class="form-control" name="surname" id="lastnameID"-->
+                           <!--placeholder="Enter surname" ng-model="surname"/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label class="control-label col-sm-2" for="emailID">Email:</label>-->
+                <!--<div class="col-sm-5">-->
+                    <!--<input type="text" class="form-control" name="email" id="emailID"-->
+                           <!--placeholder="Enter email" ng-model="email"/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<div class="col-sm-offset-2 col-sm-10">-->
+                    <!--<button type="submit" class="btn btn-default">Zarejestruj</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</form>-->
 
         <div class="col-sm-offset-2 col-sm-10">
             <p>{{postResultMessage}}</p>

@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +29,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
+
     public String createUser(@RequestBody User user){
 
         LOGGER.info("Dodawanie informacji użytkownika do bazy");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "Zarejestrowano pomyślnie";
     }
@@ -47,7 +54,7 @@ public class UserController {
         userToUpdate.setName("Nowak");
         userToUpdate.setSurname("Malinowska");
         userToUpdate.setEmail("anna@wp.pl");
-        userToUpdate.setRole("ADMIN");
+        userToUpdate.setRole("ROLE_ADMIN");
         userService.updateUser(userToUpdate, id);
         return "user/userUpdate";
     }
