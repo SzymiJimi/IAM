@@ -22,5 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
          return "login/login";
             }
 
+        @RequestMapping(value = "/find/findUser")
+        public String findUser(){ return "find/findUser";}
 
 }

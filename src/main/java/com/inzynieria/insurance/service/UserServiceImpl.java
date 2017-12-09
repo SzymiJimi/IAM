@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.ValidationException;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,11 +33,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer id) throws ValidationException {
-        if (id == null) {
-            throw new ValidationException("The ID cannot be null");
+    public User getUserByName(String name ) throws ValidationException {
+        if (name == null) {
+            throw new ValidationException("The name cannot be null");
         }
-        return userRepository.findOne(id);
+        return userRepository.findUserByName(name);
     }
 
 

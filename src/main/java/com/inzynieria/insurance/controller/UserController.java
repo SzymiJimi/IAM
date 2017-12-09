@@ -8,14 +8,12 @@ import com.inzynieria.insurance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
+import java.util.List;
 
 
 @RestController
@@ -51,11 +49,22 @@ public class UserController {
         UserDto userToUpdate= new UserDto();
         userToUpdate.setIdUser(user.getIdUser());
         userToUpdate.setUsername(username);
+        userToUpdate.setPassword("haslo");
         userToUpdate.setName("Nowak");
         userToUpdate.setSurname("Malinowska");
         userToUpdate.setEmail("anna@wp.pl");
         userToUpdate.setRole("ROLE_ADMIN");
         userService.updateUser(userToUpdate, id);
         return "user/userUpdate";
+    }
+
+
+
+    @RequestMapping(value="/find")
+    public List<User> findUser(@RequestBody String value)
+    {
+        LOGGER.info("Wyszukiwanie użytkownika w bazie");
+        List<User> users= userRepository.findUserByNameOrSurnameOrUsernameOrEmail(value, value,value, value);
+        return users;
     }
 }
