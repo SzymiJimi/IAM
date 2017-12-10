@@ -1,9 +1,9 @@
 var app = angular.module('app',[]);
-app.controller('findUserController', ['$scope','$http','findUserService', function($scope, $http, findUserService) {
+app.controller('findOfferController', ['$scope','$http','findOfferService', function($scope, $http, findOfferService) {
 
 
     $scope.submitForm = function(){
-        var url = "http://localhost:8090/user/find";
+        var url = "http://localhost:8090/offer/find";
 
         var config = {
             headers : {
@@ -14,9 +14,9 @@ app.controller('findUserController', ['$scope','$http','findUserService', functi
         var value = $scope.name;
         $scope.postResult=[];
 
-        findUserService.findUserInDB(url, value, config).then(function (result) {
+        findOfferService.findOfferInDB(url, value, config).then(function (result) {
             angular.copy(result, $scope.postResult);
-            $scope.response="Znaleziono użytkownika!";
+            $scope.response="Znaleziono umowe!";
 
         });
 
@@ -24,4 +24,3 @@ app.controller('findUserController', ['$scope','$http','findUserService', functi
 
     }
 }]);
-
