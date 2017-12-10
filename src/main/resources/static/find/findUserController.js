@@ -18,8 +18,12 @@
 
         findUserService.findUserInDB(url, value, config).then(function (result) {
             angular.copy(result, $scope.postResult);
+            if($scope.postResult.length===0)
+            {
+                $scope.response="Nie znaleziono użytkownika w bazie!";
+            }else{
             $scope.response="Znaleziono użytkownika!";
-
+            }
         });
 
 
