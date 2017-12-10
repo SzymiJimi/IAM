@@ -82,4 +82,7 @@ import java.security.Principal;
         @RequestMapping(value = "/client/clientData")
         public String clientData(){ return "client/clientData";}
 
+    @RequestMapping(value = "/find/findOffer")
+    public String findOffer(){ return "find/findOffer";}
+
 }
