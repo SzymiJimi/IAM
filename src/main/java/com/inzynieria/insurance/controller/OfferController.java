@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value="/offer")
 public class OfferController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OfferController.class);
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OfferController.class);
