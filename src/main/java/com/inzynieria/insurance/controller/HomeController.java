@@ -28,4 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
         @RequestMapping(value = "/client/clientData")
         public String clientData(){ return "client/clientData";}
 
+    @RequestMapping(value = "/find/findOffer")
+    public String findOffer(){ return "find/findOffer";}
+
 }
