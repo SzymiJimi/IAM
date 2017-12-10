@@ -18,5 +18,5 @@ public interface UserService {
 //
 //    User queryLdapUserAndSaveToDatabase(String username) throws ResourceNotFoundException;
 
-    User getUserByName(String name) throws ValidationException;
+    List<User> findUser(String name) throws ValidationException;
 }

@@ -11,13 +11,17 @@ app.controller('findUserController', ['$scope','$http','findUserService', functi
             }
         };
 
-        var value = $scope.value;
+        var value = $scope.name;
         $scope.postResult=[];
 
         findUserService.findUserInDB(url, value, config).then(function (result) {
             angular.copy(result, $scope.postResult);
+            if($scope.postResult.length===0)
+            {
+                $scope.response="Nie znaleziono użytkownika w bazie!";
+            }else{
             $scope.response="Znaleziono użytkownika!";
-
+            }
         });
 
 

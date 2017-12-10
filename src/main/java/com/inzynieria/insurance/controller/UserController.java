@@ -61,10 +61,10 @@ public class UserController {
 
 
     @RequestMapping(value="/find")
-    public List<User> findUser(@RequestBody String value)
-    {
+    public List<User> findUser(@RequestBody String value) throws ValidationException {
         LOGGER.info("Wyszukiwanie użytkownika w bazie");
-        List<User> users= userRepository.findUserByNameOrSurnameOrUsernameOrEmail(value, value,value, value);
+        List<User> users= userService.findUser(value);
+        LOGGER.info("Ilosc znalezionych userów: "+ users.size());
         return users;
     }
 }
