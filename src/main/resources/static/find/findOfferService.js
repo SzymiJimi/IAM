@@ -1,8 +1,4 @@
-(function () {
-    'use strict';
-    var app= angular.module('app');
-
-    app.service('findOfferService', function ($http, $q) {
+angular.module('app').service('findOfferService', function ($http, $q) {
     var result = [];
     return {
 
@@ -20,5 +16,4 @@
         }
     }
 
-})
-})();
+});

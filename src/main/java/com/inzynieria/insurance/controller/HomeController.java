@@ -82,14 +82,7 @@ import java.security.Principal;
         @RequestMapping(value = "/client/clientData")
         public String clientData(){ return "client/clientData";}
 
-    @PreAuthorize("hasRole('AGENT')")
-    @RequestMapping(value = "/find/findApplication")
-    public String findApplication(){ return "find/findApplication";}
+    @RequestMapping(value = "/find/findOffer")
+    public String findOffer(){ return "find/findOffer";}
 
-    @PreAuthorize("hasRole('USER')")
-    @RequestMapping(value ="/application/applicationAdd")
-    public String addApplication(){return "application/applicationAdd";}
-
-    @RequestMapping(value = "/application/applicationData")
-    public String applicationData(){ return "application/applicationData";}
 }
