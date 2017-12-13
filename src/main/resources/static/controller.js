@@ -3,7 +3,6 @@ app.controller('postcontroller', function($scope, $http, $location) {
 
     $scope.submitForm = function(){
         var url = "http://localhost:8090/user/add";
-
         var config = {
             headers : {
                 Accept: 'text/html'

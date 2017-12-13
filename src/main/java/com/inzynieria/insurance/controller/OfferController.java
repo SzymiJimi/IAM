@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,18 +23,17 @@ public class OfferController {
     OfferRepository offerRepository;
     @Autowired
     OfferService offerService;
-    @RequestMapping(value="/add")
-    public void create()
-    {
-        System.out.println("HAAAAAAAAAAAAAALO: wyświetlam informacje");
-        Offer offer=new Offer();
-        offer.setName("Przyklad");
-        offer.setInformation("tezprzyklad");
-        offer.setInsurancetype("1");
-        offer.setUser_start_age(24);
-        offer.setUser_end_age(26);
+
+    @RequestMapping(value="/add", method = RequestMethod.POST)
+
+    public String createOffer(@RequestBody Offer offer){
+
+        LOGGER.info("Dodawanie informacji oferty do bazy");
         offerRepository.save(offer);
+        return "Dodano pomyślnie";
     }
+
+
 
     @RequestMapping(value="/find")
     public List<Offer> findOffer(@RequestBody String value)
