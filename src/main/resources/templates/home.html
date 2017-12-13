@@ -15,10 +15,10 @@
 
     <h3 style="color:blue">Zakład ubezpieczen pseudo rejestracja</h3>
 
-    <div ng-controller="postcontroller">
+    <div ng-controller="homeController">
 
 
-        <form  name='f'  ng-controller="postcontroller" ng-submit="submitForm()">
+        <form  name='f' ng-submit="submitForm()">
             <table>
                 <tr>
                     <td>Login:</td>
@@ -54,65 +54,14 @@
                 </tr>
             </table>
         </form>
-
-
-
-
-
-        <!--<form class="form-horizontal" name="customerForm" ng-submit="submitForm()">-->
-            <!--<div class="form-group">-->
-                <!--<label class="control-label col-sm-2" for="loginID">Login:</label>-->
-                <!--<div class="col-sm-5">-->
-                    <!--<input type="text" class="form-control" name="username" id="loginID"-->
-                           <!--placeholder="Enter login" ng-model="username"/>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label class="control-label col-sm-2" for="nameID">Name:</label>-->
-                <!--<div class="col-sm-5">-->
-                    <!--<input type="text" class="form-control" name="name" id="nameID"-->
-                           <!--placeholder="Enter name" ng-model="name"/>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label class="control-label col-sm-2" for="lastnameID">Surname:</label>-->
-                <!--<div class="col-sm-5">-->
-                    <!--<input type="text" class="form-control" name="surname" id="lastnameID"-->
-                           <!--placeholder="Enter surname" ng-model="surname"/>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label class="control-label col-sm-2" for="emailID">Email:</label>-->
-                <!--<div class="col-sm-5">-->
-                    <!--<input type="text" class="form-control" name="email" id="emailID"-->
-                           <!--placeholder="Enter email" ng-model="email"/>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<div class="col-sm-offset-2 col-sm-10">-->
-                    <!--<button type="submit" class="btn btn-default">Zarejestruj</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</form>-->
-
-        <div class="col-sm-offset-2 col-sm-10">
-            <p>{{postResultMessage}}</p>
-        </div>
     </div>
 
-
-</div>
-
-
-
-<div class="container" ng-app="app1">
+<!--<div class="container" ng-app="app">-->
 
     <h3 style="color:blue">Dodaj oferte </h3>
 
-    <div ng-controller="postcontroller">
-
-
-        <form  name='o'  ng-controller="postcontroller"  ng-submit="submitForm()">
+    <div ng-controller="offerController">
+        <form  name='o'   ng-submit="acceptForm()">
             <table>
                 <tr>
                     <td>Id client:</td>
@@ -134,16 +83,14 @@
                     <td colspan="2"><input name="submit" type="submit" value="Dodaj"/> </td>
                 </tr>
             </table>
+            {{postMessage}}
         </form>
 
 
-        <div class="col-sm-offset-2 col-sm-10">
-            <p>{{postResultMessage}}</p>
-        </div>
     </div>
 </div>
 
-
+<!--</div>-->
 
 
 
