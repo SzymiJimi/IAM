@@ -15,10 +15,10 @@
 
     <h3 style="color:blue">Zakład ubezpieczen pseudo rejestracja</h3>
 
-    <div ng-controller="postcontroller">
+    <div ng-controller="homeController">
 
 
-        <form  name='f'  ng-controller="postcontroller" ng-submit="submitForm()">
+        <form  name='f' ng-submit="submitForm()">
             <table>
                 <tr>
                     <td>Login:</td>
@@ -54,26 +54,14 @@
                 </tr>
             </table>
         </form>
-
-
-        <div class="col-sm-offset-2 col-sm-10">
-            <p>{{postResultMessage}}</p>
-        </div>
     </div>
 
-
-</div>
-
-
-
-<div class="container" ng-app="app1">
+<!--<div class="container" ng-app="app">-->
 
     <h3 style="color:blue">Dodaj oferte </h3>
 
-    <div ng-controller="postcontroller">
-
-
-        <form  name='o'  ng-controller="postcontroller"  ng-submit="submitForm()">
+    <div ng-controller="offerController">
+        <form  name='o'   ng-submit="acceptForm()">
             <table>
                 <tr>
                     <td>Id client:</td>
@@ -95,16 +83,14 @@
                     <td colspan="2"><input name="submit" type="submit" value="Dodaj"/> </td>
                 </tr>
             </table>
+            {{postMessage}}
         </form>
 
 
-        <div class="col-sm-offset-2 col-sm-10">
-            <p>{{postResultMessage}}</p>
-        </div>
     </div>
 </div>
 
-
+<!--</div>-->
 
 
 
