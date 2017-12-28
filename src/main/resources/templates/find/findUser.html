@@ -28,20 +28,17 @@
             <tr>
                 <td>{{response}}</td>
             </tr>
-            <tr ng-repeat="result in postResult">
+            <tr ng-repeat="result in postResult"  ng-click="selectUser(result.idUser)">
                 <td> Imie:    </td>
                 <td>{{result.name}}</td>
                 <td>Nazwisko:   </td>
                 <td>{{result.surname}}</td>
                 <td>Email:    </td>
                 <td>{{result.email}}</td>
-                <td><a href="/client/clientData">Wyświetl</a></td>
             </tr>
-
 
         </table>
     </form>
-
 
 </div>
 </div>

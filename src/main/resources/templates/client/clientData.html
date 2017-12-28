@@ -1,17 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="app"  xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Dane użytkownika</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
-    <script src="clientDataController.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"  ></script>
+    <script src="http://localhost:8090/client/clientDataController.js"  ></script>
 
 </head>
 <body>
 
-Wyświetlanie danych użutkownika...
 
+Wyświetlanie danych użytkownika...
+
+<div  ng-controller="clientDataController" >
+    <table >
+        <tr>
+            <td>Imie:</td>
+            <td>{{postResult.name}} </td>
+        </tr>
+        <tr>
+            <td>Nazwisko:</td>
+            <td>{{postResult.surname}} </td>
+        </tr>
+        <tr>
+            <td>Nick:</td>
+            <td>{{postResult.username}} </td>
+        </tr> <tr>
+        <td>Email:</td>
+        <td>{{postResult.email}} </td>
+    </tr>
+    </table>
+
+</div>
 </body>
 </html>
