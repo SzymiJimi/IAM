@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="myCtrl">
+    <h3> All User List</h3>
+    <ul>
+        <li ng-repeat="appUser in appUserList">{{appUser}}</li>
+    </ul>
+
+    <br/>
+    <h3> Create New User</h3>
+    <form ng-submit="postUser()">
+        <input type="text" ng-model="userName"/>
+        <input type="text" ng-model="password"/>
+        <input type="submit" value="Submit"/>
+    </form>
+    {{newAppUser}}
+
+    <br/>
+    <h3> Get a User by Id</h3>
+    <form ng-submit="getUserById()">
+    <form ng-submit="getUserById()">
+        <input type="text" ng-model="id"/>
+        <input type="submit" value="Submit"/>
+    </form>
+    {{oneUser}}
+
+    <br/>
+    <h3> Update a User by Id</h3>
+    <form ng-submit="updateAppUser()">
+        <input type="text" ng-model="id"/>
+        <input type="text" ng-model="userName"/>
+        <input type="text" ng-model="password"/>
+        <input type="submit" value="Submit"/>
+    </form>
+    {{updatedUser}}
+
+    <br/>
+    <h3> Delete a User by Id</h3>
+    <form ng-submit="deleteAppUserById()">
+        <input type="text" ng-model="id"/>
+        <input type="submit" value="Submit"/>
+    </form>
+    {{deleteStatus}}
+</div>
+<script src="resouces/app.js"></script>
+</body>
+</html>
