@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="controller.js"></script>
-    <script src="offerControler.js"></script>
+
 </head>
 <body>
 
@@ -15,10 +15,10 @@
 
     <h3 style="color:blue">Zakład ubezpieczen pseudo rejestracja</h3>
 
-    <div ng-controller="homeController">
+    <div ng-controller="postcontroller">
 
 
-        <form  name='f' ng-submit="submitForm()">
+        <form  name='f'  ng-controller="postcontroller" ng-submit="submitForm()">
             <table>
                 <tr>
                     <td>Login:</td>
@@ -45,8 +45,6 @@
                 </tr>
                 <tr>
                     <td> <a href="find/findUser">Wyszukaj usera</a></td>
-                    <td><a href="find/findOffer">Wyszukaj oferty</a></td>
-                    <td><a href=""></a></td>
                 </tr>
                 <tr>
                     <td> <a th:href="@{/logout}">Wyloguj się</a>
@@ -54,45 +52,14 @@
                 </tr>
             </table>
         </form>
+
+
+        <div class="col-sm-offset-2 col-sm-10">
+            <p>{{postResultMessage}}</p>
+        </div>
     </div>
 
-<!--<div class="container" ng-app="app">-->
 
-    <h3 style="color:blue">Dodaj oferte </h3>
-
-    <div ng-controller="offerController">
-        <form  name='o'   ng-submit="acceptForm()">
-            <table>
-                <tr>
-                    <td>Id client:</td>
-                    <td><input type="text" name="idclient" value="" ng-model="idclient"/> </td>
-                </tr>
-                <tr>
-                    <td>Information:</td>
-                    <td><input type="text" name="information" ng-model="information" /> </td>
-                </tr>
-                <tr>
-                    <td>Typ:</td>
-                    <td><input type="text" name="insurancetype" value="" ng-model="insurancetype" /> </td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" name="name" value="" ng-model="name"/> </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input name="submit" type="submit" value="Dodaj"/> </td>
-                </tr>
-            </table>
-            {{postMessage}}
-        </form>
-
-
-    </div>
 </div>
-
-<!--</div>-->
-
-
-
 </body>
 </html>
