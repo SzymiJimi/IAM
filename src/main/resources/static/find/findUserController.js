@@ -1,5 +1,7 @@
-var app = angular.module('app',[]);
-app.controller('findUserController', ['$scope','$http','findUserService', function($scope, $http, findUserService) {
+(function () {
+    'use strict';
+    var app= angular.module('app',[]);
+    app.controller('findUserController', ['$scope','$http','findUserService', function($scope, $http, findUserService) {
 
 
     $scope.submitForm = function(){
@@ -29,5 +31,6 @@ app.controller('findUserController', ['$scope','$http','findUserService', functi
          url = "http://localhost:8090/client/show/"+id;
          $window.location.href =url;
     }
-}]);
+}])
+})();
 
