@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Wyszukiwanie wniosków</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <script src="findApplicationController.js"></script>
+    <script src="findApplicationService.js"></script>
+
+</head>
+<body>
+
+<div ng-app="app">
+    <div ng-controller="findApplicationController">
+
+
+        <form  name='f'  ng-controller="findApplicationController" ng-submit="submitForm()">
+            <table>
+                <tr>
+                    <td>Wyszukaj:</td>
+                    <td><input type="text" name="type" value="" ng-model="type"/> </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input name="submit" type="submit" value="Wyszukaj"/> </td>
+                </tr>
+                <tr>
+                    <td>{{response}}</td>
+                </tr>
+                <tr ng-repeat="result in postResult">
+                    <td> Typ:
+                    {{result.type}}</td>
+                    <td>Powód:
+                    {{result.reason}}</td>
+                    <td>Data:
+                        {{result.filling_date}}</td>
+                    <td>Zaakceptowany:
+                    {{result.accepted}}
+                    </td>
+
+                </tr>
+
+
+            </table>
+        </form>
+
+
+    </div>
+</div>
+</body>
+</html>

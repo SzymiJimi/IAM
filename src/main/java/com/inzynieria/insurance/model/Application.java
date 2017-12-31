@@ -1,26 +1,29 @@
-package com.inzynieria.insurance.dto;
+package com.inzynieria.insurance.model;
 
-import com.inzynieria.insurance.model.Application;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.jws.soap.SOAPBinding;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Date;
 
 @Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class ApplicationDto {
-    public ApplicationDto(){}
+@Entity
+public class Application {
 
-    public ApplicationDto(Integer idApplication, Date filling_date, String reason, String type, Integer user_UserId, Integer accepted){
-        this.idApplication=idApplication;
-        this.filling_date=filling_date;
-        this.reason=reason;
-        this.type=type;
-        this.user_UserId= user_UserId;
-        this.accepted=accepted;
-    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idApplication;
+    private Date filling_date;
+    private String reason;
+    private String type;
+    private Integer user_UserId;
+    private Integer accepted;
+
+    public Application() {}
+
 
     public Integer getIdApplication() {
         return idApplication;
@@ -69,11 +72,4 @@ public class ApplicationDto {
     public void setAccepted(Integer accepted) {
         this.accepted = accepted;
     }
-
-    private Integer idApplication;
-    private Date filling_date;
-    private String reason;
-    private String type;
-    private Integer user_UserId;
-    private Integer accepted;
 }
