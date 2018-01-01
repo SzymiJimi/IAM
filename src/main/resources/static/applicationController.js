@@ -14,6 +14,7 @@
             };
 
             var data = {
+                //filling_date: $scope.filling_date,
                 reason: $scope.reason,
                 type: $scope.type,
                 user_UserId: $scope.user_UserId,
