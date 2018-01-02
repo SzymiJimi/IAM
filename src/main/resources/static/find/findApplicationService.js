@@ -14,6 +14,7 @@
                     deffer.resolve(result);
                 });
                 return deffer.promise;
+
             }
         }
 

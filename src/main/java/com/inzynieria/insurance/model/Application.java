@@ -12,7 +12,6 @@ import java.sql.Date;
 @Entity
 public class Application {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idApplication;

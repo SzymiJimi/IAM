@@ -14,5 +14,4 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 
     List<Application> findApplicationByType(String type);
 
-
 }

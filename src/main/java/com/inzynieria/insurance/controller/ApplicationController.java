@@ -30,6 +30,7 @@ public class ApplicationController {
     @Autowired
     ApplicationService applicationService;
 
+
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String createApplication(@RequestBody Application application){
 

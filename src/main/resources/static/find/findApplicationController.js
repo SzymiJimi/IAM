@@ -24,6 +24,7 @@
                 }else{
                     $scope.response="Znaleziono wnioski!";
                 }
+
             });
 
 

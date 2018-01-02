@@ -8,5 +8,4 @@ import java.util.List;
 public interface ApplicationService{
 
     List<Application>  findApplication(String value) throws ValidationException;
-
 }

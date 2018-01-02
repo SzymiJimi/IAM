@@ -14,6 +14,7 @@ public class ApplicationServiceImpl implements ApplicationService{
     @Autowired
     ApplicationRepository applicationRepository;
 
+
     @Override
     public List<Application> findApplication(String value) throws ValidationException {
         if (value == null) {
