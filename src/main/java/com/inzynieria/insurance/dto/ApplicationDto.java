@@ -22,6 +22,8 @@ public class ApplicationDto {
         this.accepted=accepted;
     }
 
+
+
     public Integer getIdApplication() {
         return idApplication;
     }
