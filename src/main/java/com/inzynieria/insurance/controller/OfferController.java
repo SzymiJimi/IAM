@@ -60,7 +60,7 @@ public class OfferController {
     @RequestMapping(value = "/show/{id}")
     public ModelAndView showOffer(@PathVariable(value="id") Integer id)
     {
-        ModelAndView mav = new ModelAndView("/client/clientData");
+        ModelAndView mav = new ModelAndView("/offer/offerData");
        Offer offer  = offerRepository.findOne(id);
         mav.addObject("name",offer.getOffercol());
         mav.addObject("name",offer.getOffercol());
