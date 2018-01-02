@@ -19,4 +19,6 @@ public interface UserService {
 //    User queryLdapUserAndSaveToDatabase(String username) throws ResourceNotFoundException;
 
     List<User> findUser(String name) throws ValidationException;
+
+    List<UserDto> findClient(String data) throws ValidationException;
 }

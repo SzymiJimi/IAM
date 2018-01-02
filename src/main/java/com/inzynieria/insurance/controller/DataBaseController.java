@@ -19,7 +19,7 @@ public class DataBaseController {
         user.setName("Krzychu");
         user.setSurname("Jarzyna");
         user.setEmail("jarzyna@wp.pl");
-        user.setRole("USER");
+        user.setIdRole(10);
         userRepository.save(user);
     }
 }

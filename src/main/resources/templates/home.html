@@ -11,54 +11,20 @@
 </head>
 <body>
 
-<div class="container" ng-app="app">
+<div ng-app="app" ng-controller="homeController">
 
-    <h3 style="color:blue">Zakład ubezpieczen pseudo rejestracja</h3>
+    <h3 style="color:blue">Witaj {{user.name}} na stronie zakładu ubezpieczeń</h3>
 
-    <div ng-controller="postcontroller">
-
-
-        <form  name='f'  ng-controller="postcontroller" ng-submit="submitForm()">
-            <table>
-                <tr>
-                    <td>Login:</td>
-                    <td><input type="text" name="username" value="" ng-model="username"/> </td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="password" ng-model="password" /> </td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" name="name" value="" ng-model="name" /> </td>
-                </tr>
-                <tr>
-                    <td>Surname:</td>
-                    <td><input type="text" name="surname" value="" ng-model="surname"/> </td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="text" name="email" value="" ng-model="email"/> </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input name="submit" type="submit" value="Zarejestruj"/> </td>
-                </tr>
-                <tr>
-                    <td> <a href="find/findUser">Wyszukaj usera</a></td>
-                </tr>
-                <tr>
-                    <td> <a th:href="@{/logout}">Wyloguj się</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
-
-
-        <div class="col-sm-offset-2 col-sm-10">
-            <p>{{postResultMessage}}</p>
-        </div>
-    </div>
-
+    Wybierz czynność:
+    <table>
+    <tr ng-repeat="command in commands | orderBy: 'name'"  ng-click="selectCommand(command.idCommand)">
+        <td>{{command.name}}</td>
+    </tr>
+        <tr>
+            <td> <a th:href="@{/logout}">Wyloguj się</a>
+            </td>
+        </tr>
+    </table>
 
 </div>
 </body>

@@ -1,34 +1,45 @@
-(function () {
-    'use strict';
-    var app= angular.module('app',[]);
-    app.controller('homeController', ['$scope', '$http', function ($scope, $http) {
+var app = angular.module('app', []);
+app.controller('homeController', function($scope, $http, $window) {
 
-        $scope.submitForm = function () {
-            var url = "http://localhost:8090/user/add";
-            var config = {
-                headers: {
-                    Accept: 'text/html'
-                }
-            }
+    $scope.user={};
+    $scope.role={};
+    $scope.commands=[];
+    $scope.response={};
 
-            var data = {
-                username: $scope.username,
-                password: $scope.password,
-                name: $scope.name,
-                surname: $scope.surname,
-                email: $scope.email,
-                role: 'ROLE_USER'
-            };
 
-            $http.post(url, data, config).then(function (response) {
-                $scope.postResultMessage = response.data;
-            }, function error(response) {
-                $scope.postResultMessage = "Error with status: " + response.statusText;
-            });
+    var url = "http://localhost:8090/user/get";
 
-            $scope.firstname = "";
-            $scope.lastname = "";
+    var config = {
+        headers : {
+            Accept: undefined
         }
-    }])
-})();
+    };
+
+    $http.get(url, config).then(function (response) {
+                $scope.response= response;
+                $scope.user = response.data;
+                return $scope.user.roles;
+            }, function error(response) {
+                $scope.postResultMessage = "Error with status: " +  response.statusText;
+                return null;
+            }).then(function (roles) {
+
+        url = "http://localhost:8090/role/get";
+
+        $http.post(url, roles ,config).then(function (response) {
+            angular.copy(response.data, $scope.commands);
+        }, function error(response) {
+            $scope.postResultMessage = "Error with status: " +  response.statusText;
+        });
+    });
+
+    $scope.selectCommand= function (idCommand){
+        console.log(idCommand);
+        url = "http://localhost:8090/role/run/"+idCommand;
+        $http.get(url, config).then(function (response) {
+            $window.location.href =response.data;
+        });
+    }
+
+});
 
