@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, true " + "from user where username=? ")
-                .authoritiesByUsernameQuery("select username, role from user where username = ? ")
+                .authoritiesByUsernameQuery("select user.username, role.name from user, role where role.idRole=user.idRole AND username = ?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
@@ -40,8 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login*").anonymous()
                 .antMatchers("/*")
-                .hasAnyRole("USER", "ADMIN")
-                .anyRequest().hasAnyRole("USER", "ADMIN")
+                .hasAnyRole("USER", "ADMIN", "AGENT")
+                .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT")
                 .and()
                 .formLogin()
                 .loginPage("/login")

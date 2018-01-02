@@ -1,32 +1,45 @@
 var app = angular.module('app', []);
-app.controller('postcontroller', function($scope, $http, $location) {
+app.controller('homeController', function($scope, $http, $window) {
 
-    $scope.submitForm = function(){
-        var url = "http://localhost:8090/user/add";
+    $scope.user={};
+    $scope.role={};
+    $scope.commands=[];
+    $scope.response={};
 
-        var config = {
-            headers : {
-                Accept: 'text/html'
-            }
+
+    var url = "http://localhost:8090/user/get";
+
+    var config = {
+        headers : {
+            Accept: undefined
         }
+    };
 
-        var data = {
-            username: $scope.username,
-            password: $scope.password,
-            name: $scope.name,
-            surname: $scope.surname,
-            email: $scope.email,
-            role: 'ROLE_USER'
-        };
+    $http.get(url, config).then(function (response) {
+                $scope.response= response;
+                $scope.user = response.data;
+                return $scope.user.roles;
+            }, function error(response) {
+                $scope.postResultMessage = "Error with status: " +  response.statusText;
+                return null;
+            }).then(function (roles) {
 
-        $http.post(url, data, config).then(function (response) {
-            $scope.postResultMessage = response.data;
+        url = "http://localhost:8090/role/get";
+
+        $http.post(url, roles ,config).then(function (response) {
+            angular.copy(response.data, $scope.commands);
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " +  response.statusText;
         });
+    });
 
-        $scope.firstname = "";
-        $scope.lastname = "";
+    $scope.selectCommand= function (idCommand){
+        console.log(idCommand);
+        url = "http://localhost:8090/role/run/"+idCommand;
+        $http.get(url, config).then(function (response) {
+            $window.location.href =response.data;
+        });
     }
+
 });
 

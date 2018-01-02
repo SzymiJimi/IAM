@@ -1,9 +1,12 @@
 package com.inzynieria.insurance.dto;
 
 
+import com.inzynieria.insurance.model.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
@@ -15,20 +18,29 @@ public class UserDto {
     private String name;
     private String surname;
     private String email;
-    private String role;
+    private List<RoleDto> roles;
 
     public UserDto(){
 
     }
 
-    public UserDto(Integer idUser, String username, String password ,String name, String surname, String email, String role) {
+    public UserDto(Integer idUser, String username, String password ,String name, String surname, String email) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.role = role;
+    }
+
+    public UserDto(Integer idUser, String username, String password ,String name, String surname, String email, List<RoleDto> roles) {
+        this.idUser = idUser;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.roles = roles;
     }
 
     public Integer getIdUser() {
@@ -79,12 +91,12 @@ public class UserDto {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public List<RoleDto> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(List<RoleDto> role) {
+        this.roles = role;
     }
 
 
