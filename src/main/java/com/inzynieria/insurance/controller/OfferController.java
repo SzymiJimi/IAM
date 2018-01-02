@@ -7,10 +7,8 @@ import com.inzynieria.insurance.repository.OfferRepository;
 import com.inzynieria.insurance.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -43,4 +41,30 @@ public class OfferController {
         LOGGER.info("Ilosc znalezionych offert: "+ offers.size());
         return offers;
     }
+
+    @RequestMapping(value="/showData")
+    public String show()
+    {
+        LOGGER.info("Jestem tutaj");
+        return "";
+    }
+
+
+    @RequestMapping(value = "/show")
+    public Offer setOfferData(@RequestBody Integer value) {
+        Offer offer =offerRepository.findOne(value);
+        return offer;
+    }
+
+
+    @RequestMapping(value = "/show/{id}")
+    public ModelAndView showOffer(@PathVariable(value="id") Integer id)
+    {
+        ModelAndView mav = new ModelAndView("/client/clientData");
+       Offer offer  = offerRepository.findOne(id);
+        mav.addObject("name",offer.getOffercol());
+        mav.addObject("name",offer.getOffercol());
+        return mav;
+    }
+
 }

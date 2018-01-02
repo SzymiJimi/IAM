@@ -28,8 +28,8 @@
                 <tr>
                     <td>{{response}}</td>
                 </tr>
-                <tr ng-repeat="result in postResult">
-                    <td> Nazwa:    </td>
+                <tr ng-repeat="result in postResult"  ng-click="selectOffer(result.idoffer)">
+                    <td> Nazwa oferty:    </td>
                     <td>{{result.name}}</td>
 
                 </tr>
