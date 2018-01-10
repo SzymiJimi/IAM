@@ -1,6 +1,7 @@
 package com.inzynieria.insurance.commands.config;
 
 import com.inzynieria.insurance.commands.CommandInterface;
+import com.inzynieria.insurance.commands.CreateContract;
 import com.inzynieria.insurance.commands.FindClient;
 import com.inzynieria.insurance.repository.CommandRepository;
 import com.inzynieria.insurance.repository.RoleRepository;
@@ -23,7 +24,9 @@ public class CommandsConfig {
     public static void createCommands()
     {
         FindClient findClient = new FindClient(1, "Wyszukaj klienta");
+        CreateContract createContract = new CreateContract(2, "Stwórz umowę");
         commandList.add(findClient);
+        commandList.add(createContract);
     }
 
 

@@ -34,7 +34,6 @@ app.controller('homeController', function($scope, $http, $window) {
     });
 
     $scope.selectCommand= function (idCommand){
-        console.log(idCommand);
         url = "http://localhost:8090/role/run/"+idCommand;
         $http.get(url, config).then(function (response) {
             $window.location.href =response.data;

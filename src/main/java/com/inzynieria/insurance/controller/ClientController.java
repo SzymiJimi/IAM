@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class ClientController {
     }
 
     @RequestMapping(value="/find")
+
     public List<UserDto> findClients(@RequestBody String value) throws ValidationException {
         LOGGER.info("Jestem tutaj");
         List<UserDto> users= userService.findClient(value);

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zakład ubezpieczen</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="http://localhost:8090/contract/newContractController.js"></script>
+
+</head>
+<body>
+
+<div class="container" ng-app="app">
+
+    <h3 style="color:blue">Tworzenie nowego kontraktu </h3>
+
+    <div ng-controller="newContractController">
+
+
+        <form  name='f'  ng-controller="newContractController" ng-submit="submitForm()">
+            <table>
+                <tr>
+                    <td>Imię:</td>
+                    <td>Drugie imie:</td>
+                    <td>Nazwisko:</td>
+                </tr>
+                <tr>
+                    <td><input type="text" ng-model="name"/> </td>
+                    <td><input type="text" ng-model="secondName"/> </td>
+                    <td><input type="text" ng-model="surname" /> </td>
+                </tr>
+                <tr>
+                    <td>PESEL:</td>
+                    <td>Numer dokumentu tożsamości:</td>
+
+                </tr>
+                <tr>
+                    <td><input type="text" ng-model="pesel" /> </td>
+                    <td><input type="text" ng-model="identificationNr"/> </td>
+                </tr>
+                <tr>
+                    <td>Telefon kontaktowy:</td>
+                    <td>Email:</td>
+                </tr>
+                <tr>
+                    <td><input type="text"  ng-model="phone"/> </td>
+                    <td><input type="text"  ng-model="email"/> </td>
+                </tr>
+                <tr>
+                    <td>Miejscowość:</td>
+                    <td>Ulica:</td>
+                    <td>Numer domu:</td>
+                    <td>Numer mieszkania:</td>
+
+                </tr>
+                <tr>
+                    <td><input type="text"  ng-model="place"/> </td>
+                    <td><input type="text"  ng-model="street"/> </td>
+                    <td><input type="text"  ng-model="houseNr"/> </td>
+                    <td><input type="text"  ng-model="flatNr"/> </td>
+                </tr>
+                <tr ng-if="!offerLoaded">
+                    <td>{{offerResult.information}}</td><td>{{offerResult.name}}</td><td>{{offerResult.type}}</td>
+                </tr>
+                    <tr ng-if="offerLoaded">
+                        <td >Numer oferty:</td>
+                    </tr>
+                    <tr ng-if="offerLoaded">
+                        <td colspan="1"><input type="text" name="one" ng-model="offerId"/> </td>
+                        <td colspan="1"><input type="button" ng-click="loadOffer(offerId)" value="Załaduj ofertę"/> </td>
+                    </tr>
+                <tr ng-if="!offerLoaded">
+                    <td colspan="1"><input type="button" ng-click="changeOffer()" value="Zmień ofertę"/> </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="Stwórz umowę"/> </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!--ng-if="offerLoaded"-->
+</div>
+</body>
+</html>
