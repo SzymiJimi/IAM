@@ -1,44 +1,37 @@
-var app = angular.module('app', []);
-app.controller('homeController', function($scope, $http, $window) {
+var app = angular.module('app', ['ngMaterial', 'ngMessages']);
+// nie zapomnijcie w kwadratowe nawiasy dodać 'ngMaterial', 'ngMessages'
+app.controller('homeController', function($scope, $http, $window, homeService) {
 
-    $scope.user={};
+    var config = {
+            headers : {
+                Accept: undefined
+            }
+        };
+
     $scope.role={};
     $scope.commands=[];
     $scope.response={};
 
 
-    var url = "http://localhost:8090/user/get";
+    $scope.loggedUser={};
+    if(homeService.commands.length===0)
+    {
+        homeService.initiate();
+    }
 
-    var config = {
-        headers : {
-            Accept: undefined
-        }
+    $scope.commands=homeService.commands;
+    $scope.loggedUser=homeService.user;
+
+    $scope.selectCommand=function (idCommand) {
+        console.log("Jestem tutaj");
+        homeService.runSelectedCommand(idCommand);
     };
 
-    $http.get(url, config).then(function (response) {
-                $scope.response= response;
-                $scope.user = response.data;
-                return $scope.user.roles;
-            }, function error(response) {
-                $scope.postResultMessage = "Error with status: " +  response.statusText;
-                return null;
-            }).then(function (roles) {
+    $scope.dropDown= function(){
+        document.getElementById("myDropdown").classList.toggle("show");
+    };
 
-        url = "http://localhost:8090/role/get";
-
-        $http.post(url, roles ,config).then(function (response) {
-            angular.copy(response.data, $scope.commands);
-        }, function error(response) {
-            $scope.postResultMessage = "Error with status: " +  response.statusText;
-        });
-    });
-
-    $scope.selectCommand= function (idCommand){
-        url = "http://localhost:8090/role/run/"+idCommand;
-        $http.get(url, config).then(function (response) {
-            $window.location.href =response.data;
-        });
-    }
+    // do tąd
 
 });
 
