@@ -79,10 +79,24 @@ import java.security.Principal;
             return mav;
         }
 
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping(value = "/new/offer")
+    public ModelAndView addOffer(){
+        ModelAndView mav = new ModelAndView("offer/offerAdd");
+        return mav;
+    }
+
         @RequestMapping(value = "/client/clientData")
         public String clientData(){ return "client/clientData";}
 
+//    @RequestMapping(value = "/find/findOffer")
+//    public String findOffer(){ return "find/findOffer";}
+
+    @PreAuthorize("hasRole('AGENT')")
     @RequestMapping(value = "/find/findOffer")
-    public String findOffer(){ return "find/findOffer";}
+    public ModelAndView findOffer(){
+        ModelAndView mav = new ModelAndView("find/findOffer");
+        return mav;
+    }
 
 }
