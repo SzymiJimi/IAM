@@ -23,5 +23,6 @@ app.controller('offerDataController', ['$scope', '$location', '$http' , function
 
     $http.post(url, value, config).then(function (response) {
         $scope.postResult = response.data;
+        console.log(response.data);
     });
 }]);

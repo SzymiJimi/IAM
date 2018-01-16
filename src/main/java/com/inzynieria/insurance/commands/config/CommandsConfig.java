@@ -1,8 +1,6 @@
 package com.inzynieria.insurance.commands.config;
 
-import com.inzynieria.insurance.commands.CommandInterface;
-import com.inzynieria.insurance.commands.CreateContract;
-import com.inzynieria.insurance.commands.FindClient;
+import com.inzynieria.insurance.commands.*;
 import com.inzynieria.insurance.repository.CommandRepository;
 import com.inzynieria.insurance.repository.RoleRepository;
 import org.slf4j.LoggerFactory;
@@ -29,8 +27,12 @@ public class CommandsConfig {
     {
         FindClient findClient = new FindClient(1, "Wyszukaj klienta");
         CreateContract createContract = new CreateContract(2, "Stwórz umowę");
+        AddOffer addOffer=new AddOffer(41, "Dodaj ofertę");
+        FindOffer findOffer= new FindOffer(42, "Wyszukaj oferty");
         commandList.add(findClient);
         commandList.add(createContract);
+        commandList.add(addOffer);
+        commandList.add(findOffer);
     }
 
 
