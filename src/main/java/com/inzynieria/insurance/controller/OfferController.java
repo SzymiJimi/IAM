@@ -28,8 +28,6 @@ public class OfferController {
         offer.setName("Przyklad");
         offer.setInformation("tezprzyklad");
         offer.setInsurancetype("1");
-        offer.setUser_start_age(24);
-        offer.setUser_end_age(26);
         offerRepository.save(offer);
     }
 

@@ -43,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -52,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/*")
-                .hasAnyRole("USER", "ADMIN", "AGENT", "CARSPECIALIST")
-                .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT", "CARSPECIALIST")
+                .hasAnyRole("USER", "ADMIN", "AGENT")
+                .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT")
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler())

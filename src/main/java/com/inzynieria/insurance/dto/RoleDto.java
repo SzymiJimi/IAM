@@ -12,6 +12,7 @@ public class RoleDto {
     private Integer idRole;
     private String name;
 
+
     public RoleDto ()
     {
 

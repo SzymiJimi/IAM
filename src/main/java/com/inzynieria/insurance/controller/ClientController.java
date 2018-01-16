@@ -58,7 +58,7 @@ public class ClientController {
     @RequestMapping(value="/find")
 
     public List<UserDto> findClients(@RequestBody String value) throws ValidationException {
-        LOGGER.info("Jestem tutaj");
+        LOGGER.info("Jestem tutaj, value: "+ value);
         List<UserDto> users= userService.findClient(value);
         return users;
     }

@@ -65,12 +65,6 @@ import java.security.Principal;
         @RequestMapping(value = "/find/findUser")
         public String findUser(){ return "find/findUser";}
 
-    @RequestMapping(value = "/find/findOffer")
-    public String findOffer(){ return "find/findOffer";}
-
-    @RequestMapping(value = "/find/findApplication")
-    public String findApplications(){ return "find/findApplication";}
-
         @PreAuthorize("hasRole('AGENT')")
         @RequestMapping(value = "/find/findClient")
         public ModelAndView findClient(){
@@ -87,6 +81,5 @@ import java.security.Principal;
 
         @RequestMapping(value = "/client/clientData")
         public String clientData(){ return "client/clientData";}
-
 
 }
