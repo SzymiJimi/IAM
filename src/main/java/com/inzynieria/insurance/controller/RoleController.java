@@ -46,6 +46,7 @@ public class RoleController {
     @RequestMapping(value = "/run/{id}", method = RequestMethod.GET)
     public String run( @PathVariable(value="id") Integer id)
     {
+
         CommandInterface command = CommandsConfig.getCommandObject(id);
         return command.execute();
     }

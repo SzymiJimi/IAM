@@ -8,6 +8,7 @@ import com.inzynieria.insurance.model.Command;
 import com.inzynieria.insurance.model.Role;
 import com.inzynieria.insurance.model.User;
 import com.inzynieria.insurance.repository.UserRepository;
+import com.inzynieria.insurance.service.RequestAuthenticator;
 import com.inzynieria.insurance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,8 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+
     @Autowired
     UserService userService;
 
@@ -77,7 +80,6 @@ public class UserController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name= auth.getName();
-
         User user = userRepository.findByUsername(name);
 
         Set<Role> set;

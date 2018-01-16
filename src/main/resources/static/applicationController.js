@@ -15,10 +15,10 @@
 
             var data = {
                 //filling_date: $scope.filling_date,
-                reason: $scope.reason,
                 type: $scope.type,
-                user_UserId: $scope.user_UserId,
-                accepted: $scope.accepted
+                reason: $scope.reason,
+                accepted: $scope.accepted,
+                user_idUser: $scope.user_idUser
 
 
             };

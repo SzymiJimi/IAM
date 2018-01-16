@@ -1,6 +1,10 @@
 package com.inzynieria.insurance.model;
 
+import com.inzynieria.insurance.repository.UserRepository;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,6 +23,8 @@ public class User {
     private String email;
     private Integer idRole;
     private Set<Role> roles = new HashSet<>(0);
+
+
 
     public User(Integer idUser, String username, String password, String name, String surname, String email) {
         this.idUser = idUser;
@@ -91,6 +97,9 @@ public class User {
     public void setIdRole(Integer idRole) {
         this.idRole = idRole;
     }
+
+
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "UserRoles", joinColumns = @JoinColumn(name = "USER_IDUSER", referencedColumnName = "idUser"), inverseJoinColumns = @JoinColumn(name = "ROLE_IDROLE", referencedColumnName = "idRole"))

@@ -1,18 +1,14 @@
 package com.inzynieria.insurance.commands;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-public class FindClient implements CommandInterface {
-
-
+public class FindApplications implements CommandInterface {
     private Integer idCommand;
     private String name;
     private static final Logger LOGGER = LoggerFactory.getLogger(FindClient.class);
 
-    public FindClient (Integer idCommand, String name){
+    public FindApplications(Integer idCommand, String name){
         this.idCommand = idCommand;
         this.name = name;
     }
@@ -37,6 +33,6 @@ public class FindClient implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/find/findClient";
+        return "http://localhost:8090/find/findApplication";
     }
 }

@@ -2,10 +2,7 @@ package com.inzynieria.insurance.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Data
@@ -18,7 +15,7 @@ public class Application {
     private Date filling_date;
     private String reason;
     private String type;
-    private Integer user_UserId;
+    private Integer user_idUser;
     private Integer accepted;
 
     public Application() {}
@@ -56,12 +53,12 @@ public class Application {
         this.type = type;
     }
 
-    public Integer getUser_UserId() {
-        return user_UserId;
+    public Integer getUser_idUser() {
+        return user_idUser;
     }
 
-    public void setUser_UserId(Integer user_UserId) {
-        this.user_UserId = user_UserId;
+    public void setUser_idUser(Integer user_idUser) {
+        this.user_idUser = user_idUser;
     }
 
     public Integer getAccepted() {

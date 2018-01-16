@@ -2,6 +2,8 @@ package com.inzynieria.insurance.service;
 
 import com.inzynieria.insurance.model.Application;
 import com.inzynieria.insurance.repository.ApplicationRepository;
+import com.inzynieria.insurance.repository.RoleRepository;
+import com.inzynieria.insurance.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ public class ApplicationServiceImpl implements ApplicationService{
 
     @Autowired
     ApplicationRepository applicationRepository;
+
 
 
     @Override
