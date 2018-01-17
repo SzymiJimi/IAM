@@ -40,37 +40,7 @@
 </head>
 <body>
 
-<div class="container" ng-app="app" layout="column" ng-cloak>
-
-
-    <!--Pasek nawigacji u góry-->
-    <md-toolbar class="md-hue-2">
-        <div class="md-toolbar-tools">
-            <a flex md-truncate href="http://localhost:8090/home"> <h2 >Zakład ubezpieczeń</h2></a>
-            <p>Zalogowany jako {{loggedUser.name}}</p>
-            <div class="dropdown">
-                <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
-                    <i class="material-icons">menu</i>
-                </md-button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a th:href="@{/logout}">Wyloguj się</a>
-                </div>
-            </div>
-        </div>
-    </md-toolbar>
-
-    <section layout="row" flex>
-
-
-        <!--Tytuł strony pojawiający się na środku-->
-        <md-content flex layout-padding>
-            <h3 style="color:blue">Zakład ubezpieczen logowanie: </h3>
-            <br><br>
-
-
-
-        </md-content>
-    </section>
+<div class="container" ng-app="app">
 
 
     <div ng-controller="newContractController" layout="column" ng-cloak>

@@ -9,6 +9,8 @@ import com.inzynieria.insurance.service.ContractOfferConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -63,6 +65,29 @@ public class ContractController {
         }
 
         return contractWithOffers;
+    }
+
+    @RequestMapping(value="/check", method = RequestMethod.POST)
+    public ResponseEntity checkInsurance(@RequestBody String pesel){
+        LOGGER.info("Podbrany pesel: "+pesel);
+        try {
+            List<Contract> contracts = contractRepository.findContractByPesel(pesel);
+            List<ContractWithOffer> contractWithOffers = new ArrayList<>();
+            for(Contract contract : contracts)
+            {
+                contractWithOffers.add(contractOfferConverter.convert(contract, offerRepository.findOne(contract.getIdOffer())));
+            }
+            if(contractWithOffers.isEmpty())
+            {
+                LOGGER.info("Zwracany błąd ");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Brak użytkownika w bazie danych...");
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(contractWithOffers);
+        }catch(Exception e)
+        {
+            LOGGER.info("Zwracany błąd ");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nieudany odczyt z bazy danych...");
+        }
     }
 
 }
