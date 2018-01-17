@@ -12,11 +12,13 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 group = 'com.inzynieria'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
 
 repositories {
 	mavenCentral()
@@ -24,9 +26,11 @@ repositories {
 
 
 dependencies {
+
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-cache')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile('org.springframework.boot:spring-boot-starter-security')
@@ -34,8 +38,16 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-web-services')
+	compile('org.springframework.boot:spring-boot-devtools')
+    compile ('org.apache.tomcat:tomcat-dbcp:8.0.30')
 	runtime('org.springframework.boot:spring-boot-devtools')
+	compile ('mysql:mysql-connector-java')
+	runtime ('org.hsqldb:hsqldb')
+	runtime ('mysql:mysql-connector-java')
 	runtime('mysql:mysql-connector-java')
+	compile('net.sourceforge.nekohtml:nekohtml:1.9.22')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
+	compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.2.9')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')

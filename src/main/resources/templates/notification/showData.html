@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zakład ubezpieczen</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="http://localhost:8090/contract/newContractStyle.css">
+    <!--Ten navbar style musi być w każdym pliku html-->
+    <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" href="http://localhost:8090/notification/showNotificationStyle.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="http://localhost:8090/notification/showDataController.js"></script>
+    <!--Ten home service musi być zawsze-->
+    <script src="http://localhost:8090/homeService.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+</head>
+<body>
+
+<div class="container" ng-app="app">
+
+    <div ng-controller="showDataController" ng-init="initialize()" layout="column" ng-cloak>
+
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home" target="_self"><h2>Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}" target="_self">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+            </md-sidenav>
+
+            <!--Tytuł strony pojawiający się na środku-->
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;">Dane zgłoszenia</h3>
+                <br><br>
+                <md-list flex>
+                    <md-subheader class="md-no-sticky subHeaderCustom">Dane zgłoszenia</md-subheader>
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <div>
+                            <md-subheader class="md-no-sticky">Informacje ogólne</md-subheader>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Typ zgłoszenia</h3>
+                                    <p>{{notificationData.type}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Opis zgłoszenia</h3>
+                                    <p>{{notificationData.incident_description}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Status</h3>
+                                    <p>{{notificationData.status}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Data zgłoszenia</h3>
+                                    <p>{{notificationData.incident_time}} </p>
+                                </div>
+                            </md-list-item>
+                        </div>
+                        <div flex="25" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <div>
+                            <md-subheader class="md-no-sticky">Informacje o zgłaszającym</md-subheader>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Imię</h3>
+                                    <p>{{userData.name}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Nazwisko</h3>
+                                    <p>{{userData.surname}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Email</h3>
+                                    <p>{{userData.email}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Numer telefonu</h3>
+                                    <p>{{clientData.phone}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Ubezpieczenie ważne do</h3>
+                                    <p>{{contract.expirationDate}} </p>
+                                </div>
+                            </md-list-item>
+
+                        </div>
+                    </div>
+                    <br><br>
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-button class="md-raised md-primary buttomPrimary" ng-click="redirectNotification(notificationData.idNotification, $event)">Prześlij zgłoszenie dalej</md-button>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-button class="md-raised md-primary buttomPrimary" ng-click="">Button</md-button>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-button class="md-raised md-warn buttomPrimary" ng-click="">Usuń zgłoszenie</md-button>
+                    </div>
+            </md-content>
+        </section>
+    </div>
+</div>
+</body>
+</html>
