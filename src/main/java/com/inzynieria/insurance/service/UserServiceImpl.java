@@ -62,13 +62,14 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("The name cannot be null");
         }
 
+        LOGGER.info("Przyjęte dane: <"+data+">");
         List<UserDto> users = new ArrayList<>();
         List<User> usersFromDb =  userRepository.findClient(data);
-
+        LOGGER.info("Liczba znalezionych w bazie: "+usersFromDb.size());
         for (User user : usersFromDb) {
             users.add(new UserDto(user.getIdUser(), user.getUsername(), "#",user.getName(), user.getSurname(), user.getEmail()));
         }
-        LOGGER.info("Liczba znalezionych: "+users.size());
+
         return users;
     }
 
