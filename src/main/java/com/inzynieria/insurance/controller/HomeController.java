@@ -89,6 +89,19 @@ public class HomeController {
         return mav;
     }
 
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping(value = "/new/offer")
+    public ModelAndView addOffer(){
+        ModelAndView mav = new ModelAndView("offer/offerAdd");
+        return mav;
+    }
+  
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping(value = "/client/homeReserve")
+    public ModelAndView addClient(){
+        ModelAndView mav = new ModelAndView("client/homeReserve");
+        return mav;
+    }
 
     @RequestMapping(value = "/client/clientData")
     public String clientData() {
@@ -99,6 +112,13 @@ public class HomeController {
     @RequestMapping(value = "/client/checkInsurance")
     public String clientInsurance() {
         return "client/checkInsurance";
+    }
+
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping(value = "/find/findOffer")
+    public ModelAndView findOffer(){
+        ModelAndView mav = new ModelAndView("find/findOffer");
+        return mav;
     }
 
 }

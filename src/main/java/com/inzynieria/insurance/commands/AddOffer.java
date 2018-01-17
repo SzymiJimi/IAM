@@ -3,17 +3,16 @@ package com.inzynieria.insurance.commands;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AddClient implements CommandInterface {
+public class AddOffer implements CommandInterface {
 
     private Integer idCommand;
     private String name;
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddClient.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FindClient.class);
 
-    public AddClient (Integer idCommand, String name){
+    public AddOffer(Integer idCommand, String name){
         this.idCommand = idCommand;
         this.name = name;
     }
-
 
     @Override
     public Integer getIdCommand() {
@@ -34,8 +33,7 @@ public class AddClient implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/client/homeReserve";
+        LOGGER.info("execute offeradd");
+        return "http://localhost:8090/new/offer";
     }
 }
-
-

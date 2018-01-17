@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="app"  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Dane oferty</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"  ></script>
+    <script src="http://localhost:8090/offer/offerDataController.js"  ></script>
+
+</head>
+<body>
+
+
+Wyświetlanie danych oferty
+
+<div  ng-controller="offerDataController" >
+    <table >
+        <tr>
+            <td>Nazwa oferty:</td>
+            <td>{{postResult.name}} </td>
+        </tr>
+        <tr>
+            <td>Informacje oferty:</td>
+            <td>{{postResult.information}} </td>
+        </tr>
+        <tr>
+            <td>Czas trwania oferty:</td>
+            <td>{{postResult.duration}} </td>
+        </tr>
+        <tr>
+            <td>Typ oferty:</td>
+            <td>{{postResult.insurancetype}} </td>
+        </tr>
+        <tr>
+            <td>Opłaty miesieczne:</td>
+            <td>{{postResult.paymentAmount}}pln </td>
+        </tr>
+
+    </table>
+
+</div>
+</body>
+</html>

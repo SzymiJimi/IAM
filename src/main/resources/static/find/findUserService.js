@@ -1,4 +1,7 @@
-angular.module('app').service('findUserService', function ($http, $q) {
+(function () {
+    'use strict';
+    var app= angular.module('app');
+    app.service('findUserService', function ($http, $q) {
     var result = [];
     return {
 
@@ -14,4 +17,5 @@ angular.module('app').service('findUserService', function ($http, $q) {
     }
     }
 
-});
+})
+})();

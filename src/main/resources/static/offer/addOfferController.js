@@ -1,5 +1,5 @@
 var app = angular.module('app', ['ngMaterial', 'ngMessages']);
-app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $mdSidenav, $log,$mdDialog,$window,  homeService) {
+app.controller('addOfferController', function($scope, $http, $filter,$timeout, $mdSidenav, $log,$mdDialog,$window,  homeService) {
 
     var config = {
         headers: {
@@ -26,20 +26,17 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
         document.getElementById("myDropdown").classList.toggle("show");
     };
 
-         $scope.username="";
-         $scope.password="";
-       $scope.name="";
-         $scope.surname="";
-         $scope.email="";
-      //  role: 'ROLE_USER'
-
-
-
+    $scope.info = "";
+    $scope.name = "";
+    $scope.type = "";
+    $scope.duration = "";
+    $scope.paymentAmount = "";
+    $scope.active = "";
 
     $scope.showAlert = function (ev) {
 
         var confirm = $mdDialog.confirm()
-            .title('Dodano klienta')
+            .title('Dodano oferte')
             .textContent('Powróć na stronę główną')
             .ariaLabel('Alert Dialog Demo')
             .targetEvent(ev)
@@ -50,9 +47,9 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
         });
 
     };
-        var data={
-            username:$scope.username
-        };
+    var data = {
+        idOffer: $scope.offerId
+    };
     $scope.submitForm = function(ev){
 
         config = {
@@ -61,28 +58,30 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
             }
         };
 
-        var url = "http://localhost:8090/user/add";
+        var url = "http://localhost:8090/offer/add";
         console.log("SubmitForm");
 
         // data.idOffer=idOffer;
         console.log(data);
-        var userdata = {
-            username: $scope.username,
-            password: $scope.password,
-            name: $scope.name,
-            surname: $scope.surname,
-            email: $scope.email,
-            idRole: '12'
-        };
 
-        console.log(userdata);
-        $http.post(url, userdata, config).then(function (response) {
+        var offerData = {
+
+            information:$scope.info,
+            name: $scope.name,
+            insurancetype:$scope.type,
+            duration: $scope.duration ,
+            paymentAmount: $scope.paymentAmount ,
+            active: $scope.active
+        };
+        console.log(offerData);
+
+        $http.post(url, offerData, config).then(function (response) {
             $scope.postResultMessage = response.data;
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " +  response.statusText;
         });
 
-        url = "http://localhost:8090/user/add";
+        url = "http://localhost:8090/offer/add";
 
         $http.post(url, data, config).then(function (response) {
             $scope.postResultMessage = response.data;
@@ -90,7 +89,6 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " +  response.statusText;
         });
-
 
     };
 });

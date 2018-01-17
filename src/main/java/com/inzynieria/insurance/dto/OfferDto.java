@@ -1,22 +1,31 @@
-package com.inzynieria.insurance.model;
+package com.inzynieria.insurance.dto;
 
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import javax.persistence.*;
 
 @Data
-@Entity
-public class Offer {
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class OfferDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private Integer idoffer;
-    private String name;
-    private String information;
-    private Integer idclient;
-    private String insurancetype;
-    private String duration;
-    private String paymentAmount;
+
+    public OfferDto(){
+
+        }
+        public OfferDto(Integer idoffer, String name, String information, Integer idclient, String insurancetype, String duration, String paymentAmount){
+            this.idoffer=idoffer;
+            this.name=name;
+            this.information=information;
+            this.idclient=idclient;
+            this.insurancetype=insurancetype;
+            this.duration=duration;
+            this.paymentAmount=paymentAmount;
+
+
+        }
+
 
     public Integer getIdoffer() {
         return idoffer;
@@ -73,4 +82,12 @@ public class Offer {
     public void setPaymentAmount(String paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
+
+    private Integer idoffer;
+    private String name;
+    private String information;
+    private Integer idclient;
+    private String insurancetype;
+    private String duration;
+    private String paymentAmount;
 }
