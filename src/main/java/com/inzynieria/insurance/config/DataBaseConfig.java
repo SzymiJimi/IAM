@@ -10,6 +10,9 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import javax.sql.DataSource;
 
@@ -34,9 +37,23 @@ public class DataBaseConfig {
 
     @Bean
     public ViewResolver viewResolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/static/");
-        resolver.setSuffix(".html");
-        return resolver;
+
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setTemplateMode("XHTML");
+        templateResolver.setPrefix("static/");
+        templateResolver.setSuffix(".html");
+
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.setTemplateResolver(templateResolver);
+
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(engine);
+        return viewResolver;
+
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setTemplateMode("/static/");
+//        resolver.setPrefix("/static/");
+//        resolver.setSuffix(".html");
+//        return resolver;
     }
 }

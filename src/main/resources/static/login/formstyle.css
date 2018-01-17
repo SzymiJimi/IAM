@@ -16,6 +16,7 @@
     margin: -16px -16px 16px -16px;
 }
 .form-style-6 input[type="text"],
+.form-style-6 input[type="password"],
 .form-style-6 input[type="date"],
 .form-style-6 input[type="datetime"],
 .form-style-6 input[type="email"],
@@ -43,6 +44,7 @@
     font: 95% Arial, Helvetica, sans-serif;
 }
 .form-style-6 input[type="text"]:focus,
+.form-style-6 input[type="password"]:focus,
 .form-style-6 input[type="date"]:focus,
 .form-style-6 input[type="datetime"]:focus,
 .form-style-6 input[type="email"]:focus,
