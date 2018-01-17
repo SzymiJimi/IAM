@@ -29,10 +29,12 @@ public class CommandsConfig {
         CreateContract createContract = new CreateContract(2, "Stwórz umowę");
         AddOffer addOffer=new AddOffer(41, "Dodaj ofertę");
         FindOffer findOffer= new FindOffer(42, "Wyszukaj oferty");
+        AddClient addClient=new AddClient(3, "Dodaj klienta");
         commandList.add(findClient);
         commandList.add(createContract);
         commandList.add(addOffer);
         commandList.add(findOffer);
+        commandList.add(addClient);
     }
 
 
