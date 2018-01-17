@@ -26,6 +26,9 @@ public class Contract {
     private Integer idUser;
     private Integer idOffer;
 
+    public Contract (){
+
+    }
 
     public Contract(String startDate, String expirationDate, Integer idUser, Integer idOffer) {
 

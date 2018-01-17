@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-    <script src="controller.js"></script>
+    <script src="http://localhost:8090/client/checkInsuranceController.js"></script>
     <!--Ten home service musi być zawsze-->
     <script src="http://localhost:8090/homeService.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
@@ -19,14 +19,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
-
-    <script src="offerControler.js"></script>
 </head>
 <body>
 
 <div  class="container" ng-app="app">
 
-    <div ng-controller="homeController" layout="column" ng-cloak>
+    <div ng-controller="checkInsurance" layout="column" ng-cloak>
 
         <!--Pasek nawigacji u góry-->
         <md-toolbar class="md-hue-2">
@@ -66,24 +64,68 @@
 
             <!--Tytuł strony pojawiający się na środku-->
             <md-content flex layout-padding>
-                <h3 style="color:blue; text-align: center;">Witaj na stronie zakładu ubezpieczeń</h3>
+                <h3 style="color:blue; text-align: center;">Sprwadź ubezpieczenie klienta</h3>
                 <br><br>
 
+                <div layout-gt-sm="row">
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>PESEL</label>
+                        <input name="pesel" ng-model="pesel"
+                               required minlength="11" maxlength="11" ng-maxlength="11" />
 
+                        <div ng-messages="pesel.$error" >
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Pesel musi zawierać 11 znaków.
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+
+                    <md-button md-no-ink ng-click="checkClientInsurace(pesel)" ng-disabled="!pesel"
+                               class="md-raised md-primary">Znajdź użytkownika
+                    </md-button>
+                </div>
+
+                <div ng-if="isInsuranced">
+                    <md-subheader class="md-no-sticky subHeaderCustom">Ubezpieczenie klienta</md-subheader>
+                    <md-list-item  ng-repeat="contract in contracts"
+                                  class="md-2-line ">
+                        <div class="md-list-item-text ">
+                            <div layout-gt-sm="row ">
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <div style="width: 30%"><h3>Nazwa ubezpieczenia</h3>
+                                    <p>{{contract.offer.name}}</p></div>
+
+                                <div style="width: 30%"><h3>Data ważności</h3>
+                                    <p>{{contract.expirationDate}}</p></div>
+                                <div style="width: 15%"><h3>Typ ubezpieczenia</h3>
+                                    <p>{{contract.offer.insurancetype}}</p></div>
+                                <div flex="10" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <i ng-if="choosenId==contract.idContract" class="material-icons" style="color:green">check</i>
+                            </div>
+                        </div>
+                    </md-list-item>
+                </div>
+                <div ng-if="empty">
+                    <div flex="10" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <md-subheader class="md-no-sticky"><h3>Brak ubezpieczeń użytkownika...</h3></md-subheader>
+                </div>
 
             </md-content>
         </section>
     </div>
-
-
 </div>
-
-
-
-
-
-
-
-
 </body>
 </html>
