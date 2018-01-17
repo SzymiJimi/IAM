@@ -86,6 +86,14 @@ import java.security.Principal;
         return mav;
     }
 
+
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping(value = "/client/homeReserve")
+    public ModelAndView addClient(){
+        ModelAndView mav = new ModelAndView("client/homeReserve");
+        return mav;
+    }
+
         @RequestMapping(value = "/client/clientData")
         public String clientData(){ return "client/clientData";}
 
