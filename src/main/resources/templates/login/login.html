@@ -4,60 +4,115 @@
 <link>
 <title>Zakład ubezpieczen logowanie</title>
 <meta charset="utf-8"/>
-<link rel="stylesheet" href="http://localhost:8090/contract/newContractStyle.css">
+
 <!--Ten navbar style musi być w każdym pliku html-->
 <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
-<link rel="stylesheet" href="formstyle.css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-<script src="http://localhost:8090/contract/newContractController.js"></script>
 <!--Ten home service musi być zawsze-->
 <script src="http://localhost:8090/homeService.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<style type="text/css">
+
+    .form-style-6{
+        font: 95% Arial, Helvetica, sans-serif;
+        max-width: 400px;
+        margin: 10px auto;
+        padding: 16px;
+        background: #F7F7F7;
+    }
+    .form-style-6 h1{
+        background: #43D1AF;
+        padding: 20px 0;
+        font-size: 140%;
+        font-weight: 300;
+        text-align: center;
+        color: #fff;
+        margin: -16px -16px 16px -16px;
+    }
+    .form-style-6 input[type="text"],
+    .form-style-6 input[type="date"],
+    .form-style-6 input[type="datetime"],
+    .form-style-6 input[type="email"],
+    .form-style-6 input[type="number"],
+    .form-style-6 input[type="search"],
+    .form-style-6 input[type="time"],
+    .form-style-6 input[type="url"],
+    .form-style-6 textarea,
+    .form-style-6 select
+    {
+        -webkit-transition: all 0.30s ease-in-out;
+        -moz-transition: all 0.30s ease-in-out;
+        -ms-transition: all 0.30s ease-in-out;
+        -o-transition: all 0.30s ease-in-out;
+        outline: none;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        width: 100%;
+        background: #fff;
+        margin-bottom: 4%;
+        border: 1px solid #ccc;
+        padding: 3%;
+        color: #555;
+        font: 95% Arial, Helvetica, sans-serif;
+    }
+    .form-style-6 input[type="text"]:focus,
+    .form-style-6 input[type="date"]:focus,
+    .form-style-6 input[type="datetime"]:focus,
+    .form-style-6 input[type="email"]:focus,
+    .form-style-6 input[type="number"]:focus,
+    .form-style-6 input[type="search"]:focus,
+    .form-style-6 input[type="time"]:focus,
+    .form-style-6 input[type="url"]:focus,
+    .form-style-6 textarea:focus,
+    .form-style-6 select:focus
+    {
+        box-shadow: 0 0 5px rgb(63,81,181);;
+        padding: 3%;
+        border: 1px solid rgb(63,81,181);;
+    }
+
+    .form-style-6 input[type="submit"],
+    .form-style-6 input[type="button"]{
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        width: 100%;
+        padding: 3%;
+        background:rgb(63,81,181);
+        border-bottom: rgb(63,81,181);
+        border-top-style: none;
+        border-right-style: none;
+        border-left-style: none;
+        color: #fff;
+    }
+    .form-style-6 input[type="submit"]:hover,
+    .form-style-6 input[type="button"]:hover{
+        background: rgb(63,81,251);;
+    }
+
+    h3{
+        color: rgb(63,81,181);
+        text-align: center;
+    }
+    .nav{
+        background-color:rgb(40,53,147); ;
+        padding: 7px;
+        color:rgb(63,81,181);
+    }
+</style>
 </head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<meta name="viewport" content="width=device-width, initial-scale=1" />-->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>-->
 
 </head>
 <body>
 
-<div class="container" ng-app="app">
-
-
-    <div ng-controller="newContractController" layout="column" ng-cloak>
-
-        <!--Pasek nawigacji u góry-->
-        <md-toolbar class="md-hue-2">
-            <div class="md-toolbar-tools">
-                <a flex md-truncate href="http://localhost:8090/home"> <h2 >Zakład ubezpieczeń</h2></a>
-
-
-            </div>
-        </md-toolbar>
-    </div>
-</div>
+<div class="nav"><h2>Zaklad ubezpieczen</h2></div>
     <div class="container" ng-app="app">
 
-        <h3 >Zakład ubezpieczen logowanie: </h3>
+        <h3>Zakład ubezpieczen logowanie: </h3>
 
         <form name='f' th:action='@{/login}' class="form-style-6" method='POST'>
             <table>
