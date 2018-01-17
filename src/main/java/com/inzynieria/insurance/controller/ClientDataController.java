@@ -6,10 +6,9 @@ import com.inzynieria.insurance.repository.ClientDataRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value="/clientData")
@@ -27,6 +26,13 @@ public class ClientDataController {
         LOGGER.info("Dodaje client data: "+clientData.toString());
         clientDataRepository.save(clientData);
         return "Zarejestrowano pomyślnie";
+    }
+
+    @RequestMapping(value="/find/{id}", method = RequestMethod.GET)
+    public ClientData findClientData(@PathVariable(value="id") Integer id){
+        LOGGER.info("Przyjąłem id: "+id);
+        ClientData clientData= clientDataRepository.findClientDataByUserId(id);
+        return clientData;
     }
 
 }

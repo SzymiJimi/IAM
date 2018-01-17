@@ -3,7 +3,6 @@ ul {
     margin: 0;
     padding: 0;
     width: 95%;
-    background-color: #f1f1f1;
 }
 
 .demo #content {
@@ -41,6 +40,7 @@ li a {
 li a:hover {
     background-color: #555;
     color: white;
+    border-radius: 7px;
 }
 
 .menu-panel-container {
@@ -187,3 +187,19 @@ li a:hover {
 }
 
 .show {display:block;}
+
+.subHeaderCustom {
+    margin-left: 30px !important;
+    margin-right: 30px !important;
+    background-color: lightgray !important;
+    border-radius: 5px;
+}
+
+
+.listdemoBasicUsage md-divider {
+    margin-top: 10px;
+    margin-bottom: 0; }
+
+.listHover {
+    background-color: lightgray ;
+}

@@ -1,12 +1,11 @@
 package com.inzynieria.insurance.commands.config;
 
-import com.inzynieria.insurance.commands.CommandInterface;
-import com.inzynieria.insurance.commands.CreateContract;
-import com.inzynieria.insurance.commands.FindClient;
+import com.inzynieria.insurance.commands.*;
 import com.inzynieria.insurance.repository.CommandRepository;
 import com.inzynieria.insurance.repository.RoleRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ViewResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,12 @@ public class CommandsConfig {
     {
         FindClient findClient = new FindClient(1, "Wyszukaj klienta");
         CreateContract createContract = new CreateContract(2, "Stwórz umowę");
+        CreateNotification createNotification = new CreateNotification(5, "Zgłoszenie zdarzenia");
+        ViewNotification viewNotification = new ViewNotification(6, "Przeglądaj zgłoszenia");
         commandList.add(findClient);
         commandList.add(createContract);
+        commandList.add(createNotification);
+        commandList.add(viewNotification);
     }
 
 
