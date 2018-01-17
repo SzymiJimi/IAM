@@ -23,9 +23,6 @@ public class HomeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
-    DataBaseController dataBaseController;
-
-    @Autowired
     CommandRepository commandRepository;
 
     @Autowired
@@ -96,6 +93,12 @@ public class HomeController {
     @RequestMapping(value = "/client/clientData")
     public String clientData() {
         return "client/clientData";
+    }
+
+    @PreAuthorize("hasRole('SPECIALIST')")
+    @RequestMapping(value = "/client/checkInsurance")
+    public String clientInsurance() {
+        return "client/checkInsurance";
     }
 
 }

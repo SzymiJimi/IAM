@@ -30,10 +30,12 @@ public class CommandsConfig {
         CreateContract createContract = new CreateContract(2, "Stwórz umowę");
         CreateNotification createNotification = new CreateNotification(5, "Zgłoszenie zdarzenia");
         ViewNotification viewNotification = new ViewNotification(6, "Przeglądaj zgłoszenia");
+        CheckInsurance checkInsurance = new CheckInsurance(7, "Sprawdź czy ubezpieczony");
         commandList.add(findClient);
         commandList.add(createContract);
         commandList.add(createNotification);
         commandList.add(viewNotification);
+        commandList.add(checkInsurance);
     }
 
 
