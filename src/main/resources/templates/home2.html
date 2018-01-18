@@ -1,0 +1,101 @@
+
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zakład ubezpieczen</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="controller.js"></script>
+    <script src="applicationController.js"></script>
+</head>
+<body>
+
+<div class="container" ng-app="app">
+
+    <h3 style="color:blue">Zakład ubezpieczen pseudo rejestracja</h3>
+
+    <div ng-controller="homeController">
+
+
+        <form  name='f' ng-submit="submitForm()">
+            <table>
+                <tr>
+                    <td>Login:</td>
+                    <td><input type="text" name="username" value="" ng-model="username"/> </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password" ng-model="password" /> </td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" value="" ng-model="name" /> </td>
+                </tr>
+                <tr>
+                    <td>Surname:</td>
+                    <td><input type="text" name="surname" value="" ng-model="surname"/> </td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="" ng-model="email"/> </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input name="submit" type="submit" value="Zarejestruj"/> </td>
+                </tr>
+                <tr>
+                    <td> <a href="find/findUser">Wyszukaj usera</a></td>
+                    <td><a href="find/findOffer">Wyszukaj oferty</a></td>
+                    <td><a href="find/findApplication">Wyszukaj wnioski</a></td>
+                    <td><a href=""></a></td>
+                </tr>
+                <tr>
+                    <td> <a th:href="@{/logout}">Wyloguj się</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!--<div class="container" ng-app="app">-->
+
+    <h3 style="color:blue">Dodaj wniosek </h3>
+
+    <div ng-controller="applicationController">
+        <form  name='a'   ng-submit="acceptForm()">
+            <table>
+                <tr>
+                    <td>Typ:</td>
+                    <td><input type="text" name="type" ng-model="type" /> </td>
+                </tr>
+                <tr>
+                    <td>Powód:</td>
+                    <td><input type="text" name="reason" value="" ng-model="reason"/> </td>
+                </tr>
+                <tr>
+                    <td>Akceptowany:</td>
+                    <td><input type="text" name="accepted" value="" ng-model="accepted"/> </td>
+                </tr>
+                <tr>
+                    <td>UserID:</td>
+                    <td><input type="text" name="user_idUser" value="" ng-model="user_idUser" /> </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input name="submit" type="submit" value="Dodaj wniosek"/> </td>
+                </tr>
+            </table>
+            {{postMessage}}
+
+        </form>
+
+
+    </div>
+</div>
+
+<!--</div>-->
+
+
+
+</body>
+</html>

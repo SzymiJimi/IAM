@@ -1,5 +1,6 @@
 var app = angular.module('app',  ['ngMaterial', 'ngMessages']);
 app.config(function($locationProvider, $mdThemingProvider) {
+
         $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
         $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark();
         $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
@@ -8,14 +9,15 @@ app.config(function($locationProvider, $mdThemingProvider) {
             enabled: true,
             requireBase: false
         });
-    });
+});
 
 
 app.controller('clientDataController', ['$scope', '$location', '$http', 'homeService' , function($scope, $location, $http, homeService) {
 
-        var splitData = $location.path().split('/');
-        var value = splitData[3];
-        var url = "http://localhost:8090/client/show";
+    var splitData = $location.path().split('/');
+    var value = splitData[3];
+    var url = "http://localhost:8090/client/show";
+
 
         var config = {
             headers : {
@@ -45,9 +47,27 @@ app.controller('clientDataController', ['$scope', '$location', '$http', 'homeSer
         document.getElementById("myDropdown").classList.toggle("show");
     };
 
-        $scope.postResult=[];
+    $scope.loggedUser={};
+    if(homeService.commands.length===0)
+    {
+        homeService.initiate();
+    }
 
-                $http.post(url, value, config).then(function (response) {
-                    $scope.postResult = response.data;
-                });
-    }]);
+    $scope.commands=homeService.commands;
+    $scope.loggedUser=homeService.user;
+
+    $scope.selectCommand=function (idCommand) {
+        console.log("Jestem tutaj");
+        homeService.runSelectedCommand(idCommand);
+    };
+
+    $scope.dropDown= function(){
+        document.getElementById("myDropdown").classList.toggle("show");
+    };
+
+    $scope.postResult=[];
+
+    $http.post(url, value, config).then(function (response) {
+        $scope.postResult = response.data;
+    });
+}]);

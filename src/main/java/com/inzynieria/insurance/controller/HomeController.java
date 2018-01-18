@@ -121,4 +121,14 @@ public class HomeController {
         return mav;
     }
 
+    @PreAuthorize("hasRole('AGENT')")
+    @RequestMapping(value = "/find/findApplication")
+    public String findApplication(){ return "find/findApplication";}
+
+    @PreAuthorize("hasRole('USER')")
+    @RequestMapping(value ="/application/applicationAdd")
+    public String addApplication(){return "application/applicationAdd";}
+
+    @RequestMapping(value = "/application/applicationData")
+    public String applicationData(){ return "application/applicationData";}
 }

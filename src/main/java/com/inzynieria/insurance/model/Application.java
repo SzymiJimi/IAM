@@ -1,29 +1,40 @@
+package com.inzynieria.insurance.model;
 
-package com.inzynieria.insurance.dto;
-
-import com.inzynieria.insurance.model.Application;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.jws.soap.SOAPBinding;
+import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 @Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class ApplicationDto {
-    public ApplicationDto(){}
+@Entity
+public class Application {
 
-    public ApplicationDto(Integer idApplication,String type, Date filling_date, String reason, Integer accepted, Integer user_idUser, String description){
-        this.idApplication=idApplication;
-        this.filling_date=filling_date;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer idApplication;
+    private String type;
+    private Date filling_date;
+    private String reason;
+    private Integer accepted;
+    private Integer user_idUser;
+    private String description;
+
+
+    public Application() {
+        this.filling_date = Date.valueOf(LocalDate.now());
+        this.accepted=0;
+    }
+
+   /*public Application(String type, String reason, Integer accepted,  Integer user_idUser){
+        this.filling_date = Date.valueOf(LocalDate.now());
         this.reason=reason;
         this.type=type;
         this.user_idUser=user_idUser;
         this.accepted=accepted;
-        this.description=description;
-    }
-
+    }*/
 
 
     public Integer getIdApplication() {
@@ -81,13 +92,4 @@ public class ApplicationDto {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    private Integer idApplication;
-    private String type;
-    private Date filling_date;
-    private String reason;
-    private Integer accepted;
-    private Integer user_idUser;
-    private String description;
 }
-

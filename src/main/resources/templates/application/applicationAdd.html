@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<link>
+<title>Zakład ubezpieczen</title>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="http://localhost:8090/contract/newContractStyle.css">
+<!--Ten navbar style musi być w każdym pliku html-->
+<link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="http://localhost:8090/contract/newContractController.js"></script>
+<script src="http://localhost:8090/application/newApplicationController.js"></script>
+<!--Ten home service musi być zawsze-->
+<script src="http://localhost:8090/homeService.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+</head>
+<body>
+
+<div class="container" ng-app="app">
+
+
+    <div ng-controller="newApplicationController" layout="column" ng-cloak>
+
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home"> <h2 >Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+                </md-content>
+            </md-sidenav>
+
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;"> Zgłoszenie wniosku </h3>
+                <br><br>
+                <form name="f" ng-controller="newApplicationController">
+
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+
+                        <div layout-gt-sm="row">
+                            <div flex="5" hide-xs hide-sm>
+                                <!-- Spacer //-->
+                            </div>
+
+
+
+                            <md-radio-group ng-model="type">
+                                Ubezpieczenie:
+                                <md-radio-button name="type" ng-model="type" value="HEALTH" class="md-primary">Zdrowotne</md-radio-button>
+                                <md-radio-button name="type" ng-model="type" value="CAR"> Samochodowe </md-radio-button>
+                                <md-radio-button name="type" ng-model="type" value="TRAVEL">Podróżnicze</md-radio-button>
+
+                            </md-radio-group>
+
+                            <div flex="5" hide-xs hide-sm>
+                                <!-- Spacer //-->
+                            </div>
+                            <div layout-gt-sm="row">
+
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Powód</label>
+                                <input md-maxlength="30" required name="reason" ng-model="reason"/>
+
+                                <div ng-messages="f.type.$error">
+                                    <div ng-message="required" class="my-message">Typ jest wymagany.</div>
+
+                                    <div ng-message="md-maxlength">Typ nie może być dłuższy niż 30 znaków.</div>
+                                </div>
+                            </md-input-container>
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                        </div>
+                            <div layout-gt-sm="row">
+
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <div layout-gt-sm="row">
+                                    <div flex="5" hide-xs hide-sm>
+                                        <!-- Spacer //-->
+                                    </div>
+                                </div>
+                                <input type="hidden" name="user_idUser" ng-model="user_idUser"  data-ng-value="user_idUser = loggedUser.idUser"/>
+
+                            <md-input-container>
+                                <label>Biography</label>
+                                <textarea name="description" ng-model="description" required md-maxlength="300"></textarea>
+                                <div ng-messages="userForm.description.$error" ng-show="userForm.description.$dirty">
+                                    <div ng-message="required">Pole wymagane</div>
+                                    <div ng-message="md-maxlength">Za długie!</div>
+                                </div>
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <div layout-gt-sm="row">
+                                    <div flex="5" hide-xs hide-sm>
+                                        <!-- Spacer //-->
+                                    </div>
+                                </div>
+                            </md-input-container>
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <div layout-gt-sm="row">
+                            <div flex="5" hide-xs hide-sm>
+                                <!-- Spacer //-->
+                            </div>
+
+
+
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <div layout-gt-sm="row">
+                            <div flex="15" hide-xs hide-sm>
+                                <!-- Spacer //-->
+                            </div>
+                            <md-button md-no-ink ng-click="submitForm($event)" ng-disabled="f.$invalid"
+                                       class="md-raised md-primary">Stwórz
+                            </md-button>
+
+
+                        </div>
+                    </div>
+                </form>
+            </md-content>
+        </section>
+    </div>
+</div>
+</body>
+</html>

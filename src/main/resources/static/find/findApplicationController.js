@@ -1,12 +1,12 @@
-
 var app = angular.module('app',['ngMaterial', 'ngMessages']);
-app.controller('findClientController', [
+app.controller('findApplicationController', [
     '$scope',
     '$http' ,
-    'findClientService',
+    'findApplicationService',
     '$window',
     'homeService',
-    function($scope, $http, findUserService, $window , homeService) {
+    function($scope, $http, findApplicationService, $window , homeService) {
+
 
         var config = {
             headers : {
@@ -37,26 +37,33 @@ app.controller('findClientController', [
         };
 
 
-        $scope.submitForm = function(value){
-            var url = "http://localhost:8090/client/find";
 
-            // var value = $scope.name;
-            console.log(value);
+
+
+        $scope.submitForm = function(){
+            var url = "http://localhost:8090/application/find";
+
+
+            var value = $scope.type;
             $scope.postResult=[];
 
-            findUserService.findClientInDB(url, value, config).then(function (result) {
+            findApplicationService.findApplicationInDB(url, value, config).then(function (result) {
                 angular.copy(result, $scope.postResult);
                 if($scope.postResult.length===0)
                 {
-                    $scope.response="Nie znaleziono użytkownika w bazie!";
+                    $scope.response="Nie znaleziono wniosków o podanym typie!";
                 }else{
-                    $scope.response="Znaleziono użytkownika!";
+                    $scope.response="Znaleziono wnioski!";
                 }
-            });
-        };
 
-        $scope.selectUser = function(id){
-            url = "http://localhost:8090/client/show/"+id;
+            });
+
+
+
+        }
+
+        $scope.selectApplication = function(id){
+            url = "http://localhost:8090/application/show/"+id;
             $window.location.href =url;
         }
     }]);

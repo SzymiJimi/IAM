@@ -9,12 +9,11 @@ import lombok.Data;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class OfferDto {
 
-
-
     public OfferDto(){
 
         }
         public OfferDto(Integer idoffer, String name, String information, Integer idclient, String insurancetype, String duration, String paymentAmount){
+
             this.idoffer=idoffer;
             this.name=name;
             this.information=information;
@@ -25,7 +24,6 @@ public class OfferDto {
 
 
         }
-
 
     public Integer getIdoffer() {
         return idoffer;
@@ -67,6 +65,7 @@ public class OfferDto {
         this.insurancetype = insurancetype;
     }
 
+
     public String getDuration() {
         return duration;
     }
@@ -90,4 +89,5 @@ public class OfferDto {
     private String insurancetype;
     private String duration;
     private String paymentAmount;
+
 }
