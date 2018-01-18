@@ -89,4 +89,7 @@ import java.security.Principal;
     @PreAuthorize("hasRole('USER')")
     @RequestMapping(value ="/application/applicationAdd")
     public String addApplication(){return "application/applicationAdd";}
+
+    @RequestMapping(value = "/application/applicationData")
+    public String applicationData(){ return "application/applicationData";}
 }

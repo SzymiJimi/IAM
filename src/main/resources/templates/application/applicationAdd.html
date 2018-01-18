@@ -114,16 +114,7 @@
                                 </div>
                         </div>
                             <div layout-gt-sm="row">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <label>UserID</label>
-                            <input md-maxlength="30" required name="user_idUser" ng-model="user_idUser"/>
 
-                            <div ng-messages="f.type.$error">
-                                <div ng-message="required" class="my-message">Typ jest wymagany.</div>
-
-                                <div ng-message="md-maxlength">Typ nie może być dłuższy niż 30 znaków.</div>
-                            </div>
-                        </md-input-container>
                                 <div flex="5" hide-xs hide-sm>
                                     <!-- Spacer //-->
                                 </div>
@@ -132,8 +123,9 @@
                                         <!-- Spacer //-->
                                     </div>
                                 </div>
-                            <md-input-container>
+                                <input type="hidden" name="user_idUser" ng-model="user_idUser"  data-ng-value="user_idUser = loggedUser.idUser"/>
 
+                            <md-input-container>
                                 <label>Biography</label>
                                 <textarea name="description" ng-model="description" required md-maxlength="300"></textarea>
                                 <div ng-messages="userForm.description.$error" ng-show="userForm.description.$dirty">

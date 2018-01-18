@@ -76,10 +76,11 @@ public class ApplicationController {
         return applications;
     }
 
-    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    public ModelAndView showApplication(@PathVariable(value="id") Integer id)
+    @RequestMapping(value="/show/{id}", method = RequestMethod.GET)
+    public Application findApplication(@PathVariable(value="id") Integer id)
     {
-        ModelAndView mav = new ModelAndView("/application/applicationData");
-        return mav;
+        LOGGER.info("Id pobrane: "+id);
+        Application application= applicationRepository.findOne(id);
+        return application;
     }
 }

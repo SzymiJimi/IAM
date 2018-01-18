@@ -9,8 +9,6 @@ app.config(function($locationProvider, $mdThemingProvider) {
         requireBase: false
     });
 });
-
-
 app.controller('applicationDataController', ['$scope', '$location', '$http', 'homeService' , function($scope, $location, $http, homeService) {
 
     var splitData = $location.path().split('/');

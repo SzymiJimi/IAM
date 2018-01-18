@@ -60,15 +60,16 @@ app.controller('newApplicationController', function($scope, $http, $filter,$time
 
         // data.idOffer=idOffer;
 
-        var offerData = {
+        var applicationData = {
             type: $scope.type,
             reason: $scope.reason,
             user_idUser: $scope.user_idUser,
             description: $scope.description
         };
-        console.log(offerData);
+        console.log(applicationData);
 
-        $http.post(url, offerData, config).then(function (response) {
+
+        $http.post(url, applicationData, config).then(function (response) {
             $scope.postResultMessage = response.data;
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " +  response.statusText;

@@ -1,4 +1,4 @@
-﻿-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: mydb
 -- ------------------------------------------------------
@@ -29,10 +29,11 @@ CREATE TABLE `application` (
   `reason` varchar(45) DEFAULT NULL,
   `accepted` int(11) DEFAULT NULL,
   `user_idUser` int(11) NOT NULL,
+  `description` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`idApplication`),
   KEY `fk_Application_User1_idx` (`user_idUser`),
   CONSTRAINT `fk_Application_User1` FOREIGN KEY (`user_idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +42,7 @@ CREATE TABLE `application` (
 
 LOCK TABLES `application` WRITE;
 /*!40000 ALTER TABLE `application` DISABLE KEYS */;
-INSERT INTO `application` VALUES (1,'HEALTH','2011-01-01','RENTA_BRAK',0,22),(2,'CAR','2018-01-01','WYPADEK',1,22);
+INSERT INTO `application` VALUES (43,'HEALTH','2018-01-18','Choroba',0,22,'Zapalenie płuc z powikłaniami'),(44,'CAR','2018-01-18','Kolizja',0,22,'Uszkodzony silnik');
 /*!40000 ALTER TABLE `application` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-11 13:43:31
+-- Dump completed on 2018-01-18 13:00:41

@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" ng-app="app"  xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Dane użytkownika</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
-    <link rel="stylesheet" href="http://localhost:8090/client/clientDataStyle.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost:8090/client/clientDataStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-    <script src="http://localhost:8090/application/applicationDataController.js"></script>
+    <script src="http://localhost:8090/application/applicationDataController.js"  ></script>
     <script src="http://localhost:8090/homeService.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
 </head>
 <body>
 
@@ -58,25 +60,21 @@
                         </li>
 
                     </ul>
+                </md-content>
             </md-sidenav>
 
-            <!--Tytuł strony pojawiający się na środku-->
             <md-content flex layout-padding>
-                <h3 style="color:blue; text-align: center;">Wyświetlanie danych klienta</h3>
+                <h3 style="color:blue; text-align: center;">Wyświetlanie danych wniosku</h3>
                 <br><br>
                 <md-card md-theme="dark-blue" md-theme-watch>
                     <md-card-title>
                         <md-card-title-text>
-                            <span class="md-headline">{{postResult.idApplication}}</span>
-                            <span class="md-subhead">{{postResult.type}}</span>
+                            <span class="md-headline">{{postResult.type}}</span>
+                            <span class="md-subhead">{{postResult.reason}}</span>
                             <br><br>
-                            <span class="md-subhead">Nick: <span class="md-headline">{{postResult.filling_date}}</span></span>
-                            <span class="md-subhead">Email: <span class="md-headline">{{postResult.reason}}</span></span>
-                            <br><br>
-                            <span class="md-subhead">Nick: <span class="md-headline">{{postResult.accepted}}</span></span>
-                            <span class="md-subhead">Email: <span class="md-headline">{{postResult.user_idUser}}</span></span>
-                            <br><br>
-                            <span class="md-subhead">Nick: <span class="md-headline">{{postResult.description}}</span></span>
+                            <span class="md-subhead">Data: <span class="md-headline">{{postResult.filling_date}}</span></span>
+                            <span class="md-subhead">Opis: <span class="md-headline">{{postResult.description}}</span></span>
+                            <span class="md-subhead">ID użytkownika <span class="md-headline">{{postResult.user_idUser}}</span></span>
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
@@ -85,18 +83,39 @@
                     </md-card-actions>
                 </md-card>
 
-                <md-subheader class="md-no-sticky">Zarządzanie klientem</md-subheader>
-                <md-list-item ng-click="navigateTo('data usage', $event)">
-                    <p> Opcja 1 </p>
-                </md-list-item>
-                <md-list-item ng-click="navigateTo('data usage', $event)">
-                    <p> Opcja 2 </p>
-                </md-list-item>
+
 
             </md-content>
+
+            <!--Wyświetlanie danych oferty-->
+
+            <!--<div  ng-controller="offerDataController" >-->
+            <!--<table >-->
+            <!--<tr>-->
+            <!--<td>Nazwa oferty:</td>-->
+            <!--<td>{{postResult.name}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Informacje oferty:</td>-->
+            <!--<td>{{postResult.information}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Czas trwania oferty:</td>-->
+            <!--<td>{{postResult.duration}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Typ oferty:</td>-->
+            <!--<td>{{postResult.insurancetype}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Opłaty miesieczne:</td>-->
+            <!--<td>{{postResult.paymentAmount}}pln </td>-->
+            <!--</tr>-->
+
+            <!--</table>-->
         </section>
     </div>
 </div>
-
 </body>
+
 </html>
