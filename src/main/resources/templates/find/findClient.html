@@ -1,44 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Wyszukiwanie klienta</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script src="findClientController.js"></script>
     <script src="findClientService.js"></script>
+    <script src="http://localhost:8090/homeService.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 
 </head>
 <body>
 
-<div ng-app="app">
-    <div ng-controller="findClientController">
+<div class="container" ng-app="app">
 
 
-        <form  name='f'  ng-controller="findClientController" ng-submit="submitForm()">
-            <table>
-                <tr>
-                    <td>Wyszukaj:</td>
-                    <td><input type="text" name="name" value="" ng-model="name"/> </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input name="submit" type="submit" value="Wyszukaj"/> </td>
-                </tr>
-                <tr>
-                    <td>{{response}}</td>
-                </tr>
-                <tr ng-repeat="result in postResult"  ng-click="selectUser(result.idUser)">
-                    <td> Imie:    </td>
-                    <td>{{result.name}}</td>
-                    <td>Nazwisko:   </td>
-                    <td>{{result.surname}}</td>
-                    <td>Email:    </td>
-                    <td>{{result.email}}</td>
-                </tr>
+    <div ng-controller="findClientController" layout="column" ng-cloak>
 
-            </table>
-        </form>
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home"><h2>Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+            </md-sidenav>
+
+            <!--Tytuł strony pojawiający się na środku-->
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;">Wyszukiwarka klientów</h3>
+                <br><br>
+
+                <!--Dalsza treśc strony-->
+                <div layout-gt-sm="row">
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Nick, imię, nazwisko lub email.</label>
+                        <input name="findData" ng-model="findData" required minlength="3" maxlength="70"/>
+
+                        <div ng-messages="findData.$error">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Twój adres email musi zawierać od 10 do 70 znaków i musi wygldać jak adres email.
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+
+                    <md-button md-no-ink ng-click="submitForm(findData)" ng-disabled="!findData" class="md-primary">
+                        Wyszukaj
+                    </md-button>
+                    <div flex="45" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                </div>
+
+                <md-list flex>
+                    <md-subheader class="md-no-sticky subHeaderCustom">Znalezieni użytkownicy</md-subheader>
+
+                    <div ng-repeat="result in postResult" ng-click="selectUser(result.idUser)" layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                            <md-list-item  class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Imię:</h3>
+                                    <p> {{result.name}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Nazwisko:</h3>
+                                    <p> {{result.name}} </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3>Email:</h3>
+                                    <p> {{result.name}} </p>
+                                </div>
+                            </md-list-item>
+                    </div>
+                </md-list>
+
+                <!--<form  name='f'  ng-controller="findClientController" ng-submit="submitForm()">-->
+                <!--<table>-->
+                <!--<tr>-->
+                <!--<td>Wyszukaj:</td>-->
+                <!--<td><input type="text" name="name" value="" ng-model="name"/> </td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td colspan="2"><input name="submit" type="submit" value="Wyszukaj"/> </td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                <!--<td>{{response}}</td>-->
+                <!--</tr>-->
+                <!--<tr ng-repeat="result in postResult"  ng-click="selectUser(result.idUser)">-->
+                <!--<td> Imie:    </td>-->
+                <!--<td>{{result.name}}</td>-->
+                <!--<td>Nazwisko:   </td>-->
+                <!--<td>{{result.surname}}</td>-->
+                <!--<td>Email:    </td>-->
+                <!--<td>{{result.email}}</td>-->
+                <!--</tr>-->
+
+                <!--</table>-->
+                <!--</form>-->
+
+            </md-content>
+
+
+        </section>
 
     </div>
 </div>

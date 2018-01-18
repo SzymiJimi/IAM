@@ -68,7 +68,12 @@ public class UserController {
         return "user/userUpdate";
     }
 
-
+    @RequestMapping(value="/findOne/{id}")
+    public User findOneUserById(@PathVariable(value="id") Integer id) throws ValidationException {
+        User user=  userRepository.findOne(id);
+        user.setRoles(null);
+        return user;
+    }
 
     @RequestMapping(value="/find")
     public List<User> findUser(@RequestBody String value) throws ValidationException {

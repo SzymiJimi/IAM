@@ -94,9 +94,9 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
                 $scope.name= $scope.userResult[0].name;
                 $scope.surname= $scope.userResult[0].surname;
                 $scope.userId= $scope.userResult[0].idUser;
-                var date= new Date( );
-                date.setFullYear(date.getFullYear()+2);
-                console.log( $filter('date')(date, 'yyyy/MM/dd'));
+                // var date= new Date( );
+                // date.setFullYear(date.getFullYear()+2);
+                // console.log( $filter('date')(date, 'yyyy/MM/dd'));
             }else{
                 $scope.userResponse="Nie znaleziono użytkownika";
             }

@@ -1,6 +1,5 @@
 package com.inzynieria.insurance.config;
 
-import com.inzynieria.insurance.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import javax.sql.DataSource;
 
@@ -48,11 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/navBarStyle.css").anonymous()
+                .antMatchers("/navBarStyle.css").permitAll()
+                .antMatchers("/login/*").anonymous()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/*")
-                .hasAnyRole("USER", "ADMIN", "AGENT")
-                .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT")
+                .hasAnyRole("USER", "ADMIN", "AGENT", "SPECIALIST","CLIENT")
+                .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT", "SPECIALIST","CLIENT")
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler())
@@ -64,6 +66,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutSuccessUrl("/login");
     }
-
 
 }

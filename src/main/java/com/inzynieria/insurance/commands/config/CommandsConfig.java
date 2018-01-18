@@ -5,6 +5,7 @@ import com.inzynieria.insurance.repository.CommandRepository;
 import com.inzynieria.insurance.repository.RoleRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ViewResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,17 @@ public class CommandsConfig {
     {
         FindClient findClient = new FindClient(1, "Wyszukaj klienta");
         CreateContract createContract = new CreateContract(2, "Stwórz umowę");
+        AddClient addClient=new AddClient(3, "Dodaj klienta");
+        CreateNotification createNotification = new CreateNotification(5, "Zgłoszenie zdarzenia");
+        ViewNotification viewNotification = new ViewNotification(6, "Przeglądaj zgłoszenia");
+        CheckInsurance checkInsurance = new CheckInsurance(7, "Sprawdź czy ubezpieczony");
         AddOffer addOffer=new AddOffer(41, "Dodaj ofertę");
         FindOffer findOffer= new FindOffer(42, "Wyszukaj oferty");
-        AddClient addClient=new AddClient(3, "Dodaj klienta");
         commandList.add(findClient);
         commandList.add(createContract);
+        commandList.add(createNotification);
+        commandList.add(viewNotification);
+        commandList.add(checkInsurance);
         commandList.add(addOffer);
         commandList.add(findOffer);
         commandList.add(addClient);
@@ -53,7 +60,6 @@ public class CommandsConfig {
            }
         }
         LOGGER.info("Nie znalazłem żadnej komendy");
-//        CommandInterface command = commandList.get((id-1));
         return null;
     }
 
