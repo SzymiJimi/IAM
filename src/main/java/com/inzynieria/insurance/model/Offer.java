@@ -15,8 +15,6 @@ public class Offer {
     private String information;
     private Integer idclient;
     private String insurancetype;
-
-
     private String duration;
     private String paymentAmount;
 

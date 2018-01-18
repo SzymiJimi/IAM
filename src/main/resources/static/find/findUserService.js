@@ -2,8 +2,8 @@
     'use strict';
     var app= angular.module('app');
     app.service('findUserService', function ($http, $q) {
-        var result = [];
-        return {
+    var result = [];
+    return {
 
             result: result,
 
@@ -16,6 +16,6 @@
                 return deffer.promise;
             }
         }
-
-    })
+})
 })();
+

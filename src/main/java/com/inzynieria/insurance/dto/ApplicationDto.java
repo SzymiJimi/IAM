@@ -1,3 +1,4 @@
+
 package com.inzynieria.insurance.dto;
 
 import com.inzynieria.insurance.model.Application;
@@ -89,3 +90,4 @@ public class ApplicationDto {
     private Integer user_idUser;
     private String description;
 }
+

@@ -21,7 +21,6 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private Integer idRole;
     private Set<Role> roles = new HashSet<>(0);
 
 
@@ -33,7 +32,6 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.idRole = idRole;
     }
 
     public User(){
@@ -89,16 +87,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public Integer getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(Integer idRole) {
-        this.idRole = idRole;
-    }
-
-
 
 
     @ManyToMany(cascade = CascadeType.ALL)

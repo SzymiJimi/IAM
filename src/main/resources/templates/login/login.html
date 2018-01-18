@@ -1,44 +1,71 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Zaloguj się do IAM</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <title>Zakład ubezpieczen logowanie</title>
+    <base href="/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8090/login/formstyle.css">
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+    <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js}"></script>
+    <script type="text/javascript"  th:src="@{http://localhost:8090/login/loginController.js}"></script>
+    <script type="text/javascript"  th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js}"></script>
+    <script type="text/javascript"  th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js}"></script>
+    <script type="text/javascript"  th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js}"></script>
+    <script type="text/javascript"  th:src="@{https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js}"></script>
+    <script type="text/javascript"  th:src="@{https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js}"></script>
+
+</head>
 
 </head>
 <body>
-
-<div class="container" ng-app="app">
-
-    <h3 style="color:blue">Zakład ubezpieczen logowanie: </h3>
-
-    <form name='f' th:action='@{/login}' method='POST'>
-        <table>
-            <tr>
-                <td>Nazwa użytkownika:</td>
-                <td><input type="text" name="username" value="" /> </td>
-            </tr>
-            <tr>
-                <td>Hasło:</td>
-                <td><input type="password" name="password" /> </td>
-            </tr>
-            <tr>
-                <td>Pamietaj mnie:</td>
-                <td>
-                    <input id="remember_me" name="remember-me" type="checkbox" checked="checked" />
-                </td>
-
-            </tr>
-            <tr>
-                <td colspan="2"><input name="submit" type="submit" value="Zaloguj"/> </td>
-            </tr>
-        </table>
-    </form>
+<div layout:fragment="content">
+<div class="container" ng-app="app"  >
 
 
+    <div ng-controller="loginController" layout="column" ng-cloak>
 
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home"><h2>Zakład ubezpieczeń</h2></a>
+            </div>
+        </md-toolbar>
+
+        <section layout="row" flex>
+
+            <md-content flex layout-padding>
+            <h3>Zakład ubezpieczen logowanie: </h3>
+            <form name='f' th:action='@{/login}' class="form-style-6" method='POST'>
+                <table>
+                    <tr>
+                        <td>Nazwa użytkownika:</td>
+                        <td><input type="text" name="username" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td>Hasło:</td>
+                        <td><input type="password" name="password"/></td>
+                    </tr>
+                    <tr>
+                        <td>Pamietaj mnie:</td>
+                        <td>
+                            <input id="remember_me" name="remember-me" type="checkbox" checked="checked"/>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input name="submit" type="submit" value="Zaloguj"/></td>
+                    </tr>
+                </table>
+            </form>
+            </md-content>
+        </section>
+    </div>
 </div>
+
 </body>
 </html>

@@ -37,6 +37,7 @@
     text-decoration:none;
     border: none;
     outline: none;
+
 }
 
 /*.buttondemoBasicUsage section {*/
@@ -61,10 +62,9 @@
     /*font-size: 14px;*/
     /*opacity: 0.54; }*/
 
-.subHeaderCustom {
-    margin-left: 30px !important;
-    margin-right: 30px !important;
-    background-color: lightgray !important;
+.customButtonChooser{
+    margin-left: 50px !important;
+    margin-right: 50px !important;
 }
 
 
@@ -89,3 +89,19 @@
     left: 7px;
     font-size: 14px;
     opacity: 0.54; }
+
+
+.customAll {
+    margin-left: 50px !important;
+    margin-right: 50px !important;
+}
+
+/*md-list-item._md-button-wrap>div.md-button:first-child>.md-button:first-child {*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*height: 100%;*/
+    /*margin-left: 50px;*/
+    /*margin-right:50px;*/
+    /*padding: 0;*/
+/*}*/
