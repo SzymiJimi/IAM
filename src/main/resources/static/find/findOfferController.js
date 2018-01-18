@@ -1,28 +1,37 @@
-(function () {
-    'use strict';
-    var app= angular.module('app', []);
-    app.controller('findOfferController', ['$scope', '$http', 'findOfferService', function ($scope, $http, findOfferService) {
+var app = angular.module('app',[]);
+app.controller('findOfferController', [
+    '$scope',
+    '$http' ,
+    'findOfferService',
+    '$window',
+    function($scope, $http, findOfferService, $window ) {
 
 
-        $scope.submitForm = function () {
+        $scope.submitForm = function(){
             var url = "http://localhost:8090/offer/find";
 
             var config = {
-                headers: {
+                headers : {
                     Accept: undefined
                 }
             };
 
             var value = $scope.name;
-            $scope.postResult = [];
+            $scope.postResult=[];
 
             findOfferService.findOfferInDB(url, value, config).then(function (result) {
                 angular.copy(result, $scope.postResult);
-                $scope.response = "Znaleziono umowe!";
-
+                if($scope.postResult.length===0)
+                {
+                    $scope.response="Nie znaleziono oferty!";
+                }else{
+                    $scope.response="Znaleziono oferte!";
+                }
             });
+        };
 
-
+        $scope.selectOffer = function(id){
+            url = "http://localhost:8090/offer/show/"+id;
+            $window.location.href =url;
         }
-    }])
-})();
+    }]);

@@ -1,24 +1,46 @@
-
-
-var app = angular.module('app',[]);
+var app = angular.module('app',['ngMaterial', 'ngMessages']);
 app.controller('findClientController', [
     '$scope',
     '$http' ,
     'findClientService',
     '$window',
-    function($scope, $http, findUserService, $window ) {
+    'homeService',
+    function($scope, $http, findUserService, $window , homeService) {
+
+        var config = {
+            headers : {
+                Accept: undefined
+            }
+        };
+        $scope.findData="";
+        $scope.role={};
+        $scope.commands=[];
+        $scope.response={};
+
+        $scope.loggedUser={};
+        if(homeService.commands.length===0)
+        {
+            homeService.initiate();
+        }
+
+        $scope.commands=homeService.commands;
+        $scope.loggedUser=homeService.user;
+
+        $scope.selectCommand=function (idCommand) {
+            console.log("Jestem tutaj");
+            homeService.runSelectedCommand(idCommand);
+        };
+
+        $scope.dropDown= function(){
+            document.getElementById("myDropdown").classList.toggle("show");
+        };
 
 
-        $scope.submitForm = function(){
+        $scope.submitForm = function(value){
             var url = "http://localhost:8090/client/find";
 
-            var config = {
-                headers : {
-                    Accept: undefined
-                }
-            };
-
-            var value = $scope.name;
+            // var value = $scope.name;
+            console.log(value);
             $scope.postResult=[];
 
             findUserService.findClientInDB(url, value, config).then(function (result) {
@@ -37,4 +59,3 @@ app.controller('findClientController', [
             $window.location.href =url;
         }
     }]);
-

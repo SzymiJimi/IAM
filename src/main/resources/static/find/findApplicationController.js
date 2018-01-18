@@ -1,17 +1,48 @@
-(function () {
-    'use strict';
-    var app= angular.module('app',[]);
-    app.controller('findApplicationController', ['$scope','$http','findApplicationService', function($scope, $http, findApplicationService) {
+var app = angular.module('app',['ngMaterial', 'ngMessages']);
+app.controller('findApplicationController', [
+    '$scope',
+    '$http' ,
+    'findApplicationService',
+    '$window',
+    'homeService',
+    function($scope, $http, findApplicationService, $window , homeService) {
+
+
+        var config = {
+            headers : {
+                Accept: undefined
+            }
+        };
+        $scope.findData="";
+        $scope.role={};
+        $scope.commands=[];
+        $scope.response={};
+
+        $scope.loggedUser={};
+        if(homeService.commands.length===0)
+        {
+            homeService.initiate();
+        }
+
+        $scope.commands=homeService.commands;
+        $scope.loggedUser=homeService.user;
+
+        $scope.selectCommand=function (idCommand) {
+            console.log("Jestem tutaj");
+            homeService.runSelectedCommand(idCommand);
+        };
+
+        $scope.dropDown= function(){
+            document.getElementById("myDropdown").classList.toggle("show");
+        };
+
+
+
 
 
         $scope.submitForm = function(){
             var url = "http://localhost:8090/application/find";
 
-            var config = {
-                headers : {
-                    Accept: undefined
-                }
-            };
 
             var value = $scope.type;
             $scope.postResult=[];
@@ -30,6 +61,9 @@
 
 
         }
-    }])
-})();
 
+        $scope.selectApplication = function(id){
+            url = "http://localhost:8090/application/show/"+id;
+            $window.location.href =url;
+        }
+    }]);

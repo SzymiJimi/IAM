@@ -11,11 +11,11 @@ app.config(function($locationProvider, $mdThemingProvider) {
 });
 
 
-app.controller('clientDataController', ['$scope', '$location', '$http', 'homeService' , function($scope, $location, $http, homeService) {
+app.controller('applicationDataController', ['$scope', '$location', '$http', 'homeService' , function($scope, $location, $http, homeService) {
 
     var splitData = $location.path().split('/');
     var value = splitData[3];
-    var url = "http://localhost:8090/client/show";
+    var url = "http://localhost:8090/application/show";
 
     var config = {
         headers : {

@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 @Data
 @Entity
@@ -12,13 +15,26 @@ public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idApplication;
+    private String type;
     private Date filling_date;
     private String reason;
-    private String type;
-    private Integer user_idUser;
     private Integer accepted;
+    private Integer user_idUser;
+    private String description;
 
-    public Application() {}
+
+    public Application() {
+        this.filling_date = Date.valueOf(LocalDate.now());
+        this.accepted=0;
+    }
+
+   /*public Application(String type, String reason, Integer accepted,  Integer user_idUser){
+        this.filling_date = Date.valueOf(LocalDate.now());
+        this.reason=reason;
+        this.type=type;
+        this.user_idUser=user_idUser;
+        this.accepted=accepted;
+    }*/
 
 
     public Integer getIdApplication() {
@@ -67,5 +83,13 @@ public class Application {
 
     public void setAccepted(Integer accepted) {
         this.accepted = accepted;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

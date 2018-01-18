@@ -14,7 +14,6 @@
             };
 
             var data = {
-                //filling_date: $scope.filling_date,
                 type: $scope.type,
                 reason: $scope.reason,
                 accepted: $scope.accepted,

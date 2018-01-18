@@ -13,13 +13,14 @@ import java.sql.Date;
 public class ApplicationDto {
     public ApplicationDto(){}
 
-    public ApplicationDto(Integer idApplication,String type, Date filling_date, String reason, Integer accepted, Integer user_idUser){
+    public ApplicationDto(Integer idApplication,String type, Date filling_date, String reason, Integer accepted, Integer user_idUser, String description){
         this.idApplication=idApplication;
         this.filling_date=filling_date;
         this.reason=reason;
         this.type=type;
         this.user_idUser=user_idUser;
         this.accepted=accepted;
+        this.description=description;
     }
 
 
@@ -72,10 +73,19 @@ public class ApplicationDto {
         this.accepted = accepted;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private Integer idApplication;
+    private String type;
     private Date filling_date;
     private String reason;
-    private String type;
-    private Integer user_idUser;
     private Integer accepted;
+    private Integer user_idUser;
+    private String description;
 }
