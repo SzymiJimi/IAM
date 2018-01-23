@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<link>
+<title>Zakład ubezpieczen</title>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="http://localhost:8090/contract/newContractStyle.css">
+<!--Ten navbar style musi być w każdym pliku html-->
+<link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="http://localhost:8090/contract/newContractController.js"></script>
+<!--Ten home service musi być zawsze-->
+<script src="http://localhost:8090/homeService.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+</head>
+<body>
+
+<div class="container" ng-app="app">
+
+
+    <div ng-controller="newContractController" layout="column" ng-cloak>
+
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home"> <h2 >Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+            </md-sidenav>
+
+            <!--Tytuł strony pojawiający się na środku-->
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;">Tworzenie nowego kontraktu </h3>
+                <br><br>
+
+                <form name="f" ng-controller="newContractController">
+
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Email</label>
+                            <input name="email" ng-model="email"
+                                   required minlength="10" maxlength="70" ng-pattern="/^.+@.+\..+$/"/>
+
+                            <div ng-messages="f.email.$error" ng-hide="showHints">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Twój adres email musi zawierać od 10 do 70 znaków i musi wygldać jak adres email.
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <div ng-if="!userLoaded" flex="7" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-button md-no-ink ng-if="userLoaded" ng-click="loadUser(email)" ng-disabled="!email"
+                                   class="md-primary">Znajdź użytkownika
+                        </md-button>
+                        <!--<md-button ng-if="userLoaded" ng-click="loadUser(email)" class="md-primary">Znajdź użytkownika</md-button>-->
+                        <div flex="45" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+
+
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Imie</label>
+                            <input md-maxlength="30" required name="name" ng-model="name"/>
+
+                            <div ng-messages="f.name.$error">
+                                <div ng-message="required" class="my-message">Imię jest wymagane.</div>
+                                <div ng-message="minlength" class="my-message">Imie musi być dłuższe niz 2 znaki.</div>
+                                <div ng-message="md-maxlength" class="my-message">Imie nie może być dłuższe niż 30
+                                    znaków.
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Nazwisko</label>
+                            <input md-maxlength="30" required name="surname" ng-model="surname"/>
+
+                            <div ng-messages="f.surname.$error">
+                                <div ng-message="required" class="my-message">Nazwisko jest wymagane.</div>
+
+                                <div ng-message="md-maxlength">Nazwisko nie może być dłuższe niż 30 znaków.</div>
+                            </div>
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Numer PESEL</label>
+                            <input name="pesel" ng-minlength="11" ng-maxlength="11" ng-model="pesel" required
+                                   ng-pattern="/^[0-9]{11}$/"/>
+
+                            <div ng-messages="f.pesel.$error">
+                                <div ng-message="required" class="my-message">Pesel jest wymagany.</div>
+                                <div ng-message="ng-minlength" class="my-message">Numer PESEL powinien zawierać 11
+                                    znaków.
+                                </div>
+                                <div ng-message="ng-maxlength" class="my-message">Numer PESEL powinien zawierać 11
+                                    znaków.
+                                </div>
+                                <div ng-message="pattern" class="my-message">Proszę o wprowadzenie poprawnego numeru
+                                    PESEL.
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Numer dokumentu tożsamości</label>
+                            <input name="identificationNr" ng-minlength="5" ng-maxlength="15"
+                                   ng-model="identificationNr" required/>
+
+                            <div ng-messages="f.identificationNr.$error">
+                                <div ng-message="required" class="my-message">Numer dokumentu tożsamości jest
+                                    wymagany.
+                                </div>
+                                <div ng-message="pattern" class="my-message">Proszę o wprowadzenie poprawnego numeru
+                                    dokumentu.
+                                </div>
+                                <div ng-message="ng-minlength" class="my-message">Numer musi być dłuższy niz 5 znaków.
+                                </div>
+                                <div ng-message="ng-maxlength" class="my-message">Numer nie może być dłuższy niż 15
+                                    znaków.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Telefon</label>
+                            <input name="phone" ng-model="phone" required ng-pattern="/^[0-9]{9}$/"/>
+
+                            <div ng-messages="f.phone.$error">
+                                <div ng-message="required" class="my-message">Numer telefonu jest wymagany</div>
+                            </div>
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Miejscowość</label>
+                            <input name="place" ng-model="place" required/>
+                            <div ng-messages="f.place.$error" role="alert" multiple>
+                                <div ng-message="required" class="my-message">Miejscowość jest wymagana</div>
+                            </div>
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Ulica</label>
+                            <input name="street" ng-model="street" required/>
+                            <div ng-messages="f.street.$error" role="alert" multiple>
+                                <div ng-message="required" class="my-message">Ulica jest wymagana</div>
+                            </div>
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Numer domu</label>
+                            <input name="houseNr" ng-model="houseNr" required/>
+                            <div ng-messages="f.houseNr.$error" role="alert" multiple>
+                                <div ng-message="required" class="my-message">Numer domu jest wymagany</div>
+                            </div>
+
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Numer mieszkania</label>
+                            <input name="flatNr" ng-model="flatNr"/>
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Kod pocztowy</label>
+                            <input name="postalCode" ng-model="postalCode" placeholder="12-345"
+                                   required ng-pattern="/^[0-9]{2}-[0-9]{3}$/" md-maxlength="6">
+
+                            <div ng-messages="f.postalCode.$error" role="alert" multiple>
+                                <div ng-message="required" class="my-message">Kod pocztowy jest wymagany</div>
+                                <div ng-message="pattern" class="my-message">Wprowadzony kod pocztowy jest
+                                    nieprawidłowy.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+
+                    <div ng-if="offerLoaded" layout-gt-sm="row">
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Numer oferty</label>
+                            <input name="offerId" ng-model="offerId" required/>
+                            <div ng-messages="f.offerId.$error">
+                                <div ng-message="required" class="my-message">Wpisz numer oferty</div>
+                            </div>
+                        </md-input-container>
+
+                        <div flex="5" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
+                        <div flex="7" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-button md-no-ink ng-click="loadOffer(offerId)" ng-disabled="!offerId" class="md-primary">
+                            Załaduj ofertę
+                        </md-button>
+                        <div flex="45" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+
+                    <div ng-if="!offerLoaded">
+                        <md-list flex>
+                                <md-subheader class="md-no-sticky subHeaderCustom">Oferta</md-subheader>
+                            <div layout-gt-sm="row">
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3>Nazwa:</h3>
+                                        <p>{{offerResult.name}} </p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+
+
+                            <div layout-gt-sm="row">
+
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3>Informacje:</h3>
+                                        <p>{{offerResult.information}} </p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3>Typ:</h3>
+                                        <p>{{offerResult.type}} </p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3>Długość trwania:</h3>
+                                        <p>{{offerResult.duration}} miesiące </p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+
+                            <div layout-gt-sm="row">
+                                <div flex="5" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                                <md-list-item class="md-2-line">
+                                    <div class="md-list-item-text">
+                                        <h3>Opłata miesięczna:</h3>
+                                        <p>{{offerResult.paymentAmount}}zł</p>
+                                    </div>
+                                </md-list-item>
+                            </div>
+                        </md-list>
+
+                    </div>
+
+                    <div layout-gt-sm="row">
+                        <div flex="15" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-button md-no-ink ng-click="submitForm($event)" ng-disabled="f.$invalid || offerLoaded"
+                                   class="md-raised md-primary">Stwórz umowę
+                        </md-button>
+                    </div>
+                </form>
+            </md-content>
+
+        </section>
+
+    </div>
+
+</div>
+</body>
+</html>

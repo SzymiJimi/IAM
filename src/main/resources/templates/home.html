@@ -1,96 +1,87 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zakład ubezpieczen</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="http://localhost:8090/contract/newContractStyle.css">
+    <!--Ten navbar style musi być w każdym pliku html-->
+    <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script src="controller.js"></script>
+    <!--Ten home service musi być zawsze-->
+    <script src="http://localhost:8090/homeService.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
     <script src="offerControler.js"></script>
 </head>
 <body>
 
-<div class="container" ng-app="app">
+<div  class="container" ng-app="app">
 
-    <h3 style="color:blue">Zakład ubezpieczen pseudo rejestracja</h3>
+    <div ng-controller="homeController" layout="column" ng-cloak>
 
-    <div ng-controller="homeController">
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home"> <h2 >Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+            </md-sidenav>
+
+            <!--Tytuł strony pojawiający się na środku-->
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;">Witaj na stronie zakładu ubezpieczeń</h3>
+                <br><br>
 
 
-        <form  name='f' ng-submit="submitForm()">
-            <table>
-                <tr>
-                    <td>Login:</td>
-                    <td><input type="text" name="username" value="" ng-model="username"/> </td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type="password" name="password" ng-model="password" /> </td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" name="name" value="" ng-model="name" /> </td>
-                </tr>
-                <tr>
-                    <td>Surname:</td>
-                    <td><input type="text" name="surname" value="" ng-model="surname"/> </td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="text" name="email" value="" ng-model="email"/> </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input name="submit" type="submit" value="Zarejestruj"/> </td>
-                </tr>
-                <tr>
-                    <td> <a href="find/findUser">Wyszukaj usera</a></td>
-                    <td><a href="find/findOffer">Wyszukaj oferty</a></td>
-                    <td><a href=""></a></td>
-                </tr>
-                <tr>
-                    <td> <a th:href="@{/logout}">Wyloguj się</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+
+            </md-content>
+        </section>
     </div>
 
-<!--<div class="container" ng-app="app">-->
 
-    <h3 style="color:blue">Dodaj oferte </h3>
-
-    <div ng-controller="offerController">
-        <form  name='o'   ng-submit="acceptForm()">
-            <table>
-                <tr>
-                    <td>Id client:</td>
-                    <td><input type="text" name="idclient" value="" ng-model="idclient"/> </td>
-                </tr>
-                <tr>
-                    <td>Information:</td>
-                    <td><input type="text" name="information" ng-model="information" /> </td>
-                </tr>
-                <tr>
-                    <td>Typ:</td>
-                    <td><input type="text" name="insurancetype" value="" ng-model="insurancetype" /> </td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" name="name" value="" ng-model="name"/> </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input name="submit" type="submit" value="Dodaj"/> </td>
-                </tr>
-            </table>
-            {{postMessage}}
-        </form>
-
-
-    </div>
 </div>
 
-<!--</div>-->
+
+
+
+
 
 
 

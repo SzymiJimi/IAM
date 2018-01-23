@@ -1,34 +1,37 @@
-(function () {
-    'use strict';
-    var app= angular.module('app',[]);
-    app.controller('homeController', ['$scope', '$http', function ($scope, $http) {
+var app = angular.module('app', ['ngMaterial', 'ngMessages']);
+// nie zapomnijcie w kwadratowe nawiasy dodać 'ngMaterial', 'ngMessages'
+app.controller('homeController', function($scope, $http, $window, homeService) {
 
-        $scope.submitForm = function () {
-            var url = "http://localhost:8090/user/add";
-            var config = {
-                headers: {
-                    Accept: 'text/html'
-                }
+    var config = {
+            headers : {
+                Accept: undefined
             }
+        };
 
-            var data = {
-                username: $scope.username,
-                password: $scope.password,
-                name: $scope.name,
-                surname: $scope.surname,
-                email: $scope.email,
-                role: 'ROLE_USER'
-            };
+    $scope.role={};
+    $scope.commands=[];
+    $scope.response={};
 
-            $http.post(url, data, config).then(function (response) {
-                $scope.postResultMessage = response.data;
-            }, function error(response) {
-                $scope.postResultMessage = "Error with status: " + response.statusText;
-            });
 
-            $scope.firstname = "";
-            $scope.lastname = "";
-        }
-    }])
-})();
+    $scope.loggedUser={};
+    if(homeService.commands.length===0)
+    {
+        homeService.initiate();
+    }
+
+    $scope.commands=homeService.commands;
+    $scope.loggedUser=homeService.user;
+
+    $scope.selectCommand=function (idCommand) {
+        console.log("Jestem tutaj");
+        homeService.runSelectedCommand(idCommand);
+    };
+
+    $scope.dropDown= function(){
+        document.getElementById("myDropdown").classList.toggle("show");
+    };
+
+    // do tąd
+
+});
 
