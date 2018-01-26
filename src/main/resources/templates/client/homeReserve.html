@@ -24,14 +24,14 @@
 </head>
 
 <body>
-<div  class="container" ng-app="app">
+<div class="container" ng-app="app">
 
     <div ng-controller="controllerReserve" layout="column" ng-cloak>
 
         <!--Pasek nawigacji u góry-->
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
-                <a flex md-truncate href="http://localhost:8090/home"> <h2 >Zakład ubezpieczeń</h2></a>
+                <a flex md-truncate href="http://localhost:8090/home"><h2>Zakład ubezpieczeń</h2></a>
                 <p>Zalogowany jako {{loggedUser.name}}</p>
                 <div class="dropdown">
                     <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
@@ -72,7 +72,7 @@
                 <form name="f" ng-controller="controllerReserve">
 
                     <div layout-gt-sm="row">
-                        <div flex="5" hide-xs hide-sm>
+                        <div flex="10" hide-xs hide-sm>
                             <!-- Spacer //-->
                         </div>
                         <md-input-container class="md-block" flex-gt-sm>
@@ -86,87 +86,92 @@
                                 </div>
                             </div>
                         </md-input-container>
+                        <div flex="15" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <div flex="10" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Imie</label>
+                            <input md-maxlength="30" required name="name" ng-model="name"/>
 
-                        <div flex="5" hide-xs hide-sm>
+                            <div ng-messages="f.name.$error">
+                                <div ng-message="required" class="my-message">Imię jest wymagane.</div>
+                                <div ng-message="minlength" class="my-message">Imie musi być dłuższe niz 2 znaki.</div>
+                                <div ng-message="md-maxlength" class="my-message">Imie nie może być dłuższe niż 30
+                                    znaków.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <div flex="15" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <div flex="10" hide-xs hide-sm>
                             <!-- Spacer //-->
                         </div>
 
-                        <div layout-gt-sm="row">
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Nazwisko</label>
+                            <input md-maxlength="30" required name="surname" ng-model="surname"/>
+
+                            <div ng-messages="f.surname.$error">
+                                <div ng-message="required" class="my-message">Nazwisko jest wymagane.</div>
+
+                                <div ng-message="md-maxlength">Nazwisko nie może być dłuższe niż 30 znaków.</div>
                             </div>
+                        </md-input-container>
+                        <div flex="15" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
 
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Imie</label>
-                                <input md-maxlength="30" required name="name" ng-model="name"/>
 
-                                <div ng-messages="f.name.$error">
-                                    <div ng-message="required" class="my-message">Imię jest wymagane.</div>
-                                    <div ng-message="minlength" class="my-message">Imie musi być dłuższe niz 2 znaki.</div>
-                                    <div ng-message="md-maxlength" class="my-message">Imie nie może być dłuższe niż 30
-                                        znaków.
-                                    </div>
-                                </div>
-                            </md-input-container>
+                    <div layout-gt-sm="row">
+                        <div flex="10" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Haslo</label>
+                            <input md-maxlength="30" type="password" required="password" ng-model="password"/>
+                        </md-input-container>
+                        <div flex="15" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
 
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
-                            </div>
-
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Nazwisko</label>
-                                <input md-maxlength="30" required name="surname" ng-model="surname"/>
-
-                                <div ng-messages="f.surname.$error">
-                                    <div ng-message="required" class="my-message">Nazwisko jest wymagane.</div>
-
-                                    <div ng-message="md-maxlength">Nazwisko nie może być dłuższe niż 30 znaków.</div>
-                                </div>
-                            </md-input-container>
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
-                            </div>
+                    <div layout-gt-sm="row">
+                        <div flex="10" hide-xs hide-sm>
+                            <!-- Spacer //-->
                         </div>
 
-                        <div layout-gt-sm="row">
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
-                            </div>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Username</label>
+                            <input md-maxlength="30" required="username" ng-model="username"/>
+                        </md-input-container>
+                        <div flex="15" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+                    </div>
 
-
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Haslo</label>
-                                <input md-maxlength="30" type="password" required="password" ng-model="password"/>
-                            </md-input-container>
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
-                            </div>
+                    <div layout-gt-sm="row">
+                        <div flex="10" hide-xs hide-sm>
+                            <!-- Spacer //-->
                         </div>
 
-                        <div layout-gt-sm="row">
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
-                            </div>
-
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Username</label>
-                                <input md-maxlength="30" required="username" ng-model="username"/>
-                            </md-input-container>
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
-                            </div>
-                        </div>
-
-                        <div layout-gt-sm="row">
-                            <div flex="5" hide-xs hide-sm>
-                                <!-- Spacer //-->
-                            </div>
-
-                        </div>
                         <md-button md-no-ink ng-click="submitForm($event)" ng-disabled="f.$invalid"
                                    class="md-raised md-primary">Dodaj
                         </md-button>
+                        <div flex="10" hide-xs hide-sm>
+                            <!-- Spacer //-->
+                        </div>
+
                     </div>
+
                 </form>
 
             </md-content>

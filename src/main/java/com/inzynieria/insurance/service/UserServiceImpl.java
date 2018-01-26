@@ -73,5 +73,22 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    @Override
+    public UserDto findOneClient(Integer idUser) throws ValidationException {
+        if (idUser == null) {
+            throw new ValidationException("The name cannot be null");
+        }
+        try{
+            UserConv userConv = new UserConv();
+            User userFromDb =  userRepository.findOneClient(idUser);
+            UserDto userDto= userConv.convertUserToUserDto(userFromDb);
+            return userDto;
+        }catch(Exception e)
+        {
+            LOGGER.info("Nie można znaleźć użytkownika w bazie...");
+        }
+
+        return null;
+    }
 
 }

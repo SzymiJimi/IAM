@@ -1,14 +1,14 @@
 package com.inzynieria.insurance.controller;
 
 
-import com.inzynieria.insurance.dto.CommandDto;
 import com.inzynieria.insurance.dto.RoleDto;
 import com.inzynieria.insurance.dto.UserDto;
-import com.inzynieria.insurance.model.Command;
 import com.inzynieria.insurance.model.Role;
 import com.inzynieria.insurance.model.User;
+import com.inzynieria.insurance.model.UserRoles;
+import com.inzynieria.insurance.repository.RoleRepository;
 import com.inzynieria.insurance.repository.UserRepository;
-import com.inzynieria.insurance.service.RequestAuthenticator;
+import com.inzynieria.insurance.repository.UserRolesRepository;
 import com.inzynieria.insurance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +38,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    UserRolesRepository userRolesRepository;
+
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
@@ -47,7 +53,10 @@ public class UserController {
 
         LOGGER.info("Dodawanie informacji użytkownika do bazy");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        User userRet =userRepository.save(user);
+        UserRoles userRoles = new UserRoles("Nowy",userRet.getIdUser() ,12);
+        userRolesRepository.save(userRoles);
+
         return "Zarejestrowano pomyślnie";
     }
 
@@ -102,4 +111,6 @@ public class UserController {
 
         return new UserDto(user.getIdUser(), user.getUsername(), "#", user.getName(), user.getSurname(), user.getEmail(), list);
     }
+
+
 }

@@ -36,7 +36,7 @@ app.controller('newApplicationController', function($scope, $http, $filter,$time
     $scope.showAlert = function (ev) {
 
         var confirm = $mdDialog.confirm()
-            .title('Dodano oferte')
+            .title('Dodano wniosek!')
             .textContent('Powróć na stronę główną')
             .ariaLabel('Alert Dialog Demo')
             .targetEvent(ev)
@@ -71,6 +71,7 @@ app.controller('newApplicationController', function($scope, $http, $filter,$time
 
         $http.post(url, applicationData, config).then(function (response) {
             $scope.postResultMessage = response.data;
+            $scope.showAlert(ev);
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " +  response.statusText;
         });

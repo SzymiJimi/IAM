@@ -62,7 +62,6 @@ app.controller('addOfferController', function($scope, $http, $filter,$timeout, $
         console.log("SubmitForm");
 
         // data.idOffer=idOffer;
-        console.log(data);
 
         var offerData = {
 
@@ -76,14 +75,6 @@ app.controller('addOfferController', function($scope, $http, $filter,$timeout, $
         console.log(offerData);
 
         $http.post(url, offerData, config).then(function (response) {
-            $scope.postResultMessage = response.data;
-        }, function error(response) {
-            $scope.postResultMessage = "Error with status: " +  response.statusText;
-        });
-
-        url = "http://localhost:8090/offer/add";
-
-        $http.post(url, data, config).then(function (response) {
             $scope.postResultMessage = response.data;
             $scope.showAlert(ev);
         }, function error(response) {

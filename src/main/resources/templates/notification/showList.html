@@ -18,7 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.6/angular-material.min.js"></script>
 
 </head>
 <body>
@@ -68,34 +68,93 @@
                 <br><br>
                 <md-subheader class="md-no-sticky subHeaderCustom">Oczekujące do analizy</md-subheader>
                 <div layout="row">
-                    <div flex="7" hide-xs hide-sm>
+                    <div flex="10" hide-xs hide-sm>
                         <!-- Spacer //-->
                     </div>
                     <md-input-container style="width: 255px">
-                    <label>Typ zgłoszenia</label>
-                    <md-select ng-model="selectedStatus" md-selected-text="getSelectedText()">
-                        <md-optgroup label="Statusy">
-                            <md-option ng-value="status" ng-repeat="status in statuses">{{status}}</md-option>
-                        </md-optgroup>
-                    </md-select>
-                </md-input-container>
+                        <label>Typ zgłoszenia</label>
+                        <md-select ng-model="selectedStatus" md-selected-text="getSelectedText()">
+                            <md-optgroup label="Statusy">
+                                <md-option ng-value="status" ng-repeat="status in statuses">{{status}}</md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+
+
+                </div>
+                <div layout="row">
+                    <div flex="10" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <md-autocomplete flex required
+                                     md-input-name="autocompleteField"
+                                     md-input-minlength="2"
+                                     md-input-maxlength="18"
+                                     md-no-cache="showListController.noCache"
+                                     md-selected-item="showListController.selectedItem"
+                                     md-search-text="searchText"
+                                     md-items="item in querySearch(searchText)"
+                                     md-item-text="item.pesel"
+                                     md-require-match
+                                     md-floating-label="Wyszukaj klienta wpisując PESEL">
+
+                        <md-item-template>
+                            <span class="item-metadata">
+                                <span>
+                                <strong>Pesel: </strong>{{item.value.pesel}},
+                                </span>
+                                    <span>
+                                    <strong>Imię: </strong>{{item.value.name}},
+                                    </span>
+                                <span>
+                                    <strong>Nazwisko: </strong>{{item.value.surname}},
+                                    </span>
+                             </span>
+                        </md-item-template>
+
+                        <div ng-messages="searchForm.autocompleteField.$error"
+                             ng-if="searchForm.autocompleteField.$touched">
+                            <div ng-message="required">You <b>must</b> have a favorite state.</div>
+                            <div ng-message="md-require-match">Please select an existing state.</div>
+                            <div ng-message="minlength">Your entry is not long enough.</div>
+                            <div ng-message="maxlength">Your entry is too long.</div>
+                        </div>
+                    </md-autocomplete>
                     <div flex="5" hide-xs hide-sm>
                         <!-- Spacer //-->
                     </div>
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>PESEL</label>
-                        <input name="pesel" ng-model="pesel"
-                               required minlength="11" ng-maxlength="11" maxlength="11"/>
-                        <div ng-messages="f.email.$error" ng-hide="showHints">
-                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                                Pesel musi mieć 11 liczb
-                            </div>
-                        </div>
-                    </md-input-container>
-                    <md-button class="md-raised md-primary buttomPrimary" ng-disabled="pesel.$invalid" ng-click="loadUserNotification(pesel)" >SZUKAJ</md-button>
+                    <md-button class="md-raised md-primary buttomPrimary" ng-disabled="pesel.$invalid"
+                               ng-click="loadUserNotification(pesel)">SZUKAJ
+                    </md-button>
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <!--<md-autocomplete flex required-->
+                    <!--md-input-name="autocompleteField"-->
+                    <!--md-input-minlength="2"-->
+                    <!--md-input-maxlength="18"-->
+                    <!--md-no-cache="noCache"-->
+                    <!--md-selected-item="selectedItem"-->
+                    <!--md-search-text="searchText"-->
+                    <!--md-items="item in querySearch(searchText)"-->
+                    <!--md-item-text="item.display"-->
+                    <!--md-require-match-->
+                    <!--md-floating-label="Favorite state">-->
+                    <!--<md-item-template>-->
+                    <!--<span md-highlight-text="searchText">{{item.display}}</span>-->
+                    <!--</md-item-template>-->
+                    <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">-->
+                    <!--<div ng-message="required">You <b>must</b> have a favorite state.</div>-->
+                    <!--<div ng-message="md-require-match">Please select an existing state.</div>-->
+                    <!--<div ng-message="minlength">Your entry is not long enough.</div>-->
+                    <!--<div ng-message="maxlength">Your entry is too long.</div>-->
+                    <!--</div>-->
+                    <!--</md-autocomplete>-->
                 </div>
+
                 <br><br><br>
-                <md-card ng-repeat="notification in notifications | filter: {status: realStatus}" md-theme="dark-grey" class="md-whiteframe-10dp customCard" md-theme-watch>
+                <md-card ng-repeat="notification in notifications | filter: {status: realStatus}" md-theme="dark-grey"
+                         class="md-whiteframe-10dp customCard" md-theme-watch>
                     <md-card-title class="cardTitle">
                         <md-card-title-text>
                             <span class="md-headline">{{notification.type}}</span>
@@ -104,8 +163,10 @@
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button ng-if="notification.status==='CREATED'" ng-click="loadDetails(notification.idNotification)" >Analizuj</md-button>
-                        <md-button ng-click="deleteFromList(notification.idNotification)" >Ukryj</md-button>
+                        <md-button ng-if="notification.status==='CREATED'"
+                                   ng-click="loadDetails(notification.idNotification)">Analizuj
+                        </md-button>
+                        <md-button ng-click="deleteFromList(notification.idNotification)">Ukryj</md-button>
                     </md-card-actions>
                 </md-card>
             </md-content>
