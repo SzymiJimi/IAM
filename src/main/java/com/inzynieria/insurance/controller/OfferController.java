@@ -13,7 +13,7 @@ import javax.xml.bind.ValidationException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/offer")
+@RequestMapping(value = "/offer")
 public class OfferController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OfferController.class);
@@ -21,31 +21,35 @@ public class OfferController {
 
     @Autowired
     OfferRepository offerRepository;
-   @RequestMapping(value="/add", method = RequestMethod.POST)
-   public String createOffer(@RequestBody Offer offer)
-   {
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String createOffer(@RequestBody Offer offer) {
         LOGGER.info("Dodaje oferte");
-       offerRepository.save(offer);
-       return "Dodano pomyslnie"; }
+        offerRepository.save(offer);
+        return "Dodano pomyslnie";
+    }
 
 
-
-
-
-
-
-    @RequestMapping(value="/find")
+    @RequestMapping(value = "/find")
     public List<Offer> findOffer(@RequestBody String value) throws ValidationException {
 
         LOGGER.info("Wyszukiwanie oferty w bazie");
         List<Offer> offers = offerRepository.findOfferByName(value);
-        LOGGER.info("Ilosc znalezionych offert: "+ offers.size());
-        return  offers;
+        LOGGER.info("Ilosc znalezionych offert: " + offers.size());
+        return offers;
     }
 
-    @RequestMapping(value="/showData")
-    public String show()
+    @RequestMapping(value="/findOne", method = RequestMethod.POST)
+    public Offer findOffer(@RequestBody Integer id)
     {
+        LOGGER.info("Id pobrane: "+id);
+        Offer offer= offerRepository.findOne(id);
+        return offer;
+    }
+
+
+    @RequestMapping(value = "/showData")
+    public String show() {
         LOGGER.info("Jestem tutaj");
         return "";
     }
@@ -53,20 +57,17 @@ public class OfferController {
 
     @RequestMapping(value = "/show")
     public Offer setOfferData(@RequestBody Integer value) {
-        Offer offer =offerRepository.findOne(value);
+        Offer offer = offerRepository.findOne(value);
         return offer;
     }
 
     @RequestMapping(value = "/show/{id}")
-    public ModelAndView showOffer(@PathVariable(value="id") Integer id)
-    {
-                ModelAndView mav = new ModelAndView("/offer/offerData");
-               Offer offer  = offerRepository.findOne(id);
-                mav.addObject("name",offer.getName());
-                return mav;
-            }
-
-
+    public ModelAndView showOffer(@PathVariable(value = "id") Integer id) {
+        ModelAndView mav = new ModelAndView("/offer/offerData");
+        Offer offer = offerRepository.findOne(id);
+        mav.addObject("name", offer.getName());
+        return mav;
+    }
 
 
 }

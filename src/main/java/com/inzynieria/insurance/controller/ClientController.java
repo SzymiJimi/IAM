@@ -1,13 +1,17 @@
 package com.inzynieria.insurance.controller;
 
 import com.inzynieria.insurance.dto.UserDto;
+import com.inzynieria.insurance.model.ClientData;
 import com.inzynieria.insurance.model.User;
+import com.inzynieria.insurance.repository.ClientDataRepository;
 import com.inzynieria.insurance.repository.UserRepository;
 import com.inzynieria.insurance.service.UserConv;
 import com.inzynieria.insurance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +33,9 @@ public class ClientController {
 
     @Autowired
     UserController userController;
+
+    @Autowired
+    ClientDataRepository clientDataRepository;
 
 
     @RequestMapping(value="/showData")
@@ -55,12 +62,36 @@ public class ClientController {
         return mav;
     }
 
+
+
     @RequestMapping(value="/find")
 
     public List<UserDto> findClients(@RequestBody String value) throws ValidationException {
         LOGGER.info("Jestem tutaj, value: "+ value);
         List<UserDto> users= userService.findClient(value);
         return users;
+    }
+
+
+    @RequestMapping(value="/findOne/{idUser}", method = RequestMethod.GET)
+    public UserDto findOneById(@PathVariable Integer idUser) throws ValidationException {
+        LOGGER.info("Jestem tutaj, value: "+ idUser);
+        UserDto users= userService.findOneClient(idUser);
+        return users;
+    }
+
+
+    @RequestMapping(value="/getList")
+    public ResponseEntity getUserList(){
+        try{
+           List<ClientData> clients=  clientDataRepository.findAllClients();
+
+            return ResponseEntity.status(HttpStatus.OK).body(clients);
+        }catch(Exception e )
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nie znaleziono userów...");
+        }
+
     }
 
 }

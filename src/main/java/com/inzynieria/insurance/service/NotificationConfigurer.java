@@ -27,7 +27,4 @@ public class NotificationConfigurer {
         return notification;
     }
 
-    public void redirect(Notification n){
-
-    }
 }

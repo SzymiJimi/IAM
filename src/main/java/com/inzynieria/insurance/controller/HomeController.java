@@ -114,9 +114,10 @@ public class HomeController {
         return "client/checkInsurance";
     }
 
-    @PreAuthorize("hasRole('AGENT')")
+    @PreAuthorize("hasRole('AGENT')  or hasRole('CLIENT')")
     @RequestMapping(value = "/find/findOffer")
     public ModelAndView findOffer(){
+        LOGGER.info("Jestem w find offer w home");
         ModelAndView mav = new ModelAndView("find/findOffer");
         return mav;
     }
@@ -125,10 +126,13 @@ public class HomeController {
     @RequestMapping(value = "/find/findApplication")
     public String findApplication(){ return "find/findApplication";}
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('CLIENT')"   )
     @RequestMapping(value ="/application/applicationAdd")
-    public String addApplication(){return "application/applicationAdd";}
+    public String addApplication(){
+        LOGGER.info("Jestem w find offer w home");
+        return "application/applicationAdd";}
 
     @RequestMapping(value = "/application/applicationData")
-    public String applicationData(){ return "application/applicationData";}
+    public String applicationData(){
+        return "application/applicationData";}
 }
