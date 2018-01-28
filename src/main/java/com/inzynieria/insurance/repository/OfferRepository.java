@@ -16,7 +16,4 @@ public interface OfferRepository extends JpaRepository<Offer,Integer> {
 
     List<Offer> findOfferByName(String name);
 
-    //List<OfferDto> findOffer(String value);
-//    @Query(value= "SELECT  o.idoffer, o.information, o.insurancetype, o.name, o.duration, o.paymenAmount from Offer o where o.idUser=userRoles.USER_IDUSER AND ( o.username= :data OR o.name= :data OR o.surname= :data OR o.email= :data)  AND userRoles.name = 'ROLE_CLIENT'", nativeQuery = true)
-//    List<Offer> findOffer(@Param("data") String data);
 }
