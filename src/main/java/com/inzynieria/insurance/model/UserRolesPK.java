@@ -1,12 +1,20 @@
 package com.inzynieria.insurance.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+
 import java.io.Serializable;
 
+/**
+ * Klasa słuząca do tworzenia kluczy głownych dla tabeli pośredniej UserRoles.
+ */
 public class UserRolesPK implements Serializable{
 
+    /**
+     * Pole odnosi się do klucza głównego w tabeli User.
+     */
     private Integer USER_IDUSER;
+    /**
+     * Pole odnosi się do klucza głównego w tabeli Role.
+     */
     private Integer ROLE_IDROLE;
 
     public UserRolesPK(){

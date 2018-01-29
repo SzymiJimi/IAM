@@ -55,6 +55,13 @@
                         <td>
                             <input id="remember_me" name="remember-me" type="checkbox" checked="checked"/>
                         </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div align="center"  th:if="${param.error}">
+                                <p style="font-size: 18; color: #FF1C19; text-align: center">Zła nazwa użytkownika lub hasło</p>
+                            </div>
+                        </td>
 
                     </tr>
                     <tr>

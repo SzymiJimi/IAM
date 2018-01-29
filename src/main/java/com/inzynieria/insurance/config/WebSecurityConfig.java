@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler())
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/home", true)
                 .and()
                 .rememberMe().tokenValiditySeconds(2419200).key("iamKey")
