@@ -94,7 +94,7 @@
                                      md-selected-item="showListController.selectedItem"
                                      md-search-text="searchText"
                                      md-items="item in querySearch(searchText)"
-                                     md-item-text="item.pesel"
+                                     md-item-text="item.value.pesel"
                                      md-require-match
                                      md-floating-label="Wyszukaj klienta wpisując PESEL">
 
@@ -124,7 +124,7 @@
                         <!-- Spacer //-->
                     </div>
                     <md-button class="md-raised md-primary buttomPrimary" ng-disabled="pesel.$invalid"
-                               ng-click="loadUserNotification(pesel)">SZUKAJ
+                               ng-click="loadUserNotification(searchText)">SZUKAJ
                     </md-button>
                     <div flex="5" hide-xs hide-sm>
                         <!-- Spacer //-->

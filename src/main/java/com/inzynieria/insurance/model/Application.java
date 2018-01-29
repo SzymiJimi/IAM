@@ -8,6 +8,9 @@ import java.time.LocalDate;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
+/**
+ * Klasa modelowa, która odwzorowuje encję wniosków w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class Application {
@@ -27,15 +30,6 @@ public class Application {
         this.filling_date = Date.valueOf(LocalDate.now());
         this.accepted=0;
     }
-
-   /*public Application(String type, String reason, Integer accepted,  Integer user_idUser){
-        this.filling_date = Date.valueOf(LocalDate.now());
-        this.reason=reason;
-        this.type=type;
-        this.user_idUser=user_idUser;
-        this.accepted=accepted;
-    }*/
-
 
     public Integer getIdApplication() {
         return idApplication;

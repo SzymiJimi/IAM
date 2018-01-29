@@ -3,10 +3,24 @@ package com.inzynieria.insurance.commands;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Polecenie dodania wniosku, klasa implementuje interfejs CommandInterface co umożliwia podpięcie tego polecenia to systemu obsługi poleceń wykorzystującego
+ * wzorzec command.
+ */
 public class AddApplication implements CommandInterface {
+    /**
+     * ID komendy, takie jakie zostanie przypisane w bazie danych.
+     */
     private Integer idCommand;
+    /**
+     * Nazwa komendy taka jaka będzie wyświetlana w interfejsie aplikacji.
+     */
     private String name;
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(FindClient.class);
+
 
     public AddApplication(Integer idCommand, String name){
         this.idCommand = idCommand;
@@ -32,6 +46,10 @@ public class AddApplication implements CommandInterface {
         this.name = name;
     }
 
+    /**
+     * Metoda uruchamiająca polecenia dodania wniosku.
+     * @return Zwraca ona adres, na który zostanie przekierowana aplikacja. Następnie uruchomi on widok zajmujący się dodawaniem wniosku.
+     */
     public String execute(){
         LOGGER.info("Jestem w wyłołaniu dodawania wniosku");
         return "http://localhost:8090/application/applicationAdd";

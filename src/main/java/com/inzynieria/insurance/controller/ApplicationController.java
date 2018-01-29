@@ -1,29 +1,17 @@
 package com.inzynieria.insurance.controller;
 
 
-import com.inzynieria.insurance.dto.UserDto;
 import com.inzynieria.insurance.model.Application;
-import com.inzynieria.insurance.model.User;
 import com.inzynieria.insurance.repository.ApplicationRepository;
-import com.inzynieria.insurance.repository.UserRepository;
-import com.inzynieria.insurance.service.ApplicationService;
-import com.inzynieria.insurance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.xml.bind.ValidationException;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/application")
@@ -33,9 +21,6 @@ public class ApplicationController {
 
     @Autowired
     ApplicationRepository applicationRepository;
-    @Autowired
-    ApplicationService applicationService;
-
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String createApplication(@RequestBody Application application){
@@ -72,7 +57,6 @@ public class ApplicationController {
                 applications.addAll(tmp);
             }
         }
-        //List <Application> applications= (applicationRepository.findApplicationByType(value));
         return applications;
     }
 

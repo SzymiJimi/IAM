@@ -1,25 +1,23 @@
 package com.inzynieria.insurance.commands.config;
 
 import com.inzynieria.insurance.commands.*;
-import com.inzynieria.insurance.repository.CommandRepository;
-import com.inzynieria.insurance.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.ViewResolver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Klasa która wspomaga użycie wzorca command. W klasie konfigurujemy numery ID, którym będą odpowiadały konkretne polecenia.
+ */
 public class CommandsConfig {
 
-    @Autowired
-    CommandRepository commandRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
+    /**
+     * Lista która przechowuje obiekty implementujące interfejs CommandInterface.
+     */
     static List<CommandInterface> commandList = new ArrayList<>();
 
+    /**
+     * Metoda, w której tworzone są obiekty implementujące interfejs CommandInterface, nadawane jest im ID komendy, nazwa i dodawane są do listy commandList.
+     */
     public static void createCommands()
     {
         FindClient findClient = new FindClient(1, "Wyszukaj klienta");
@@ -45,6 +43,11 @@ public class CommandsConfig {
         commandList.add(addApplication);
     }
 
+    /**
+     * Wyszaukiwana jest komenda w liście na podstawie podanego ID.
+     * @param id ID wyszukiwanej komendy.
+     * @return Zwraca znalezioną komende.
+     */
     public static CommandInterface getCommandObject(Integer id)
     {
         for (CommandInterface command :commandList) {

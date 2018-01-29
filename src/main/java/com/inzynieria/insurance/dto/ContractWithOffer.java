@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Klasa umożliwiająca połączenie dwóch klas modelowych w jedną. Jest to uzyteczne w przypadku wyświetlania danych umowy dla danego klienta. Połączenie danych z dwóch
+ * encji wykonywane jest na poziomie kodu Javy unikając w ten sposób, łączenia tych obiektów w AngularzeJS.
+ */
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class ContractWithOffer {

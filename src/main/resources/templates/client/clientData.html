@@ -81,12 +81,58 @@
                 </md-card>
 
                 <md-subheader class="md-no-sticky">Zarządzanie klientem</md-subheader>
-                <md-list-item ng-click="navigateTo('data usage', $event)">
-                    <p> Opcja 1 </p>
-                </md-list-item>
-                <md-list-item ng-click="navigateTo('data usage', $event)">
-                    <p> Opcja 2 </p>
-                </md-list-item>
+
+                <md-nav-bar
+                        md-no-ink-bar="disableInkBar"
+                        md-selected-nav-item="currentNavItem"
+                        nav-bar-aria-label="navigation links">
+                    <md-nav-item md-nav-click="goto('page1')" name="page1">
+                        Umowy klienta
+                    </md-nav-item>
+                    <md-nav-item md-nav-click="goto('page2')" name="page2">
+                        Zgłoszenia klienta
+                    </md-nav-item>
+                    <md-nav-item md-nav-click="goto('page3')" name="page3">
+                        Płatności
+                    </md-nav-item>
+                    <!-- these require actual routing with ui-router or ng-route, so they
+                    won't work in the demo
+                    <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
+                    <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
+                    You can also add options for the <code>ui-sref-opts</code> attribute.
+                    <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+                      Page Six
+                    </md-nav-item>
+                    -->
+                </md-nav-bar>
+
+                <div ng-if="currentNavItem=='page1'">
+                    Siema jestem w panelu 1
+                    <br>
+                    wyświetlam informacje na temat umów hehe
+                    <br>
+                    oraz wyświetlam dodatkowe informacje
+                    <br>
+                    i jeszcze wiecej
+                </div>
+
+                <div ng-if="currentNavItem=='page2'">
+                    Siema jestem w panelu 2
+                    <br>
+                    wyświetlam mniej info o zgłoszeniach
+                </div>
+
+
+                <!--<span>{{status}}</span>-->
+                <!--<div class="ext-content">-->
+                    <!--External content for `<span>{{currentNavItem}}</span>`.-->
+                <!--</div>-->
+                <!--<md-list-item ng-click="navigateTo('data usage', $event)">-->
+                    <!--<p> Opcja 1 </p>-->
+                <!--</md-list-item>-->
+                <!--<md-list-item ng-click="navigateTo('data usage', $event)">-->
+                    <!--<p> Opcja 2 </p>-->
+                <!--</md-list-item>-->
 
             </md-content>
         </section>

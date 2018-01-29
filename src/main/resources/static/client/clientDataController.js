@@ -24,6 +24,14 @@ app.controller('clientDataController', ['$scope', '$location', '$http', 'homeSer
                 Accept: undefined
             }
         };
+
+
+    $scope.currentNavItem = 'page1';
+
+    $scope.goto = function(page) {
+        $scope.status = "Goto " + page;
+    };
+
     $scope.role={};
     $scope.commands=[];
     $scope.response={};
