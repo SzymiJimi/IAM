@@ -40,9 +40,9 @@ public class ClientDataController {
             return "Wystąpił błąd";
     }
     /**
-     * Metoda zajmująca się odbiorem żądania dotyczącego znalezienia danych użytkownika w bazie o podanym ID użytkownika.
+     * Metoda zajmująca się odbiorem żądania dotyczącego znalezienia danych użytkownika w bazie o podanym ID użytkownika
      * @param id Id użytkownika, którego dane chcemy wyświetlić
-     * @return Zwraca znaleziony obiekt danych klienta.
+     * @return Zwraca znaleziony obiekt danych klienta
      */
     @RequestMapping(value="/find/{id}", method = RequestMethod.GET)
     public ClientData findClientData(@PathVariable(value="id") Integer id){

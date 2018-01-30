@@ -9,10 +9,19 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
+/**
+ * Interfejs zawierający 
+ */
 public interface UserService {
 
     //List<User> getUsers();
 
+    /**
+     * Aktualizowanie
+     * @param user
+     * @param id
+     * @throws ValidationException
+     */
     void updateUser(UserDto user, Integer id) throws ValidationException;
 
 //    User findOrCreateUserByUsername(String username) throws ResourceNotFoundException;

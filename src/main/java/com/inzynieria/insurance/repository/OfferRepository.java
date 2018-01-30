@@ -11,7 +11,11 @@ import java.util.List;
 
 @Service
 public interface OfferRepository extends JpaRepository<Offer,Integer> {
-
+    /**
+     * Wyszukiwanie ofert po nazwie
+     * @param name nazwa ofert
+     * @return Lista ofert
+     */
     List<Offer> findOfferByName(String name);
 
 }

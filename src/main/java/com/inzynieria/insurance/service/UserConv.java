@@ -6,8 +6,15 @@ import com.inzynieria.insurance.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa konwertująca z klasy User na uproszczoną wersję modelu User
+ */
 public class UserConv {
-
+    /**
+     * Konwertująca metoda  z klasy User na uproszczoną wersję modelu User
+     * @param user obiekt User
+     * @return Uproszczona wersja modelu User
+     */
     public UserDto convertUserToUserDto(User user){
         return new UserDto(user.getIdUser(), user.getUsername(), "#",user.getName(), user.getSurname(), user.getEmail());
     }

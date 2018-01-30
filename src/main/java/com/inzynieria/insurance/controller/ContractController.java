@@ -32,16 +32,24 @@ public class ContractController {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(ContractController.class);
 
-
+    /**
+     * Repozytorium wniosków
+     */
     @Autowired
     ContractRepository contractRepository;
-
+    /**
+     * Repozytorium ofert
+     */
     @Autowired
     OfferRepository offerRepository;
-
+    /**
+     *
+     */
     @Autowired
     ContractOfferConverter contractOfferConverter;
-
+    /**
+     * Repozytorium użytkowników
+     */
     @Autowired
     UserRepository userRepository;
 

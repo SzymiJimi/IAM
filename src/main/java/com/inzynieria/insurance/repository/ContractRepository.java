@@ -12,9 +12,18 @@ import java.util.List;
  */
 @Service
 public interface ContractRepository extends JpaRepository<Contract,Integer> {
-
+    /**
+     * Wyszukiwanie umów po id użytkownika
+     * @param id id użytkownika
+     * @return Lista umów użytkownika
+     */
     List<Contract> findContractByIdUser(Integer id);
 
+    /**
+     * Wyszukiwanie umów po numerze PESEL
+     * @param data numer PESEL
+     * @return Lista umów
+     */
     @Query(value= "SELECT  c.idContract, c.expirationDate, c.idOffer, c.idUser, c.startDate from contract c, clientdata where c.idUser= clientData.userId AND  clientdata.pesel= :data", nativeQuery = true)
     List<Contract> findContractByPesel(@Param("data") String data);
 

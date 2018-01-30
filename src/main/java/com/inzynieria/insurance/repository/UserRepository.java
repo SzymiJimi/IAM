@@ -14,9 +14,28 @@ import java.util.List;
  */
 @Service
 public interface UserRepository extends JpaRepository<User,Integer> {
-
+    /**
+     * Wyszukiwanie użytkownika po imieniu
+     * @param name nazwa
+     * @return Użytkownik, którego imię jest podane
+     */
     User findUserByName(String name);
+
+    /**
+     * Wyszukiwanie użytkownika po nazwie
+     * @param username nazwa użytkownika
+     * @return użytkownik, którego nazwa została podana
+     */
     User findByUsername(String username);
+
+    /**
+     * Wyszukiwanie użytkowników po imieniu lub nazwisku lub nazwie użytkownika lub e-mailu
+     * @param name imię użytkownika
+     * @param surname nazwisko użytkownika
+     * @param username nazwa użytkownika
+     * @param Email e-mail użytkownika
+     * @return Lista użytkowników
+     */
     List<User> findUserByNameOrSurnameOrUsernameOrEmail(String name, String surname, String username, String Email);
 
     @Query(value= "SELECT  u.idUser, u.username, u.password, u.name, u.surname, u.email from User u, UserRoles, role where u.idUser=userRoles.USER_IDUSER AND userRoles.ROLE_IDROLE=role.idRole AND  ( u.username= :data OR u.name= :data OR u.surname= :data OR u.email= :data)  AND role.name = 'ROLE_CLIENT'", nativeQuery = true)
