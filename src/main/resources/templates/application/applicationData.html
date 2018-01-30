@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app"  xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Dane użytkownika</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost:8090/client/clientDataStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="http://localhost:8090/application/applicationDataController.js"  ></script>
+    <script src="http://localhost:8090/homeService.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+
+</head>
+<body>
+
+<div class="container" ng-app="app">
+
+    <div ng-controller="applicationDataController" layout="column" ng-cloak>
+
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home" target="_self"> <h2 >Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}" target="_self">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+                </md-content>
+            </md-sidenav>
+
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;">Wyświetlanie danych wniosku</h3>
+                <br><br>
+                <md-card md-theme="dark-blue" md-theme-watch>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{postResult.type}}</span>
+                            <span class="md-subhead">{{postResult.reason}}</span>
+                            <br><br>
+                            <span class="md-subhead">Data: <span class="md-headline">{{postResult.filling_date}}</span></span>
+                            <span class="md-subhead">Opis: <span class="md-headline">{{postResult.description}}</span></span>
+                            <span class="md-subhead">ID użytkownika <span class="md-headline">{{postResult.user_idUser}}</span></span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>Action 1</md-button>
+                        <md-button>Action 2</md-button>
+                    </md-card-actions>
+                </md-card>
+
+
+
+            </md-content>
+
+            <!--Wyświetlanie danych oferty-->
+
+            <!--<div  ng-controller="offerDataController" >-->
+            <!--<table >-->
+            <!--<tr>-->
+            <!--<td>Nazwa oferty:</td>-->
+            <!--<td>{{postResult.name}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Informacje oferty:</td>-->
+            <!--<td>{{postResult.information}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Czas trwania oferty:</td>-->
+            <!--<td>{{postResult.duration}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Typ oferty:</td>-->
+            <!--<td>{{postResult.insurancetype}} </td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td>Opłaty miesieczne:</td>-->
+            <!--<td>{{postResult.paymentAmount}}pln </td>-->
+            <!--</tr>-->
+
+            <!--</table>-->
+        </section>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,15 +1,14 @@
 package com.inzynieria.insurance.model;
 
 
-import com.inzynieria.insurance.commands.CommandInterface;
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+/**
+ * Klasa modelowa, która odwzorowuje encję command w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class Command {

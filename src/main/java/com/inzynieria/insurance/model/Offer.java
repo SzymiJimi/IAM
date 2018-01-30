@@ -3,6 +3,9 @@ package com.inzynieria.insurance.model;
 import lombok.Data;
 import javax.persistence.*;
 
+/**
+ * Klasa modelowa, która odwzorowuje encję oferta (offer) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class Offer {

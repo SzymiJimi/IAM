@@ -1,37 +1,143 @@
 <!DOCTYPE html>
-<html lang="en"  ng-app="app"  xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Dane użytkownika</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"  ></script>
-    <script src="http://localhost:8090/client/clientDataController.js"  ></script>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" href="http://localhost:8090/client/clientDataStyle.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="http://localhost:8090/client/clientDataController.js"></script>
+    <script src="http://localhost:8090/homeService.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
 </head>
 <body>
 
+<div class="container" ng-app="app">
 
-Wyświetlanie danych użytkownika...
+    <div ng-controller="clientDataController" layout="column" ng-cloak>
 
-<div  ng-controller="clientDataController" >
-    <table >
-        <tr>
-            <td>Imie:</td>
-            <td>{{postResult.name}} </td>
-        </tr>
-        <tr>
-            <td>Nazwisko:</td>
-            <td>{{postResult.surname}} </td>
-        </tr>
-        <tr>
-            <td>Nick:</td>
-            <td>{{postResult.username}} </td>
-        </tr> <tr>
-        <td>Email:</td>
-        <td>{{postResult.email}} </td>
-    </tr>
-    </table>
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home" target="_self"> <h2 >Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}" target="_self">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
 
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+            </md-sidenav>
+
+            <!--Tytuł strony pojawiający się na środku-->
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;">Wyświetlanie danych klienta</h3>
+                <br><br>
+                <md-card md-theme="dark-blue" md-theme-watch>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{postResult.name}}</span>
+                            <span class="md-subhead">{{postResult.surname}}</span>
+                            <br><br>
+                            <span class="md-subhead">Nick: <span class="md-headline">{{postResult.username}}</span></span>
+                            <span class="md-subhead">Email: <span class="md-headline">{{postResult.email}}</span></span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button>Action 1</md-button>
+                        <md-button>Action 2</md-button>
+                    </md-card-actions>
+                </md-card>
+
+                <md-subheader class="md-no-sticky">Zarządzanie klientem</md-subheader>
+
+                <md-nav-bar
+                        md-no-ink-bar="disableInkBar"
+                        md-selected-nav-item="currentNavItem"
+                        nav-bar-aria-label="navigation links">
+                    <md-nav-item md-nav-click="goto('page1')" name="page1">
+                        Umowy klienta
+                    </md-nav-item>
+                    <md-nav-item md-nav-click="goto('page2')" name="page2">
+                        Zgłoszenia klienta
+                    </md-nav-item>
+                    <md-nav-item md-nav-click="goto('page3')" name="page3">
+                        Płatności
+                    </md-nav-item>
+                    <!-- these require actual routing with ui-router or ng-route, so they
+                    won't work in the demo
+                    <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
+                    <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
+                    You can also add options for the <code>ui-sref-opts</code> attribute.
+                    <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+                      Page Six
+                    </md-nav-item>
+                    -->
+                </md-nav-bar>
+
+                <div ng-if="currentNavItem=='page1'">
+                    Siema jestem w panelu 1
+                    <br>
+                    wyświetlam informacje na temat umów hehe
+                    <br>
+                    oraz wyświetlam dodatkowe informacje
+                    <br>
+                    i jeszcze wiecej
+                </div>
+
+                <div ng-if="currentNavItem=='page2'">
+                    Siema jestem w panelu 2
+                    <br>
+                    wyświetlam mniej info o zgłoszeniach
+                </div>
+
+
+                <!--<span>{{status}}</span>-->
+                <!--<div class="ext-content">-->
+                    <!--External content for `<span>{{currentNavItem}}</span>`.-->
+                <!--</div>-->
+                <!--<md-list-item ng-click="navigateTo('data usage', $event)">-->
+                    <!--<p> Opcja 1 </p>-->
+                <!--</md-list-item>-->
+                <!--<md-list-item ng-click="navigateTo('data usage', $event)">-->
+                    <!--<p> Opcja 2 </p>-->
+                <!--</md-list-item>-->
+
+            </md-content>
+        </section>
+    </div>
 </div>
+
 </body>
 </html>

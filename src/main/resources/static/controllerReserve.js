@@ -50,9 +50,7 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
         });
 
     };
-        var data={
-            username:$scope.username
-        };
+
     $scope.submitForm = function(ev){
 
         config = {
@@ -62,10 +60,6 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
         };
 
         var url = "http://localhost:8090/user/add";
-        console.log("SubmitForm");
-
-        // data.idOffer=idOffer;
-        console.log(data);
         var userdata = {
             username: $scope.username,
             password: $scope.password,
@@ -75,23 +69,12 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
             idRole: '12'
         };
 
-        console.log(userdata);
         $http.post(url, userdata, config).then(function (response) {
-            $scope.postResultMessage = response.data;
-        }, function error(response) {
-            $scope.postResultMessage = "Error with status: " +  response.statusText;
-        });
-
-        url = "http://localhost:8090/user/add";
-
-        $http.post(url, data, config).then(function (response) {
-            $scope.postResultMessage = response.data;
             $scope.showAlert(ev);
+            $scope.postResultMessage = response.data;
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " +  response.statusText;
         });
-
-
     };
 });
 

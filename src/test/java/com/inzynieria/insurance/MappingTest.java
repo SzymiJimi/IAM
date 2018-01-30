@@ -4,6 +4,7 @@ import com.inzynieria.insurance.controller.HomeController;
 import org.junit.Test;
 
 
+import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,6 +49,10 @@ public class MappingTest {
         mockMvc.perform(get("/client/clientData")).andExpect(view().name("client/clientData"));
     }
 
+    /**
+     *
+     * @throws Exception
+     */
 
 
     @Test
@@ -56,6 +61,43 @@ public class MappingTest {
         MockMvc mockMvc=standaloneSetup(controller).build();
         mockMvc.perform(get("/find/findUser")).andExpect(view().name("find/findUser"));
     }
+
+    @Test
+    public void testRegister() throws Exception{
+        HomeController controller=new HomeController();
+        MockMvc mockMvc=standaloneSetup(controller).build();
+        mockMvc.perform(get("/client/homeReserve")).andExpect(view().name("client/homeReserve"));
+    }
+
+    @Test
+    public void testOfferadd() throws Exception{
+        HomeController controller = new HomeController();
+        MockMvc mockMvc=standaloneSetup(controller).build();
+        mockMvc.perform(get("/new/offer")).andExpect(view().name("offer/offerAdd"));
+    }
+    @Test
+    public void testFindOffer() throws Exception{
+        HomeController controller = new HomeController();
+        MockMvc mockMvc=standaloneSetup(controller).build();
+        mockMvc.perform(get("/find/findOffer")).andExpect(view().name("find/findOffer"));
+    }
+
+    @Test
+    public void testNotyficationAdd() throws Exception{
+        HomeController controller = new HomeController();
+        MockMvc mockMvc=standaloneSetup(controller).build();
+        mockMvc.perform(get("/new/notification")).andExpect(view().name("notification/new"));
+    }
+
+    @Test
+    public void testNotyficationShow() throws Exception{
+        HomeController controller = new HomeController();
+        MockMvc mockMvc=standaloneSetup(controller).build();
+        mockMvc.perform(get("/show/notifications")).andExpect(view().name("notification/showList"));
+    }
+
+
+
 
 
 

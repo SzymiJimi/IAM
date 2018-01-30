@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zakład ubezpieczen</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="http://localhost:8090/contract/newContractStyle.css">
+    <link rel="stylesheet" href="http://localhost:8090/notification/showNotificationStyle.css">
+    <!--Ten navbar style musi być w każdym pliku html-->
+    <link rel="stylesheet" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="http://localhost:8090/notification/showListController.js"></script>
+    <!--Ten home service musi być zawsze-->
+    <script src="http://localhost:8090/homeService.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.6/angular-material.min.js"></script>
+
+</head>
+<body>
+
+<div class="container" ng-app="app">
+
+    <div ng-controller="showListController" ng-init="loadNotifications()" layout="column" ng-cloak>
+
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090/home"><h2>Zakład ubezpieczeń</h2></a>
+                <p>Zalogowany jako {{loggedUser.name}}</p>
+                <div class="dropdown">
+                    <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
+                        <i class="material-icons">menu</i>
+                    </md-button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a th:href="@{/logout}">Wyloguj się</a>
+                    </div>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!--Obowiązkowy element aby menu było do samego dołu-->
+        <section layout="row" flex>
+            <!--Boczny pasek nawigacji-->
+            <md-sidenav
+                    class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
+
+                <md-content layout-padding>
+                    <ul>
+                        <!--<a href="default.asp">Home</a>-->
+                        <li ng-repeat="command in commands | orderBy: 'name'"
+                            ng-click="selectCommand(command.idCommand)"><p class="commands-panel">{{command.name}} </p>
+                        </li>
+
+                    </ul>
+            </md-sidenav>
+
+            <!--Tytuł strony pojawiający się na środku-->
+            <md-content flex layout-padding>
+                <h3 style="color:blue; text-align: center;">Przeglądanie zgłoszeń</h3>
+                <br><br>
+                <md-subheader class="md-no-sticky subHeaderCustom">Oczekujące do analizy</md-subheader>
+                <div layout="row">
+                    <div flex="10" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <md-input-container style="width: 255px">
+                        <label>Typ zgłoszenia</label>
+                        <md-select ng-model="selectedStatus" md-selected-text="getSelectedText()">
+                            <md-optgroup label="Statusy">
+                                <md-option ng-value="status" ng-repeat="status in statuses">{{status}}</md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+
+
+                </div>
+                <div layout="row">
+                    <div flex="10" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <md-autocomplete flex required
+                                     md-input-name="autocompleteField"
+                                     md-input-minlength="2"
+                                     md-input-maxlength="18"
+                                     md-no-cache="showListController.noCache"
+                                     md-selected-item="showListController.selectedItem"
+                                     md-search-text="searchText"
+                                     md-items="item in querySearch(searchText)"
+                                     md-item-text="item.value.pesel"
+                                     md-require-match
+                                     md-floating-label="Wyszukaj klienta wpisując PESEL">
+
+                        <md-item-template>
+                            <span class="item-metadata">
+                                <span>
+                                <strong>Pesel: </strong>{{item.value.pesel}},
+                                </span>
+                                    <span>
+                                    <strong>Imię: </strong>{{item.value.name}},
+                                    </span>
+                                <span>
+                                    <strong>Nazwisko: </strong>{{item.value.surname}},
+                                    </span>
+                             </span>
+                        </md-item-template>
+
+                        <div ng-messages="searchForm.autocompleteField.$error"
+                             ng-if="searchForm.autocompleteField.$touched">
+                            <div ng-message="required">You <b>must</b> have a favorite state.</div>
+                            <div ng-message="md-require-match">Please select an existing state.</div>
+                            <div ng-message="minlength">Your entry is not long enough.</div>
+                            <div ng-message="maxlength">Your entry is too long.</div>
+                        </div>
+                    </md-autocomplete>
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <md-button class="md-raised md-primary buttomPrimary" ng-disabled="pesel.$invalid"
+                               ng-click="loadUserNotification(searchText)">SZUKAJ
+                    </md-button>
+                    <div flex="5" hide-xs hide-sm>
+                        <!-- Spacer //-->
+                    </div>
+                    <!--<md-autocomplete flex required-->
+                    <!--md-input-name="autocompleteField"-->
+                    <!--md-input-minlength="2"-->
+                    <!--md-input-maxlength="18"-->
+                    <!--md-no-cache="noCache"-->
+                    <!--md-selected-item="selectedItem"-->
+                    <!--md-search-text="searchText"-->
+                    <!--md-items="item in querySearch(searchText)"-->
+                    <!--md-item-text="item.display"-->
+                    <!--md-require-match-->
+                    <!--md-floating-label="Favorite state">-->
+                    <!--<md-item-template>-->
+                    <!--<span md-highlight-text="searchText">{{item.display}}</span>-->
+                    <!--</md-item-template>-->
+                    <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">-->
+                    <!--<div ng-message="required">You <b>must</b> have a favorite state.</div>-->
+                    <!--<div ng-message="md-require-match">Please select an existing state.</div>-->
+                    <!--<div ng-message="minlength">Your entry is not long enough.</div>-->
+                    <!--<div ng-message="maxlength">Your entry is too long.</div>-->
+                    <!--</div>-->
+                    <!--</md-autocomplete>-->
+                </div>
+
+                <br><br><br>
+                <md-card ng-repeat="notification in notifications | filter: {status: realStatus}" md-theme="dark-grey"
+                         class="md-whiteframe-10dp customCard" md-theme-watch>
+                    <md-card-title class="cardTitle">
+                        <md-card-title-text>
+                            <span class="md-headline">{{notification.type}}</span>
+                            <span class="md-subhead">Opis: {{notification.incident_description}}</span>
+                            <span class="md-subhead">Status: {{notification.status}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-if="notification.status==='CREATED'"
+                                   ng-click="loadDetails(notification.idNotification)">Analizuj
+                        </md-button>
+                        <md-button ng-click="deleteFromList(notification.idNotification)">Ukryj</md-button>
+                    </md-card-actions>
+                </md-card>
+            </md-content>
+        </section>
+    </div>
+</div>
+</body>
+</html>

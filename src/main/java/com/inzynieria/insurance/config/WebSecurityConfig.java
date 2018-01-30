@@ -1,6 +1,5 @@
 package com.inzynieria.insurance.config;
 
-import com.inzynieria.insurance.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import javax.sql.DataSource;
@@ -48,22 +46,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/navBarStyle.css").anonymous()
+                .antMatchers("/navBarStyle.css").permitAll()
+                .antMatchers("/login/*").anonymous()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/*")
-                .hasAnyRole("USER", "ADMIN", "AGENT")
-                .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT")
+                .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT", "CARSPECIALIST", "HEALTHSPECIALIST", "TRAVELSPECIALIST", "SPECIALIST","CLIENT")
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler())
                 .and()
-                .formLogin().loginPage("/login")
+                .formLogin().loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/home", true)
                 .and()
                 .rememberMe().tokenValiditySeconds(2419200).key("iamKey")
                 .and()
                 .logout().logoutSuccessUrl("/login");
     }
-
 
 }

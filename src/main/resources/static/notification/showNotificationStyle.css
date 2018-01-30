@@ -1,0 +1,15 @@
+.customCard{
+    margin-right: 7%!important;
+    margin-left: 7%!important;
+    border-radius: 10px !important;
+}
+
+.cardTitle{
+
+    padding: 10px 20px 0 !important;
+}
+
+.buttomPrimary{
+
+    min-width: 250px !important;
+}

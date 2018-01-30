@@ -1,0 +1,20 @@
+.carddemoBasicUsage .card-media {
+    background-color: #999999; }
+
+.md-headline{
+    font-size: 20px;
+    font-style: italic;
+    color: linen;
+}
+
+.dropdown-content a {
+    /* color: white !important; */
+    margin-top: 12px !important;
+}
+
+
+.navBardemoBasicUsage md-content .ext-content {
+    padding: 50px;
+    margin: 20px;
+    background-color: #FFF2E0; }
+

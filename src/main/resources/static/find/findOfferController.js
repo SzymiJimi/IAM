@@ -1,6 +1,6 @@
 
-
 var app = angular.module('app',['ngMaterial', 'ngMessages']);
+
 app.controller('findOfferController', [
     '$scope',
     '$http' ,
@@ -37,16 +37,9 @@ app.controller('findOfferController', [
         $scope.dropDown= function(){
             document.getElementById("myDropdown").classList.toggle("show");
         };
-
-
-
-
-
         $scope.submitForm = function(value){
             var url = "http://localhost:8090/offer/find";
             $scope.postResult=[];
-
-
 
             findOfferService.findOfferInDB(url, value, config).then(function (result) {
                 angular.copy(result, $scope.postResult);
@@ -64,4 +57,3 @@ app.controller('findOfferController', [
             $window.location.href =url;
         }
     }]);
-

@@ -1,16 +1,12 @@
 package com.inzynieria.insurance.model;
 
-import com.inzynieria.insurance.repository.UserRepository;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * Klasa modelowa, która odwzorowuje encję użytkownika (user) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class User {
@@ -21,7 +17,6 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private Integer idRole;
     private Set<Role> roles = new HashSet<>(0);
 
 
@@ -33,7 +28,6 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.idRole = idRole;
     }
 
     public User(){
@@ -89,16 +83,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public Integer getIdRole() {
-        return idRole;
-    }
-
-    public void setIdRole(Integer idRole) {
-        this.idRole = idRole;
-    }
-
-
 
 
     @ManyToMany(cascade = CascadeType.ALL)
