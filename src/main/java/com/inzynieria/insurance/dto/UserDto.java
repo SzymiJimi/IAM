@@ -1,13 +1,15 @@
 package com.inzynieria.insurance.dto;
 
-
-import com.inzynieria.insurance.model.Role;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Uproszczona werja modelu User z bazy danych. Różni się tym od klasy modelowej User tym, że Role userów zapisane są w liście i nie powiązane są żadnym związkiem
+ * z inną tabelą. Uławia to zparsowanie obiektu do JSONa.
+ */
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserDto {

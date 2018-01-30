@@ -5,6 +5,7 @@ angular.module('app').service('findClientService', function ($http, $q) {
         result: result,
 
         findClientInDB: function (url, name, config) {
+            console.log(name);
             var deffer = $q.defer();
             $http.post(url, name, config).then(function (response) {
                 result = response.data;

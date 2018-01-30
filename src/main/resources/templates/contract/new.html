@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
 <link>
 <title>Zakład ubezpieczen</title>
 <meta charset="utf-8"/>
@@ -76,7 +76,7 @@
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Email</label>
                             <input name="email" ng-model="email"
-                                   required minlength="10" maxlength="70" ng-pattern="/^.+@.+\..+$/"/>
+                                   required minlength="10" maxlength="70" ng-pattern="/^.+@.+\..+$/" ng-disabled="clientDataLoaded" />
 
                             <div ng-messages="f.email.$error" ng-hide="showHints">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -95,10 +95,11 @@
                         <md-button md-no-ink ng-if="userLoaded" ng-click="loadUser(email)" ng-disabled="!email"
                                    class="md-primary">Znajdź użytkownika
                         </md-button>
-                        <!--<md-button ng-if="userLoaded" ng-click="loadUser(email)" class="md-primary">Znajdź użytkownika</md-button>-->
+                        <span ng-if="!userLoaded"> {{userResponse}}</span>
                         <div flex="45" hide-xs hide-sm>
                             <!-- Spacer //-->
                         </div>
+
                     </div>
 
 
@@ -109,7 +110,7 @@
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Imie</label>
-                            <input md-maxlength="30" required name="name" ng-model="name"/>
+                            <input md-maxlength="30" required name="name" ng-model="name" ng-disabled="clientDataLoaded" />
 
                             <div ng-messages="f.name.$error">
                                 <div ng-message="required" class="my-message">Imię jest wymagane.</div>
@@ -126,7 +127,7 @@
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Nazwisko</label>
-                            <input md-maxlength="30" required name="surname" ng-model="surname"/>
+                            <input md-maxlength="30" required name="surname" ng-model="surname" ng-disabled="clientDataLoaded" />
 
                             <div ng-messages="f.surname.$error">
                                 <div ng-message="required" class="my-message">Nazwisko jest wymagane.</div>
@@ -145,7 +146,7 @@
                         </div>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Numer PESEL</label>
-                            <input name="pesel" ng-minlength="11" ng-maxlength="11" ng-model="pesel" required
+                            <input name="pesel" ng-minlength="11" ng-maxlength="11" ng-model="pesel" required ng-disabled="clientDataLoaded"
                                    ng-pattern="/^[0-9]{11}$/"/>
 
                             <div ng-messages="f.pesel.$error">
@@ -169,7 +170,7 @@
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Numer dokumentu tożsamości</label>
                             <input name="identificationNr" ng-minlength="5" ng-maxlength="15"
-                                   ng-model="identificationNr" required/>
+                                   ng-model="identificationNr" required ng-disabled="clientDataLoaded" />
 
                             <div ng-messages="f.identificationNr.$error">
                                 <div ng-message="required" class="my-message">Numer dokumentu tożsamości jest
@@ -196,7 +197,7 @@
                         </div>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Telefon</label>
-                            <input name="phone" ng-model="phone" required ng-pattern="/^[0-9]{9}$/"/>
+                            <input name="phone" ng-model="phone" required  ng-disabled="clientDataLoaded" ng-pattern="/^[0-9]{9}$/"/>
 
                             <div ng-messages="f.phone.$error">
                                 <div ng-message="required" class="my-message">Numer telefonu jest wymagany</div>
@@ -207,7 +208,7 @@
                         </div>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Miejscowość</label>
-                            <input name="place" ng-model="place" required/>
+                            <input name="place" ng-model="place" required ng-disabled="clientDataLoaded"/>
                             <div ng-messages="f.place.$error" role="alert" multiple>
                                 <div ng-message="required" class="my-message">Miejscowość jest wymagana</div>
                             </div>
@@ -224,7 +225,7 @@
 
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Ulica</label>
-                            <input name="street" ng-model="street" required/>
+                            <input name="street" ng-model="street" required ng-disabled="clientDataLoaded" />
                             <div ng-messages="f.street.$error" role="alert" multiple>
                                 <div ng-message="required" class="my-message">Ulica jest wymagana</div>
                             </div>
@@ -234,7 +235,7 @@
                         </div>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Numer domu</label>
-                            <input name="houseNr" ng-model="houseNr" required/>
+                            <input name="houseNr" ng-model="houseNr" required ng-disabled="clientDataLoaded" />
                             <div ng-messages="f.houseNr.$error" role="alert" multiple>
                                 <div ng-message="required" class="my-message">Numer domu jest wymagany</div>
                             </div>
@@ -245,7 +246,7 @@
                         </div>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Numer mieszkania</label>
-                            <input name="flatNr" ng-model="flatNr"/>
+                            <input name="flatNr" ng-model="flatNr" ng-disabled="clientDataLoaded" />
                         </md-input-container>
                         <div flex="5" hide-xs hide-sm>
                             <!-- Spacer //-->
@@ -253,7 +254,7 @@
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Kod pocztowy</label>
                             <input name="postalCode" ng-model="postalCode" placeholder="12-345"
-                                   required ng-pattern="/^[0-9]{2}-[0-9]{3}$/" md-maxlength="6">
+                                   required ng-pattern="/^[0-9]{2}-[0-9]{3}$/" md-maxlength="6" ng-disabled="clientDataLoaded" >
 
                             <div ng-messages="f.postalCode.$error" role="alert" multiple>
                                 <div ng-message="required" class="my-message">Kod pocztowy jest wymagany</div>
@@ -273,7 +274,7 @@
                         </div>
                         <md-input-container class="md-block" flex-gt-sm>
                             <label>Numer oferty</label>
-                            <input name="offerId" ng-model="offerId" required/>
+                            <input name="offerId" ng-model="offerId" required />
                             <div ng-messages="f.offerId.$error">
                                 <div ng-message="required" class="my-message">Wpisz numer oferty</div>
                             </div>

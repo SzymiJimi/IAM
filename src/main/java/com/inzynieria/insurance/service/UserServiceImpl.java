@@ -62,15 +62,33 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("The name cannot be null");
         }
 
+        LOGGER.info("Przyjęte dane: <"+data+">");
         List<UserDto> users = new ArrayList<>();
         List<User> usersFromDb =  userRepository.findClient(data);
-
+        LOGGER.info("Liczba znalezionych w bazie: "+usersFromDb.size());
         for (User user : usersFromDb) {
             users.add(new UserDto(user.getIdUser(), user.getUsername(), "#",user.getName(), user.getSurname(), user.getEmail()));
         }
-        LOGGER.info("Liczba znalezionych: "+users.size());
+
         return users;
     }
 
+    @Override
+    public UserDto findOneClient(Integer idUser) throws ValidationException {
+        if (idUser == null) {
+            throw new ValidationException("The name cannot be null");
+        }
+        try{
+            UserConv userConv = new UserConv();
+            User userFromDb =  userRepository.findOneClient(idUser);
+            UserDto userDto= userConv.convertUserToUserDto(userFromDb);
+            return userDto;
+        }catch(Exception e)
+        {
+            LOGGER.info("Nie można znaleźć użytkownika w bazie...");
+        }
+
+        return null;
+    }
 
 }

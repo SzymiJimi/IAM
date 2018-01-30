@@ -13,7 +13,7 @@ import javax.xml.bind.ValidationException;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/offer")
+@RequestMapping(value = "/offer")
 public class OfferController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OfferController.class);
@@ -35,25 +35,34 @@ public class OfferController {
 
 
     @RequestMapping(value="/find")
+
     public List<Offer> findOffer(@RequestBody String value) throws ValidationException {
 
         LOGGER.info("Klient wyszukuje oferty w bazie");
         List<Offer> offers = offerRepository.findOfferByName(value);
-        LOGGER.info("Ilosc znalezionych offert: "+ offers.size());
-        return  offers;
+        LOGGER.info("Ilosc znalezionych offert: " + offers.size());
+        return offers;
     }
 
-    @RequestMapping(value="/showData")
-    public String show()
+    @RequestMapping(value="/findOne", method = RequestMethod.POST)
+    public Offer findOffer(@RequestBody Integer id)
     {
+
         LOGGER.info("Klient wyswielta dane oferty");
+        Offer offer= offerRepository.findOne(id);
+        return offer;
+    }
+
+    @RequestMapping(value = "/showData")
+    public String show() {
+        LOGGER.info("Jestem tutaj");
         return "";
     }
 
 
     @RequestMapping(value = "/show")
     public Offer setOfferData(@RequestBody Integer value) {
-        Offer offer =offerRepository.findOne(value);
+        Offer offer = offerRepository.findOne(value);
         return offer;
     }
 
