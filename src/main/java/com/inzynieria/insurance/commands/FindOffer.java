@@ -32,7 +32,7 @@ public class FindOffer  implements CommandInterface {
     }
 
     public String execute(){
-        LOGGER.info("Jestem w uruchamianiu komendy");
+        LOGGER.info("Wyszukiwanie oferty");
         return "http://localhost:8090/find/findOffer";
     }
 }
