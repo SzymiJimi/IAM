@@ -46,7 +46,7 @@ public class RoleController {
     @RequestMapping(value = "/run/{id}", method = RequestMethod.GET)
     public String run( @PathVariable(value="id") Integer id)
     {
-        LOGGER.info("Jestem w role");
+        LOGGER.info("Sprawdzanie roli usera");
         CommandInterface command = CommandsConfig.getCommandObject(id);
         return command.execute();
     }

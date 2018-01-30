@@ -21,23 +21,23 @@ public class OfferController {
 
     @Autowired
     OfferRepository offerRepository;
-   @RequestMapping(value="/add", method = RequestMethod.POST)
+
+    public OfferController(OfferRepository offerRepository) {
+    }
+
+    @RequestMapping(value="/add", method = RequestMethod.POST)
    public String createOffer(@RequestBody Offer offer)
    {
-        LOGGER.info("Dodaje oferte");
+        LOGGER.info("Klient dodaje oferte");
        offerRepository.save(offer);
        return "Dodano pomyslnie"; }
-
-
-
-
 
 
 
     @RequestMapping(value="/find")
     public List<Offer> findOffer(@RequestBody String value) throws ValidationException {
 
-        LOGGER.info("Wyszukiwanie oferty w bazie");
+        LOGGER.info("Klient wyszukuje oferty w bazie");
         List<Offer> offers = offerRepository.findOfferByName(value);
         LOGGER.info("Ilosc znalezionych offert: "+ offers.size());
         return  offers;
@@ -46,7 +46,7 @@ public class OfferController {
     @RequestMapping(value="/showData")
     public String show()
     {
-        LOGGER.info("Jestem tutaj");
+        LOGGER.info("Klient wyswielta dane oferty");
         return "";
     }
 
@@ -65,8 +65,6 @@ public class OfferController {
                 mav.addObject("name",offer.getName());
                 return mav;
             }
-
-
 
 
 }

@@ -5,16 +5,15 @@ import com.inzynieria.insurance.repository.CommandRepository;
 import com.inzynieria.insurance.repository.RoleRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 
 public class CommandsConfig {
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(CommandsConfig.class);
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommandsConfig.class);
     @Autowired
     CommandRepository commandRepository;
 
@@ -40,7 +39,7 @@ public class CommandsConfig {
 
     public static CommandInterface getCommandObject(Integer id)
     {
-        LOGGER.info("Przekazane id:"+ id);
+        LOGGER.info("Klient uzywa komendy o id:"+ id);
         if(commandList.isEmpty())
         {
             createCommands();
