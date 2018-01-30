@@ -1,14 +1,14 @@
 package com.inzynieria.insurance.model;
 
 import lombok.Data;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import java.io.Serializable;
 
-
+/**
+ * Klasa modelowa, która odwzorowuje encję ról użytkownika (userRoles) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 @IdClass(value=UserRolesPK.class)

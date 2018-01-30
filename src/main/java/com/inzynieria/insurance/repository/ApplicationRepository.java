@@ -14,9 +14,18 @@ import java.util.List;
  */
 @Service
 public interface ApplicationRepository extends JpaRepository<Application,Integer> {
-
+    /**
+     * Szukanie wniosku po typie
+     * @param type Typ
+     * @return Lista wniosków
+     */
     List<Application> findApplicationByType(String type);
 
+    /**
+     * Wyszukiwanie po zapytaniu roli użytkownika
+     * @param data Nazwa użytkownika
+     * @return Lista roli
+     */
     @Query(value= "select role.name from user, role, userRoles where user.idUser=userRoles.USER_IDUSER and userRoles.ROLE_IDROLE=role.idRole AND username = :data", nativeQuery = true)
     List <String> roleForFind(@Param("data") String data);
 

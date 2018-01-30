@@ -14,6 +14,11 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Klasa która zapobiega nieporządanemu użytkownikowi na dostep do treści.
+ * Kiedy użytkownik nie zostanie rozpoznany zostaje przekierowany na strone "/accessDenied"
+ */
+
 public class  CustomAccessDeniedHandler implements AccessDeniedHandler {
     public static final Logger LOG = LoggerFactory.getLogger(CustomAccessDeniedHandler.class);
 

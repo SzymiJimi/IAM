@@ -13,8 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Observable;
 
+import java.util.Date;
+/**
+ * Klasa modelowa, która odwzorowuje encję umowa (contract) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
+import java.util.Observable;
 @Data
 @Entity
 public class Contract extends Observable {

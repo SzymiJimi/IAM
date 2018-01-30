@@ -8,14 +8,16 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.InternalResourceView;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import javax.sql.DataSource;
 
+/**
+ * Klasa odpowiedzialna za konfiguracje bazy danych
+ * Dane do nasze bazy pobieramy z application.properties
+ */
 @Configuration
 public class DataBaseConfig {
 
@@ -35,6 +37,11 @@ public class DataBaseConfig {
         return dataSource;
     }
 
+    /**
+     * Metoda która zapewnia mapowanie między nazwami widoków i rzeczywistymi widokami
+     *
+     */
+
     @Bean
     public ViewResolver viewResolver(){
 
@@ -50,10 +57,5 @@ public class DataBaseConfig {
         viewResolver.setTemplateEngine(engine);
         return viewResolver;
 
-//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setTemplateMode("/static/");
-//        resolver.setPrefix("/static/");
-//        resolver.setSuffix(".html");
-//        return resolver;
     }
 }

@@ -1,6 +1,5 @@
 package com.inzynieria.insurance.service;
 
-import com.inzynieria.insurance.controller.RoleController;
 import com.inzynieria.insurance.dto.RoleDto;
 import com.inzynieria.insurance.dto.UserDto;
 import com.inzynieria.insurance.model.Role;
@@ -16,9 +15,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * Klasa serwisowa obsługująca użytkownika
+ */
 @Service
 public class UserServiceImpl implements UserService {
-
+    /**
+     * Repozytorium użytkownika
+     */
         @Autowired
         UserRepository userRepository;
 

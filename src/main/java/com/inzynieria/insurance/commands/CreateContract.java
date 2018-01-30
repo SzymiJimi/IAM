@@ -4,9 +4,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CreateContract implements CommandInterface {
-
+    /**
+     * ID komendy, takie jakie zostanie przypisane w bazie danych.
+     */
     private Integer idCommand;
+    /**
+     * Nazwa komendy taka jaka będzie wyświetlana w interfejsie aplikacji.
+     */
     private String name;
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(FindClient.class);
 
     public CreateContract (Integer idCommand, String name){

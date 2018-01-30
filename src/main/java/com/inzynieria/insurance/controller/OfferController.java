@@ -1,6 +1,5 @@
 package com.inzynieria.insurance.controller;
 
-import com.inzynieria.insurance.dto.UserDto;
 import com.inzynieria.insurance.model.Offer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,31 +10,45 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.bind.ValidationException;
 import java.util.List;
-
+/**
+ * OfferController zajmuje się przechwytywaniem żądań powiązanych z ofertami. Umożliwia odbiór żądań przysyłanych z AngularaJS.
+ */
 @RestController
 @RequestMapping(value = "/offer")
 public class OfferController {
-
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(OfferController.class);
 
 
     @Autowired
     OfferRepository offerRepository;
 
-    public OfferController(OfferRepository offerRepository) {
+
+    /**
+     *  Zajmuje się odbiorem i obsługą żądania dotyczącego tworzenia nowej oferty.
+     * @param offer Ciało żądania zawiera obiekt oferty, którą będziemy dodawać do naszego systemu.
+     * @return Zwraca informacje, o pozytywnym dodaniu oferty w przypadku powodzenia, w przypadku błędu, zwraca informacje o niepowodzeniu.
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String createOffer(@RequestBody Offer offer) {
+        LOGGER.info("Dodaje oferte");
+        if(offerRepository.save(offer)!=null) {
+            return "Dodano pomyslnie";
+        }
+        else
+            return "Wystąpił błąd podczas dodawania oferty!";
     }
 
-    @RequestMapping(value="/add", method = RequestMethod.POST)
-   public String createOffer(@RequestBody Offer offer)
-   {
-        LOGGER.info("Klient dodaje oferte");
-       offerRepository.save(offer);
-       return "Dodano pomyslnie"; }
-
-
-
-    @RequestMapping(value="/find")
-
+    /**
+     * Metoda zajmująca się odbiorem żądania dotyczącego znalezienia listy ofert, których nazwa jest
+     * taka sama jak przekazany parametr value.
+     * @param value Nazwa oferty
+     * @return Lista ofert
+     * @throws ValidationException
+     */
+    @RequestMapping(value = "/find")
     public List<Offer> findOffer(@RequestBody String value) throws ValidationException {
 
         LOGGER.info("Klient wyszukuje oferty w bazie");
@@ -44,6 +57,11 @@ public class OfferController {
         return offers;
     }
 
+    /**
+     * Metoda zajmująca się odbiorem żądania dotyczącego znalezienia oferty, której identyfikator jest przekazany przez parametr
+     * @param id Identyfikator oferty
+     * @return Oferta o podanym id
+     */
     @RequestMapping(value="/findOne", method = RequestMethod.POST)
     public Offer findOffer(@RequestBody Integer id)
     {
@@ -65,7 +83,10 @@ public class OfferController {
         Offer offer = offerRepository.findOne(value);
         return offer;
     }
-
+    /**
+     * Metoda wyswietlajaca szczegółowe dane dla konkretnej oferty
+     * @return zwraca widok na ta oferte
+     */
     @RequestMapping(value = "/show/{id}")
     public ModelAndView showOffer(@PathVariable(value="id") Integer id)
     {

@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * Uproszczona werja modelu Role z bazy danych. Różni się tym od klasy modelowej Role tym, że klasa ta nie posiada żadnych odniesień do encji command i user.
- * Uławia to zparsowanie obiektu do JSONa.
+ * Uławia to sparsowanie obiektu do JSONa.
  */
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
