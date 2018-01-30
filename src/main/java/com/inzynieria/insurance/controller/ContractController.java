@@ -6,6 +6,7 @@ import com.inzynieria.insurance.model.User;
 import com.inzynieria.insurance.repository.ContractRepository;
 import com.inzynieria.insurance.repository.OfferRepository;
 import com.inzynieria.insurance.service.ContractOfferConverter;
+import com.inzynieria.insurance.service.GeneratePaymentsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,14 @@ public class ContractController {
     @Autowired
     ContractOfferConverter contractOfferConverter;
 
+    @Autowired
+    GeneratePaymentsService generatePaymentsService;
+
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String createContract(@RequestBody Contract contract){
         LOGGER.info("Dodaje kontrakt:  idOferty: "+contract.getIdOffer()+" Data ważności:"+ contract.getExpirationDate()+", data stworzenia: "+contract.getStartDate()+" idUsera: "+contract.getIdUser());
-        contractRepository.save(contract);
+        Contract saved= contractRepository.save(contract);
+        generatePaymentsService.generatePayments(saved.getIdContract(), saved.getIdUser(), saved.getIdOffer(),saved.getStartDate() );
         return "Zarejestrowano pomyślnie";
     }
 

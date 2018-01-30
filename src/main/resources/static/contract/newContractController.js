@@ -1,6 +1,7 @@
 var app = angular.module('app', ['ngMaterial', 'ngMessages']);
 app.controller('newContractController', function($scope, $http, $filter,$timeout, $mdSidenav, $log,$mdDialog,$window,  homeService) {
 
+    var that = this;
     var config = {
         headers : {
             Accept: undefined
@@ -26,7 +27,6 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
         document.getElementById("myDropdown").classList.toggle("show");
     };
 
-    // do tąd + na dole
 
     $scope.offerId="";
     $scope.userId="";
@@ -40,12 +40,14 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
     $scope.street="";
     $scope.houseNr="";
     $scope.flatNr="";
+    $scope.postalCode="";
     $scope.offerLoaded = true;
     $scope.userLoaded = true;
+    $scope.clientDataLoaded = false;
     $scope.offerResult={};
     $scope.userResult={};
     $scope.userResponse="";
-
+    $scope.clientDataResponse={};
 
 
     var idOffer;
@@ -76,9 +78,23 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
         });
     };
 
-    // $scope.status = '  ';
-    // $scope.customFullscreen = false;
-
+    that.loadClientData= function (userId) {
+        var url = "http://localhost:8090/clientData/find/"+userId;
+        $http.get(url, config).then(function (response) {
+            $scope.clientDataResponse = response.data;
+            if(response.data.length!==0) {
+                $scope.pesel=$scope.clientDataResponse.pesel;
+                $scope.identificationNr=$scope.clientDataResponse.idNumber;
+                $scope.phone=$scope.clientDataResponse.phone;
+                $scope.place=$scope.clientDataResponse.place;
+                $scope.street=$scope.clientDataResponse.street;
+                $scope.houseNr=$scope.clientDataResponse.houseNr;
+                $scope.flatNr=$scope.clientDataResponse.flatNr;
+                $scope.postalCode= $scope.clientDataResponse.postalCode;
+                $scope.clientDataLoaded = true;
+            }
+        });
+    };
 
 
     $scope.loadUser = function (email){
@@ -94,9 +110,7 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
                 $scope.name= $scope.userResult[0].name;
                 $scope.surname= $scope.userResult[0].surname;
                 $scope.userId= $scope.userResult[0].idUser;
-                // var date= new Date( );
-                // date.setFullYear(date.getFullYear()+2);
-                // console.log( $filter('date')(date, 'yyyy/MM/dd'));
+                that.loadClientData($scope.userId);
             }else{
                 $scope.userResponse="Nie znaleziono użytkownika";
             }
@@ -105,6 +119,8 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
             $scope.postResultMessage = "Error with status: " +  response.statusText;
         });
     };
+
+
 
     $scope.changeOffer = function () {
         $scope.offerLoaded=true;
@@ -138,7 +154,8 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
             place: $scope.place,
             houseNr: $scope.houseNr,
             flatNr: $scope.flatNr,
-            street: $scope.street
+            street: $scope.street,
+            postalCode: $scope.postalCode
         };
         console.log(clientData);
 
