@@ -25,6 +25,7 @@ public class OfferController {
     @Autowired
     OfferRepository offerRepository;
 
+
     /**
      *  Zajmuje się odbiorem i obsługą żądania dotyczącego tworzenia nowej oferty.
      * @param offer Ciało żądania zawiera obiekt oferty, którą będziemy dodawać do naszego systemu.
@@ -50,7 +51,7 @@ public class OfferController {
     @RequestMapping(value = "/find")
     public List<Offer> findOffer(@RequestBody String value) throws ValidationException {
 
-        LOGGER.info("Wyszukiwanie oferty w bazie");
+        LOGGER.info("Klient wyszukuje oferty w bazie");
         List<Offer> offers = offerRepository.findOfferByName(value);
         LOGGER.info("Ilosc znalezionych offert: " + offers.size());
         return offers;
@@ -64,11 +65,11 @@ public class OfferController {
     @RequestMapping(value="/findOne", method = RequestMethod.POST)
     public Offer findOffer(@RequestBody Integer id)
     {
-        LOGGER.info("Id pobrane: "+id);
+
+        LOGGER.info("Klient wyswielta dane oferty");
         Offer offer= offerRepository.findOne(id);
         return offer;
     }
-
 
     @RequestMapping(value = "/showData")
     public String show() {
@@ -87,12 +88,13 @@ public class OfferController {
      * @return zwraca widok na ta oferte
      */
     @RequestMapping(value = "/show/{id}")
-    public ModelAndView showOffer(@PathVariable(value = "id") Integer id) {
-        ModelAndView mav = new ModelAndView("/offer/offerData");
-        Offer offer = offerRepository.findOne(id);
-        mav.addObject("name", offer.getName());
-        return mav;
-    }
+    public ModelAndView showOffer(@PathVariable(value="id") Integer id)
+    {
+                ModelAndView mav = new ModelAndView("/offer/offerData");
+               Offer offer  = offerRepository.findOne(id);
+                mav.addObject("name",offer.getName());
+                return mav;
+            }
 
 
 }

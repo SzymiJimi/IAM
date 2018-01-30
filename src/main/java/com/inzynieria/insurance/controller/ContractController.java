@@ -8,6 +8,9 @@ import com.inzynieria.insurance.repository.OfferRepository;
 import com.inzynieria.insurance.repository.UserRepository;
 import com.inzynieria.insurance.service.ContractOfferConverter;
 import com.inzynieria.insurance.service.SendMailService;
+import com.inzynieria.insurance.service.GeneratePaymentsService;
+import com.inzynieria.insurance.service.NotificationCreator;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +74,6 @@ public class ContractController {
         }
         else
             return "Wystąpił błąd podczas dodawania umowy!";
-
     }
 
     /**

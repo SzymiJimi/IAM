@@ -25,6 +25,7 @@ public class ClientData {
     private Integer houseNr;
     private Integer flatNr;
     private String street;
+    private String postalCode;
 
     public ClientData() {
     }
@@ -101,5 +102,11 @@ public class ClientData {
         this.street = street;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
 
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 }

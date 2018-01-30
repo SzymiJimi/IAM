@@ -2,17 +2,26 @@ package com.inzynieria.insurance.commands.config;
 
 import com.inzynieria.insurance.commands.*;
 
+import com.inzynieria.insurance.repository.CommandRepository;
+import com.inzynieria.insurance.repository.RoleRepository;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Klasa która wspomaga użycie wzorca command. W klasie konfigurujemy numery ID, którym będą odpowiadały konkretne polecenia.
- */
+
+
 public class CommandsConfig {
 
-    /**
-     * Lista która przechowuje obiekty implementujące interfejs CommandInterface.
-     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommandsConfig.class);
+    @Autowired
+    CommandRepository commandRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+
     static List<CommandInterface> commandList = new ArrayList<>();
 
     /**
@@ -50,6 +59,13 @@ public class CommandsConfig {
      */
     public static CommandInterface getCommandObject(Integer id)
     {
+
+        LOGGER.info("Klient uzywa komendy o id:"+ id);
+        if(commandList.isEmpty())
+        {
+            createCommands();
+        }
+
         for (CommandInterface command :commandList) {
            if(command.getIdCommand().equals(id))
            {

@@ -30,6 +30,7 @@ public class ClientDataController {
      */
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String createClientData(@RequestBody ClientData clientData){
+
         LOGGER.info("Jestem tutaj ");
 //        LOGGER.info("Dodaje kontrakt:  idOferty: "+clientData.getIdOffer()+" Data ważności:"+ contract.getExpirationDate()+", data stworzenia: "+contract.getStartDate()+" idUsera: "+contract.getIdUser());
         LOGGER.info("Dodaje client data: "+clientData.toString());
