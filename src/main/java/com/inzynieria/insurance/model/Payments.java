@@ -6,10 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Observable;
 
 @Data
 @Entity
-public class Payments {
+public class Payments extends Observable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +22,9 @@ public class Payments {
     private Integer idContract;
     private Integer regulated;
 
+    public Payments(){
+
+    }
 
     public Payments(Integer amount, String expitation_Date, String payment_Date, Integer user_idUser, Integer idContract, Integer regulated) {
         this.amount = amount;
@@ -85,5 +89,11 @@ public class Payments {
 
     public void setRegulated(Integer regulated) {
         this.regulated = regulated;
+    }
+
+    public void updatePayment(){
+        System.out.println("Weszło do update w płatnościach");
+        setChanged();
+        notifyObservers();
     }
 }

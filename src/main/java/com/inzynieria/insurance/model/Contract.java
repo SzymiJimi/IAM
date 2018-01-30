@@ -13,10 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Observable;
 
 @Data
 @Entity
-public class Contract {
+public class Contract extends Observable {
 
 //    @Autowired
 //    GeneratePaymentsService generatePaymentsService;
@@ -113,6 +114,12 @@ public class Contract {
 
     public void setActive(Integer active) {
         this.active = active;
+    }
+
+    public void updateContract(){
+        System.out.println("Weszło do update w umowach");
+        setChanged();
+        notifyObservers();
     }
 
 }

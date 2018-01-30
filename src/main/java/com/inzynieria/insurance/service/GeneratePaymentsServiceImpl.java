@@ -59,6 +59,8 @@ public class GeneratePaymentsServiceImpl implements GeneratePaymentsService {
                 }
                 tmpCalendar.set(startDate.get(Calendar.YEAR) + year, startDate.get(Calendar.MONTH) + month, startDate.get(Calendar.DATE));
                 Payments payment = new Payments(amount, format.format(tmpCalendar.getTime()), null, userId, idContract, 0);
+                NotificationCreator notificationCreator= new NotificationCreator();
+                payment.addObserver(notificationCreator);
                 paymentRepository.save(payment);
                 month++;
             }

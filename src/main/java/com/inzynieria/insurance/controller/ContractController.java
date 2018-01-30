@@ -7,6 +7,7 @@ import com.inzynieria.insurance.repository.ContractRepository;
 import com.inzynieria.insurance.repository.OfferRepository;
 import com.inzynieria.insurance.service.ContractOfferConverter;
 import com.inzynieria.insurance.service.GeneratePaymentsService;
+import com.inzynieria.insurance.service.NotificationCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class ContractController {
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String createContract(@RequestBody Contract contract){
         LOGGER.info("Dodaje kontrakt:  idOferty: "+contract.getIdOffer()+" Data ważności:"+ contract.getExpirationDate()+", data stworzenia: "+contract.getStartDate()+" idUsera: "+contract.getIdUser());
+        NotificationCreator notificationCreator= new NotificationCreator();
+        contract.addObserver(notificationCreator);
         Contract saved= contractRepository.save(contract);
         generatePaymentsService.generatePayments(saved.getIdContract(), saved.getIdUser(), saved.getIdOffer(),saved.getStartDate() );
         return "Zarejestrowano pomyślnie";

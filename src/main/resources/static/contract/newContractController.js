@@ -48,6 +48,7 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
     $scope.userResult={};
     $scope.userResponse="";
     $scope.clientDataResponse={};
+    $scope.sendClientData=true;
 
 
     var idOffer;
@@ -159,11 +160,16 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
         };
         console.log(clientData);
 
-        $http.post(url, clientData, config).then(function (response) {
-            $scope.postResultMessage = response.data;
-        }, function error(response) {
-            $scope.postResultMessage = "Error with status: " +  response.statusText;
-        });
+        if(!$scope.clientDataLoaded)
+        {
+            console.log("Wchodzi...");
+            $http.post(url, clientData, config).then(function (response) {
+                $scope.postResultMessage = response.data;
+            }, function error(response) {
+                $scope.postResultMessage = "Error with status: " +  response.statusText;
+            });
+        }
+
 
         url = "http://localhost:8090/contract/add";
 

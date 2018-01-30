@@ -2,8 +2,11 @@ package com.inzynieria.insurance.controller;
 
 
 import com.inzynieria.insurance.commands.config.CommandsConfig;
+import com.inzynieria.insurance.service.UpdateContractStatus;
+import com.inzynieria.insurance.service.UpdatePaymentStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +20,13 @@ import java.security.Principal;
  */
 @Controller
 public class HomeController {
+
+    @Autowired
+    UpdateContractStatus updateContractStatus;
+
+    @Autowired
+    UpdatePaymentStatus updatePaymentStatus;
+
 
     /**
      * Statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
@@ -74,6 +84,8 @@ public class HomeController {
      */
     @RequestMapping(value = "/find/findUser")
     public String findUser() {
+        updateContractStatus.updateContractStatuses();
+        updatePaymentStatus.updatePaymentsStatuses();
         return "find/findUser";
     }
 
@@ -95,6 +107,7 @@ public class HomeController {
     @PreAuthorize("hasRole('AGENT')")
     @RequestMapping(value = "/new/contract")
     public ModelAndView newContract() {
+
         ModelAndView mav = new ModelAndView("contract/new");
         return mav;
     }
