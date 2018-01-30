@@ -49,6 +49,10 @@ public class MappingTest {
         mockMvc.perform(get("/client/clientData")).andExpect(view().name("client/clientData"));
     }
 
+    /**
+     *
+     * @throws Exception
+     */
 
 
     @Test
