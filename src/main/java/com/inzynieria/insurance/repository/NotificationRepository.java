@@ -12,7 +12,11 @@ import java.util.List;
  */
 @Service
 public interface NotificationRepository extends JpaRepository<Notification,Integer> {
-
+    /**
+     * Wyszukiwanie zgłoszenia po numerze PESEL
+     * @param data numer PESEL użytkownika, który utworzył zgłoszenie
+     * @return Lista zgłoszeń
+     */
     @Query(value= "SELECT  n.idNotification, n.type, n.status, n.incident_time, n.incident_description, n.valuation, n.idContract from Notification n, contract,user, clientdata where n.idContract=contract.idContract AND contract.idUser=user.idUser AND user.idUser=clientData.userId AND  clientdata.pesel=:data", nativeQuery = true)
     List<Notification> findNotificationsByUserPesel(@Param("data") String data);
 }

@@ -16,11 +16,13 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * Klasa serwisowa zawie
+ * Klasa serwisowa obsługująca użytkownika
  */
 @Service
 public class UserServiceImpl implements UserService {
-
+    /**
+     * Repozytorium użytkownika
+     */
         @Autowired
         UserRepository userRepository;
 

@@ -1,11 +1,9 @@
 package com.inzynieria.insurance.service;
 
-import com.inzynieria.insurance.controller.NotificationController;
 import com.inzynieria.insurance.model.Notification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 

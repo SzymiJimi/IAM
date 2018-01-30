@@ -23,10 +23,17 @@ public class RoleController {
      * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleController.class);
-
+    /**
+     * Repozytorium ról
+     */
     @Autowired
     RoleRepository roleRepository;
 
+    /**
+     * Metoda służąca do pobrania ról zalogowanego użytkownika
+     * @param roles
+     * @return
+     */
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public List<CommandDto> getRole(@RequestBody List<Role> roles)
     {

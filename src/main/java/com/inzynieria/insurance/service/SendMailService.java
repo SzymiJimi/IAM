@@ -13,7 +13,13 @@ import javax.mail.internet.MimeMessage;
  * Klasa odpowiedzialna za konfiguracje i wysyłanie odpowiednich wiadomości e-mail
  */
 public class SendMailService {
+    /**
+     * Odbioca wiadomości
+     */
     String messageReceiver;
+    /**
+     * Treść wiadomości
+     */
     String messageContent;
 
     public SendMailService(String messageReceiver, String messageContent){
@@ -21,6 +27,9 @@ public class SendMailService {
         this.messageContent=messageContent;
     }
 
+    /**
+     * Metoda wysyłająca wiadomość e-mail
+     */
     public void send() {
 
         final String username = "insurance.application@insurance.com";

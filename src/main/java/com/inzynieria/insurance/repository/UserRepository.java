@@ -41,6 +41,11 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query(value= "SELECT  u.idUser, u.username, u.password, u.name, u.surname, u.email from User u, UserRoles, role where u.idUser=userRoles.USER_IDUSER AND userRoles.ROLE_IDROLE=role.idRole AND  ( u.username= :data OR u.name= :data OR u.surname= :data OR u.email= :data)  AND role.name = 'ROLE_CLIENT'", nativeQuery = true)
     List<User> findClient(@Param("data") String data);
 
+    /**
+     * Wyszukiwanie jednego klienta po numerze ID
+     * @param data numer ID
+     * @return Klient o podanym numerze ID
+     */
     @Query(value= "SELECT  u.idUser, u.username, u.password, u.name, u.surname, u.email from User u, UserRoles, role where u.idUser=userRoles.USER_IDUSER AND userRoles.ROLE_IDROLE=role.idRole AND u.idUser= :data  AND role.name = 'ROLE_CLIENT'", nativeQuery = true)
     User findOneClient(@Param("data") Integer data);
 
