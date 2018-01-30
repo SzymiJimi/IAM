@@ -82,7 +82,10 @@ public class OfferController {
         Offer offer = offerRepository.findOne(value);
         return offer;
     }
-
+    /**
+     * Metoda wyswietlajaca szczegółowe dane dla konkretnej oferty
+     * @return zwraca widok na ta oferte
+     */
     @RequestMapping(value = "/show/{id}")
     public ModelAndView showOffer(@PathVariable(value = "id") Integer id) {
         ModelAndView mav = new ModelAndView("/offer/offerData");

@@ -74,6 +74,12 @@ public class ContractController {
 
     }
 
+    /**
+     * Metoda ktora ma na celu znalezienie kontraktu w bazie danych
+     * @param id kontraktu którego szukamy w naszej bazie danych
+     * @return
+     */
+
     @RequestMapping(value="/find/{id}", method = RequestMethod.GET)
     public Boolean findContract(@PathVariable(value="id") Integer id){
         LOGGER.info("Przyjąłem id: "+id);
@@ -81,6 +87,12 @@ public class ContractController {
         LOGGER.info("Liczba znalezionych kontraktów: "+ contracts.size());
         return !contracts.isEmpty();
     }
+
+    /**
+     * Metoda odpowiedzialna za wyszukanie kontraktu
+     * @param id id kontraktu ktorego szukamy
+     * @return zwraca wyszukany kontrakt
+     */
 
     @RequestMapping(value="/get/{id}", method = RequestMethod.GET)
     public Contract getContract(@PathVariable(value="id") Integer id){
@@ -105,6 +117,8 @@ public class ContractController {
 
         return contractWithOffers;
     }
+
+
 
     @RequestMapping(value="/check", method = RequestMethod.POST)
     public ResponseEntity checkInsurance(@RequestBody String pesel){

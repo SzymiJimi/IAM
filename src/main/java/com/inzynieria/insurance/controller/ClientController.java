@@ -72,6 +72,12 @@ public class ClientController {
         return mav;
     }
 
+    /**
+     *
+     * @param value string po którym
+     * @return
+     * @throws ValidationException
+     */
 
 
     @RequestMapping(value="/find")
