@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/**
+ * Klasa modelowa, która odwzorowuje encję rola (role) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class Role {

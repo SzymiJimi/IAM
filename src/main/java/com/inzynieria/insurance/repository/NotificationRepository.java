@@ -7,7 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Interfejs rozszerzający JpaRepository umożliwia pobieranie danych z encji notification z bazy danych w prosty i przejrzysty sposób.
+ */
 @Service
 public interface NotificationRepository extends JpaRepository<Notification,Integer> {
 

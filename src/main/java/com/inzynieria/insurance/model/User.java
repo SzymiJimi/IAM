@@ -1,16 +1,12 @@
 package com.inzynieria.insurance.model;
 
-import com.inzynieria.insurance.repository.UserRepository;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * Klasa modelowa, która odwzorowuje encję użytkownika (user) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class User {

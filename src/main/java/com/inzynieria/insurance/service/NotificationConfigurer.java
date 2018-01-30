@@ -11,7 +11,9 @@ import java.util.Calendar;
 
 @Service
 public class NotificationConfigurer {
-
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationConfigurer.class);
 
 

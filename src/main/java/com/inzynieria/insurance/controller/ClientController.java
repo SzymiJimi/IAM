@@ -14,26 +14,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.security.RolesAllowed;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
-
+/**
+ * ClientController zajmuje się przechwytywaniem żądań powiązanych z klientami agencji ubezpieczoniowej. Umożliwia odbiór żądań przysyłanych z AngularaJS.
+ */
 @RestController
 @RequestMapping(value="/client")
 public class ClientController {
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
-
+    /**
+     * Serwis użytkownika
+     */
     @Autowired
     UserService userService;
-
+    /**
+     * Repozytorium użytkownika
+     */
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    UserController userController;
-
+    /**
+     * Repozytorium danych klienta
+     */
     @Autowired
     ClientDataRepository clientDataRepository;
 
@@ -54,7 +60,11 @@ public class ClientController {
         return userDto;
     }
 
-
+    /**
+     * Metoda zajmująca się odbiorem żądania dotyczącego znalezienia klienta w bazie o konkretnym id.
+     * @param id Id użytkownika, którego chcemy znaleźć w bazie.
+     * @return
+     */
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public ModelAndView showUser(@PathVariable(value="id") Integer id)
     {
@@ -80,7 +90,11 @@ public class ClientController {
         return users;
     }
 
-
+    /**
+     * Metoda zajmująca się odbiorem żądania dotyczącego wyświetlenia wszystkich klientów w bazie.
+     * @return Zwraca znalezionych klientów.
+     * @throws ValidationException
+     */
     @RequestMapping(value="/getList")
     public ResponseEntity getUserList(){
         try{

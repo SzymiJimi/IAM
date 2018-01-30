@@ -9,7 +9,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Interfejs rozszerzający JpaRepository umożliwia pobieranie danych z encji user z bazy danych w prosty i przejrzysty sposób.
+ */
 @Service
 public interface UserRepository extends JpaRepository<User,Integer> {
 

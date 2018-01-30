@@ -1,13 +1,13 @@
 package com.inzynieria.insurance.repository;
 
 import com.inzynieria.insurance.model.ClientData;
-import com.inzynieria.insurance.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
+/**
+ * Interfejs rozszerzający JpaRepository umożliwia pobieranie danych z encji clientdata z bazy danych w prosty i przejrzysty sposób.
+ */
 @Service
 public interface ClientDataRepository extends JpaRepository<ClientData,Integer> {
 

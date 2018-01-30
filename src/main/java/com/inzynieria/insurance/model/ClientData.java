@@ -1,12 +1,14 @@
 package com.inzynieria.insurance.model;
 
 import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Klasa modelowa, która odwzorowuje encję dane klienta (clientdata) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class ClientData {

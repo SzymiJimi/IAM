@@ -9,6 +9,7 @@ import com.inzynieria.insurance.model.UserRoles;
 import com.inzynieria.insurance.repository.RoleRepository;
 import com.inzynieria.insurance.repository.UserRepository;
 import com.inzynieria.insurance.repository.UserRolesRepository;
+import com.inzynieria.insurance.service.SendMailService;
 import com.inzynieria.insurance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,27 +26,39 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * User controller zajmuje się przechwytywaniem żądań powiązanych z użytkownikami. Umożliwia odbór żądań przysyłanych z AngularaJS.
+ * User controller zajmuje się przechwytywaniem żądań powiązanych z użytkownikami. Umożliwia odbiór żądań przysyłanych z AngularaJS.
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-
+    /**
+     * Repozytorium użytkownika
+     */
     @Autowired
     UserRepository userRepository;
 
-
+    /**
+     * Serwis użytkownika
+     */
     @Autowired
     UserService userService;
-
+    /**
+     * Repozytorium roli, które może przyjmować użytkownik
+     */
     @Autowired
     RoleRepository roleRepository;
-
+    /**
+     * Repozytorium roli, które przyjmują konkretni użytkownicu
+     */
     @Autowired
     UserRolesRepository userRolesRepository;
-
+    /**
+     * Wykorzystywane do szyfrowania hasła
+     */
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     /**
@@ -63,6 +76,8 @@ public class UserController {
         UserRoles userRoles = new UserRoles("Nowy",userRet.getIdUser() ,12);
         if(userRolesRepository.save(userRoles)!= null)
         {
+            SendMailService sendMailService = new SendMailService(user.getEmail(), "Witamy w agencji ubezpieczeniowej"+ user.getName()+ " " + user.getSurname() );
+            sendMailService.send();
             return "Zarejestrowano pomyślnie";
         }else{
             return "Błąd tworzenia nowego użytkownika";

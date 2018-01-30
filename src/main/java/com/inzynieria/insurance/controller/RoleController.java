@@ -19,7 +19,9 @@ import java.util.Set;
 @RestController
 @RequestMapping(value="/role")
 public class RoleController {
-
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired

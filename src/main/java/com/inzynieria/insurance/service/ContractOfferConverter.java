@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ContractOfferConverter{
-
+    /**
+     * Finalny statyczny obiekt loggera służący do wyświetlania informacji o czasie oraz miejscu wystpienia błędu w konsoli lub w pliku.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(ContractOfferConverter.class);
 
     public ContractWithOffer convert(Contract contract, Offer offer)

@@ -12,7 +12,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+/**
+ * Klasa modelowa, która odwzorowuje encję umowa (contract) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
+ */
 @Data
 @Entity
 public class Contract {

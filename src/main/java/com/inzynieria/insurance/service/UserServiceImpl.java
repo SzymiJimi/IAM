@@ -1,6 +1,5 @@
 package com.inzynieria.insurance.service;
 
-import com.inzynieria.insurance.controller.RoleController;
 import com.inzynieria.insurance.dto.RoleDto;
 import com.inzynieria.insurance.dto.UserDto;
 import com.inzynieria.insurance.model.Role;
