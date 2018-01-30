@@ -116,10 +116,9 @@ public class Contract extends Observable {
         this.active = active;
     }
 
-    public void updateContract(){
-        System.out.println("Weszło do update w umowach");
+    public void updateContract(Object contract){
         setChanged();
-        notifyObservers();
+        notifyObservers(contract);
     }
 
 }

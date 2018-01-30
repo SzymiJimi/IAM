@@ -41,7 +41,9 @@ public class UpdatePaymentStatus extends Observable {
                     expitationDate = format.parse(payment.getExpitation_Date());
                     if(expitationDate.before(today))
                     {
-                        payment.updatePayment();
+                        NotificationCreator notificationCreator= new NotificationCreator();
+                        payment.addObserver(notificationCreator);
+                        payment.updatePayment(payment);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -51,13 +53,7 @@ public class UpdatePaymentStatus extends Observable {
         }
     }
 
-//    public void updatePayment(){
-//        LOGGER.info("Weszło do update w płatnościach");
-//
-//        setChanged();
-//        notifyObservers("Siema");
-//
-//    }
+
     private List<Payments> getPayments() {
 
         List<Payments> paymentsList = new ArrayList<>();
@@ -70,14 +66,4 @@ public class UpdatePaymentStatus extends Observable {
         return paymentsList;
     }
 
-
-//    @Override
-//    public void addListener(InvalidationListener listener) {
-//
-//    }
-//
-//    @Override
-//    public void removeListener(InvalidationListener listener) {
-//
-//    }
 }

@@ -91,9 +91,9 @@ public class Payments extends Observable {
         this.regulated = regulated;
     }
 
-    public void updatePayment(){
-        System.out.println("Weszło do update w płatnościach");
+    public void updatePayment(Object payment){
+
         setChanged();
-        notifyObservers();
+        notifyObservers(payment);
     }
 }

@@ -41,7 +41,9 @@ public class UpdateContractStatus {
                     expitationDate = format.parse(contract.getExpirationDate());
                     if(expitationDate.before(today))
                     {
-                        contract.updateContract();
+                        NotificationCreator notificationCreator= new NotificationCreator();
+                        contract.addObserver(notificationCreator);
+                        contract.updateContract(contract);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -51,12 +53,6 @@ public class UpdateContractStatus {
         }
     }
 
-//    public void updateContract(){
-//        LOGGER.info("Weszło do update w umowach");
-//        setChanged();
-//        notifyObservers("Siema");
-//
-//    }
     private List<Contract> getContracts() {
 
         List<Contract> contractList = new ArrayList<>();
