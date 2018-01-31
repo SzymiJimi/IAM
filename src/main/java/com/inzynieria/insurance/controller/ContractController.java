@@ -56,6 +56,10 @@ public class ContractController {
     @Autowired
     UserRepository userRepository;
 
+
+    @Autowired
+    GeneratePaymentsService generatePaymentsService;
+
     /**
      * Zajmuje się odbiorem i obsługą żądania dotyczącego tworzenia nowych umów.
      * @param contract Ciało żądania zawiera obiekt umowy, którą będziemy dodawać do naszego systemu.
@@ -64,7 +68,9 @@ public class ContractController {
     @RequestMapping(value="/add", method = RequestMethod.POST)
     public String createContract(@RequestBody Contract contract){
         LOGGER.info("Dodaje kontrakt:  idOferty: "+contract.getIdOffer()+" Data ważności:"+ contract.getExpirationDate()+", data stworzenia: "+contract.getStartDate()+" idUsera: "+contract.getIdUser());
-        if(contractRepository.save(contract)!=null) {
+        Contract saved= contractRepository.save(contract);
+        if(saved!=null) {
+            generatePaymentsService.generatePayments(saved.getIdContract(), saved.getIdUser(), saved.getIdOffer(),saved.getStartDate() );
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             User user = userRepository.findByUsername(currentPrincipalName);

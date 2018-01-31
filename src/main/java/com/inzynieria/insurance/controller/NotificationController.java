@@ -4,6 +4,7 @@ package com.inzynieria.insurance.controller;
 
 import com.inzynieria.insurance.model.Notification;
 import com.inzynieria.insurance.repository.NotificationRepository;
+import com.inzynieria.insurance.service.CustomComparator;
 import com.inzynieria.insurance.service.NotificationConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,6 +52,23 @@ public class NotificationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nie udało się dodać...");
         }
     }
+    /**
+     * Zajmuje się odbiorem i obsługą żądania dotyczącego usuwania zgłoszeń.
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ResponseEntity deleteNotification(@RequestBody Integer id)
+    {
+        try{
+            notificationRepository.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        }catch(Exception e)
+        {
+            LOGGER.info("Błąd usuwania zgłoszenia, wyjątek: "+ e.toString());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nie udało się usunąc...");
+        }
+    }
+
 
     /**
      * Zajmuje się odbiorem i obsługą żądania dotyczącego przeglądania zgłoszeń.
@@ -60,6 +79,7 @@ public class NotificationController {
 
         try{
             List<Notification> notifications= notificationRepository.findAll();
+            Collections.sort(notifications, new CustomComparator());
             return ResponseEntity.status(HttpStatus.OK).body(notifications);
         }catch(Exception e)
         {

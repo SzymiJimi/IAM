@@ -1,6 +1,7 @@
 package com.inzynieria.insurance.repository;
 
 import com.inzynieria.insurance.model.Notification;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -144,14 +144,10 @@
                             <!-- Spacer //-->
                         </div>
                         <md-button class="md-raised md-primary buttomPrimary" ng-click="redirectNotification(notificationData.idNotification, $event)">Prześlij zgłoszenie dalej</md-button>
-                        <div flex="5" hide-xs hide-sm>
+                        <div flex="15" hide-xs hide-sm>
                             <!-- Spacer //-->
                         </div>
-                        <md-button class="md-raised md-primary buttomPrimary" ng-click="">Button</md-button>
-                        <div flex="5" hide-xs hide-sm>
-                            <!-- Spacer //-->
-                        </div>
-                        <md-button class="md-raised md-warn buttomPrimary" ng-click="">Usuń zgłoszenie</md-button>
+                        <md-button class="md-raised md-warn buttomPrimary" ng-click="delete($event, notificationData.idNotification)">Usuń zgłoszenie</md-button>
                     </div>
             </md-content>
         </section>

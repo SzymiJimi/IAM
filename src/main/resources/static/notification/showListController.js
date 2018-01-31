@@ -65,8 +65,8 @@ app.controller('showListController', function ($scope, $http, $window, $timeout,
     $scope.commands = [];
     $scope.response = {};
     $scope.notifications = [];
-    $scope.statuses = ['CONFIRMED', 'CREATED', 'AVAITING_VALUATION', 'REJECTED', 'ENDED', 'INVESTIGATED', 'ALL'];
-    $scope.selectedStatus = 'ALL';
+    $scope.statuses = ['Wszystkie', 'Potwierdzone', 'Stworzone', 'Oczekujące wyceny', 'Odrzucone', 'Zakończone', 'Oceniane'];
+    $scope.selectedStatus = 'Wszystkie';
     $scope.realStatus = '';
     $scope.loggedUser = {};
     $scope.pesel = "";
@@ -88,10 +88,26 @@ app.controller('showListController', function ($scope, $http, $window, $timeout,
 
     $scope.getSelectedText = function () {
         if ($scope.selectedStatus !== undefined) {
-            if ($scope.selectedStatus === 'ALL') {
+            if ($scope.selectedStatus === 'Wszystkie') {
                 $scope.realStatus = '';
-            } else {
-                $scope.realStatus = $scope.selectedStatus;
+            } else if($scope.selectedStatus === 'Potwierdzone'){
+
+                $scope.realStatus = 'CONFIRMED';
+            }else if($scope.selectedStatus === 'Stworzone'){
+
+                $scope.realStatus = 'CREATED';
+            }else if($scope.selectedStatus === 'Oczekujące wyceny'){
+
+                $scope.realStatus = 'AVAITING_VALUATION';
+            }else if($scope.selectedStatus === 'Odrzucone'){
+
+                $scope.realStatus = 'REJECTED';
+            }else if($scope.selectedStatus === 'Zakończone'){
+
+                $scope.realStatus = 'ENDED';
+            }else if($scope.selectedStatus === 'Oceniane'){
+
+                $scope.realStatus = 'INVESTIGATED';
             }
             return $scope.selectedStatus;
         } else {

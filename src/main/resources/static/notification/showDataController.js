@@ -79,6 +79,17 @@ app.controller('showDataController', function($scope, $http, $window,$location,$
         });
     };
 
+    $scope.delete = function (ev, id) {
+        var url = "http://localhost:8090/notification/delete";
+        $http.post(url, id, config).then(function (response) {
+            $scope.result="Sukces!";
+            $scope.postResultMessage="Usunięcie zakończone pozytywnie!";
+            $scope.showAlert(ev);
+        }, function (response) {
+        });
+    };
+
+
     $scope.redirectNotification = function (id, ev) {
         var url = "http://localhost:8090/notification/redirect";
         $http.post(url, id, config).then(function (response) {

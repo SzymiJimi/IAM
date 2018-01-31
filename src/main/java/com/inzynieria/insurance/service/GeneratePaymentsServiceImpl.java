@@ -24,6 +24,9 @@ public class GeneratePaymentsServiceImpl implements GeneratePaymentsService {
     @Autowired
     PaymentRepository paymentRepository;
 
+    @Autowired
+    NotificationCreator notificationCreator;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(GeneratePaymentsServiceImpl.class);
 
     @Override
@@ -59,7 +62,7 @@ public class GeneratePaymentsServiceImpl implements GeneratePaymentsService {
                 }
                 tmpCalendar.set(startDate.get(Calendar.YEAR) + year, startDate.get(Calendar.MONTH) + month, startDate.get(Calendar.DATE));
                 Payments payment = new Payments(amount, format.format(tmpCalendar.getTime()), null, userId, idContract, 0);
-                NotificationCreator notificationCreator= new NotificationCreator();
+               // NotificationCreator notificationCreator= new NotificationCreator();
                 payment.addObserver(notificationCreator);
                 paymentRepository.save(payment);
                 month++;

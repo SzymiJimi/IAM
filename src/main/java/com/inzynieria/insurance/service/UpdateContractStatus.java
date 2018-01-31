@@ -24,6 +24,9 @@ public class UpdateContractStatus {
     @Autowired
     ContractRepository contractRepository;
 
+    @Autowired
+    NotificationCreator notificationCreator;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdatePaymentStatus.class);
 
     @Scheduled(cron = "0 0 12 1/1 * ? ")
@@ -41,7 +44,6 @@ public class UpdateContractStatus {
                     expitationDate = format.parse(contract.getExpirationDate());
                     if(expitationDate.before(today))
                     {
-                        NotificationCreator notificationCreator= new NotificationCreator();
                         contract.addObserver(notificationCreator);
                         contract.updateContract(contract);
                     }

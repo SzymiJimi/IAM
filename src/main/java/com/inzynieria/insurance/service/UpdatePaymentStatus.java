@@ -19,10 +19,12 @@ import java.util.*;
 @Service
 public class UpdatePaymentStatus extends Observable {
 
-    String value;
 
     @Autowired
     PaymentRepository paymentRepository;
+
+    @Autowired
+    NotificationCreator notificationCreator;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdatePaymentStatus.class);
 
@@ -41,7 +43,6 @@ public class UpdatePaymentStatus extends Observable {
                     expitationDate = format.parse(payment.getExpitation_Date());
                     if(expitationDate.before(today))
                     {
-                        NotificationCreator notificationCreator= new NotificationCreator();
                         payment.addObserver(notificationCreator);
                         payment.updatePayment(payment);
                     }
@@ -52,7 +53,6 @@ public class UpdatePaymentStatus extends Observable {
             }
         }
     }
-
 
     private List<Payments> getPayments() {
 
