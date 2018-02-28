@@ -1,22 +1,85 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Zakład ubezpieczen</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8090/navBarStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script type="text/javascript" th:src="@{http://localhost:8090/login/loginController.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <!--<link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">-->
 
 </head>
 <body>
 
-<div>
+<div class="container" ng-app="app">
+    <div ng-controller="loginController" layout="column" ng-cloak>
 
-    <h3 style="color:blue">Witaj na stronie zakładu ubezpieczeń</h3>
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2 fixed-top">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090"><h2>Zakład ubezpieczeń</h2></a>
+                <!--<div flex-gt-sm="5" ></div>-->
+            <md-button md-truncate href="http://localhost:8090/login"
+                       title="Zaloguj się"
+                       aria-label="Login"
+                       class="md-icon-button"
+                       style="width: 12%; color:inherit">
+                Zaloguj się
+                <i class="material-icons">input</i>
+            </md-button>
+            </div>
+        </md-toolbar>
+    </div>
 
-    <h1>  <a href="/static/login">Zaloguj się</a> </h1>
-
-
+    <md-content class="md-padding" layout="row" layout-sm="column" layout-align="space-around">
+        <!--<div flex-gt-sm="5">-->
+        <!--</div>-->
+        <div flex-gt-sm="85">
+            <h1>Witaj na stronie zakłdu ubezpieczeń!</h1>
+            <p>Na tej stronie w prosty sposób, możesz zamówić ubezpieczenie, bądź przejrzeć nasze oferty. Jeśli
+                chcesz poznać więcej funkcji
+                zamów konto w naszej ubezpieczalni wraz z ubezpieczeniem. Dzięki niemu w łatwy sposób będziesz
+                mógł zarządzać swoimi ubezpieczeniami czy płatnościami</p>
+            <md-button md-truncate href="http://localhost:8090/login/orderInsurance"
+                       title="Zamów ubezpieczenie"
+                       aria-label="OrderInsurance"
+                       class="md-icon-button launch"
+                       style="width: 22%">
+                Zamów ubezpieczenie
+                <i class="material-icons">launch</i>
+            </md-button>
+        </div>
+    </md-content>
+    <md-content class="md-padding" layout="row" layout-sm="column" layout-align="space-around">
+        <div flex-gt-sm="25">
+            <h2>Ubezpieczenie podróży</h2>
+            <p>U nas możesz ubezpieczyć swoją podróż w niskiej cenie. Dzięki naszym specjalistom, którzy szybko
+                zorganizują pomoc w obcym kraju, każda podróż
+                będzie przyjemna i spokojna.</p>
+        </div>
+        <div flex-gt-sm="25">
+            <h2>Ubezpieczenie samochodu</h2>
+            <p>Od teraz będziesz mógł być spokojny o swój samochód. U nas możesz zakupić ubezpieczenie OC/AC w
+                przystepnych cenach.</p>
+        </div>
+        <div flex-gt-sm="25">
+            <h2>Ubezpieczenie zdrowotne</h2>
+            <p>Jeśli nie chcesz mieć doczynienia z kolejkami do specjalistów, a także chcesz być leczony przez
+                najlepszych specjalistów zakup u nas
+                ubezpieczenie zdrowotne.</p>
+        </div>
+    </md-content>
+    <footer class="container">
+        <p>&copy; Company 2017-2018</p>
+    </footer>
 </div>
 </body>
 </html>

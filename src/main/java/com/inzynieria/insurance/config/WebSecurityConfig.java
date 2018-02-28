@@ -53,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/navBarStyle.css").anonymous()
                 .antMatchers("/navBarStyle.css").permitAll()
                 .antMatchers("/login/*").anonymous()
+                .antMatchers("/order/*").anonymous()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().hasAnyRole("USER", "ADMIN", "AGENT", "CARSPECIALIST", "HEALTHSPECIALIST", "TRAVELSPECIALIST", "SPECIALIST","CLIENT")

@@ -142,7 +142,6 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
         };
 
         var url = "http://localhost:8090/clientData/add";
-        console.log("SubmitForm");
         data.idUser=$scope.userId;
         data.idOffer=idOffer;
         console.log(data);

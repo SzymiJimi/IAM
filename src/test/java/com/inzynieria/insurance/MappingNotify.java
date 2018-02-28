@@ -12,7 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 
-public class MappingTest {
+public class MappingNotify {
 
     @Test
     public void testHomePage() throws Exception{
@@ -54,13 +54,6 @@ public class MappingTest {
      * @throws Exception
      */
 
-
-    @Test
-    public void testHomeUser() throws Exception{
-        HomeController controller=new HomeController();
-        MockMvc mockMvc=standaloneSetup(controller).build();
-        mockMvc.perform(get("/find/findUser")).andExpect(view().name("find/findUser"));
-    }
 
     @Test
     public void testRegister() throws Exception{

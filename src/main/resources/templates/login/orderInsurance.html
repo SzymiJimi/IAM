@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zakład ubezpieczen</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8090/navBarStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script type="text/javascript" th:src="@{http://localhost:8090/login/orderInsuranceController.js}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <!--<link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+</head>
+<body>
+
+<div class="container" ng-app="app">
+    <div ng-controller="orderInsuranceController" layout="column" ng-cloak>
+
+        <!--Pasek nawigacji u góry-->
+        <md-toolbar class="md-hue-2 fixed-top">
+            <div class="md-toolbar-tools">
+                <a flex md-truncate href="http://localhost:8090"><h2>Zakład ubezpieczeń</h2></a>
+                <!--<div flex-gt-sm="5" ></div>-->
+                <md-button md-truncate href="http://localhost:8090/login"
+                           title="Zaloguj się"
+                           aria-label="Login"
+                           class="md-icon-button"
+                           style="width: 12%; color:inherit">
+                    Zaloguj się
+                    <i class="material-icons">input</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+
+    <md-content class="md-padding" layout="row" layout-sm="column" layout-align="space-around">
+
+        <div flex-gt-sm="85">
+            <h2>Zamów ubezpieczenie!</h2>
+            <p>Aby zamówić ubezpieczenie podaj kilka podstawowych informacji a nasz agent się z Tobą skontaktuje.</p>
+            <div layout="row">
+                <div flex-gt-sm="6">
+                </div>
+            <form name="order">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Imie</label>
+                    <input md-maxlength="30" required name="name" ng-model="name"/>
+                    <div ng-messages="order.name.$error">
+                        <div ng-message="required" class="my-message">Imię jest wymagane.</div>
+                        <div ng-message="minlength" class="my-message">Imie musi być dłuższe niz 2 znaki.</div>
+                        <div ng-message="md-maxlength" class="my-message">Imie nie może być dłuższe niż 30
+                            znaków.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Nazwisko</label>
+                    <input md-maxlength="30" required name="surname" ng-model="surname" />
+                    <div ng-messages="order.surname.$error">
+                        <div ng-message="required" class="my-message">Nazwisko jest wymagane.</div>
+                        <div ng-message="md-maxlength">Nazwisko nie może być dłuższe niż 30 znaków.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Email</label>
+                    <input name="email" ng-model="email"
+                           required minlength="10" maxlength="70" ng-pattern="/^.+@.+\..+$/" />
+
+                    <div ng-messages="order.email.$error" ng-hide="showHints">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                            Twój adres email musi zawierać od 10 do 70 znaków i musi wygldać jak adres email.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Telefon</label>
+                    <input name="phone" ng-model="phone" required ng-pattern="/^[0-9]{9}$/"/>
+
+                    <div ng-messages="order.phone.$error">
+                        <div ng-message="required" class="my-message">Numer telefonu jest wymagany</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Kod pocztowy</label>
+                    <input name="postalCode" ng-model="postalCode" placeholder="12-345"
+                           required ng-pattern="/^[0-9]{2}-[0-9]{3}$/" md-maxlength="6"  >
+                    <div ng-messages="order.postalCode.$error" role="alert" multiple>
+                        <div ng-message="required" class="my-message">Kod pocztowy jest wymagany</div>
+                        <div ng-message="pattern" class="my-message">Wprowadzony kod pocztowy jest
+                            nieprawidłowy.
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-button md-no-ink ng-disabled="order.$invalid" ng-click="submitOrder($event)" class="md-raised md-primary">Zamów</md-button>
+            </form>
+                <div flex-gt-sm="6">
+                </div>
+            </div>
+        </div>
+    </md-content>
+
+    <footer class="container">
+        <p>&copy; Company 2017-2018</p>
+    </footer>
+    </div>
+</div>
+</body>
+</html>

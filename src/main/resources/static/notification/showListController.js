@@ -107,7 +107,7 @@ app.controller('showListController', function ($scope, $http, $window, $timeout,
                 $scope.realStatus = 'ENDED';
             }else if($scope.selectedStatus === 'Oceniane'){
 
-                $scope.realStatus = 'INVESTIGATED';
+                $scope.realStatus = 'IVESTIGATING';
             }
             return $scope.selectedStatus;
         } else {

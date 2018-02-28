@@ -77,6 +77,10 @@ public class HomeController {
         return new ModelAndView("login/login");
     }
 
+    @RequestMapping(value = "/login/orderInsurance")
+    public String orderInsurance() {
+        return "login/orderInsurance";
+    }
 
     /**
      * Metoda zajmująca się odbiorem żądania uruchomienia widoku wyszukiwania usera.
@@ -204,6 +208,12 @@ public class HomeController {
     @RequestMapping(value = "/application/applicationData")
     public String applicationData() {
         return "application/applicationData";
+    }
+
+    @RequestMapping(value= "/client/homeReserve")
+    public String addUser()
+    {
+        return "client/homeReserve";
     }
 
 
