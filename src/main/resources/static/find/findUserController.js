@@ -2,7 +2,7 @@ var app = angular.module('app',[]);
 app.controller('findUserController', ['$scope','$http','findUserService', function($scope, $http, findUserService) {
 
         $scope.submitForm = function(){
-            var url = "http://localhost:8090/user/find";
+            var url = "/user/find";
 
             var config = {
                 headers : {
@@ -25,7 +25,7 @@ app.controller('findUserController', ['$scope','$http','findUserService', functi
         };
 
     $scope.selectUser = function(id){
-        url = "http://localhost:8090/client/show/"+id;
+        url = "/client/show/"+id;
         $window.location.href =url;
     }
 }]);

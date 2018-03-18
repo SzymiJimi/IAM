@@ -44,6 +44,6 @@ public class FindOffer  implements CommandInterface {
 
     public String execute(){
         LOGGER.info("Wyszukiwanie oferty");
-        return "http://localhost:8090/find/findOffer";
+        return "/find/findOffer";
     }
 }

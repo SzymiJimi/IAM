@@ -36,7 +36,7 @@ app.controller('checkInsurance', function ($scope, $http, $window, homeService) 
 
     $scope.checkClientInsurace = function (pesel) {
         
-        var url = "http://localhost:8090/contract/check";
+        var url = "/contract/check";
         $http.post(url,pesel, config).then(function (response) {
             console.log(response.data);
             if(response.data.idContract===undefined && response.data[0].idContract===undefined)

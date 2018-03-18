@@ -3,6 +3,15 @@ ul {
     margin: 0;
     padding: 0;
     width: 95%;
+    background-color: #555555;
+}
+
+
+.panel-apperance {
+    background-color: #555555 !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .demo #content {
@@ -16,15 +25,16 @@ ul {
 .commands-panel{
 
     display: block;
-    color: #000;
+    color: #f3f3f3;
     padding: 8px 16px;
     text-decoration: none;
+    border-radius: 5px;
 }
 
 /* Change the link color on hover */
 .commands-panel:hover {
-    background-color: #555;
-    color: white;
+    background-color: #f3f3f3;
+    color: black;
 }
 
 
@@ -202,4 +212,19 @@ li a:hover {
 
 .listHover {
     background-color: lightgray ;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin-left: 42%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

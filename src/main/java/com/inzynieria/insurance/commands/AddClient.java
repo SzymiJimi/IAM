@@ -45,7 +45,7 @@ public class AddClient implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/client/homeReserve";
+        return "/client/homeReserve";
     }
 }
 

@@ -45,6 +45,6 @@ public class FindApplications implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/find/findApplication";
+        return "/find/findApplication";
     }
 }

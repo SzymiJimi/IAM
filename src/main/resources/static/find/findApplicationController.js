@@ -35,13 +35,9 @@ app.controller('findApplicationController', [
         $scope.dropDown= function(){
             document.getElementById("myDropdown").classList.toggle("show");
         };
-
-
-
-
-
+        
         $scope.submitForm = function(){
-            var url = "http://localhost:8090/application/find";
+            var url = "/application/find";
 
 
             var value = $scope.type;
@@ -63,7 +59,7 @@ app.controller('findApplicationController', [
         }
 
         $scope.selectApplication = function(id){
-            url = "http://localhost:8090/application/show/"+id;
+            url = "/application/show/"+id;
             $window.location.href =url;
         }
     }]);

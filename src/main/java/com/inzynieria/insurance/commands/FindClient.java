@@ -48,6 +48,6 @@ public class FindClient implements CommandInterface {
 
     public String execute(){
         LOGGER.info("Wyszukiwanie klienta");
-        return "http://localhost:8090/find/findClient";
+        return "/find/findClient";
     }
 }

@@ -31,7 +31,6 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
        $scope.name="";
          $scope.surname="";
          $scope.email="";
-      //  role: 'ROLE_USER'
 
 
 
@@ -46,7 +45,7 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
             .ok('Ok!');
 
         $mdDialog.show(confirm).then(function () {
-            $window.location.href = "http://localhost:8090/home"
+            $window.location.href = "/home"
         });
 
     };
@@ -59,7 +58,7 @@ app.controller('controllerReserve', function($scope, $http, $filter,$timeout, $m
             }
         };
 
-        var url = "http://localhost:8090/user/add";
+        var url = "/user/add";
         var userdata = {
             username: $scope.username,
             password: $scope.password,

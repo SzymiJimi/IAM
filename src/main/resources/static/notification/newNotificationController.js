@@ -63,7 +63,7 @@ app.controller('newNotificationController', function ($scope, $http, $window, $m
             .ok('Powrót na stronę główną');
 
         $mdDialog.show(confirm).then(function () {
-            $window.location.href = "http://localhost:8090/home"
+            $window.location.href = "/home"
         });
     };
 
@@ -78,7 +78,7 @@ app.controller('newNotificationController', function ($scope, $http, $window, $m
         return clientData;
     };
     $scope.loadUser = function (email) {
-        var url = "http://localhost:8090/client/find";
+        var url = "/client/find";
         $http.post(url, email, config).then(function (response) {
             $scope.userResult = response.data[0];
             if (response.data.length !== 0) {
@@ -88,7 +88,7 @@ app.controller('newNotificationController', function ($scope, $http, $window, $m
             }
             $scope.userLoaded = false;
         }).then(function (data) {
-            var url = "http://localhost:8090/clientData/find/" + $scope.userResult.idUser;
+            var url = "/clientData/find/" + $scope.userResult.idUser;
             $http.get(url, config).then(function (response) {
                 if(response.data===""){
                     console.log("Jestem nullem");
@@ -100,13 +100,13 @@ app.controller('newNotificationController', function ($scope, $http, $window, $m
             });
         })
             .then(function (data) {
-                var url = "http://localhost:8090/contract/find/" + $scope.userResult.idUser;
+                var url = "/contract/find/" + $scope.userResult.idUser;
                 $http.get(url, config).then(function (response) {
                     $scope.isInsuranced = response.data;
                 });
             })
             .then(function (data) {
-                var url = "http://localhost:8090/contract/getList/" + $scope.userResult.idUser;
+                var url = "/contract/getList/" + $scope.userResult.idUser;
                 $http.get(url, config).then(function (response) {
                     $scope.contracts = response.data;
                 });
@@ -128,7 +128,7 @@ app.controller('newNotificationController', function ($scope, $http, $window, $m
             }
         };
         console.log($scope.description);
-        var url = "http://localhost:8090/notification/add";
+        var url = "/notification/add";
 
         var notificationData = {
             type: $scope.selectedItem,

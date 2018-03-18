@@ -2,6 +2,7 @@ package com.inzynieria.insurance.controller;
 
 import com.inzynieria.insurance.model.Orders;
 import com.inzynieria.insurance.repository.OrdersRepository;
+import com.inzynieria.insurance.service.GenerateNewUser;
 import com.inzynieria.insurance.service.SendMailService;
 import org.apache.naming.factory.SendMailFactory;
 import org.slf4j.Logger;
@@ -26,6 +27,9 @@ public class OrderController
     @Autowired
     OrdersRepository ordersRepository;
 
+    @Autowired
+    GenerateNewUser generateNewUser;
+
     @RequestMapping(value="/create", method = RequestMethod.POST)
     public ResponseEntity create(@RequestBody Orders orderData)
     {
@@ -37,9 +41,10 @@ public class OrderController
             Calendar startDate = Calendar.getInstance();
             orderData.setFillingDate(format1.format(startDate.getTime()));
             ordersRepository.save(orderData);
-            SendMailService sendMailService = new SendMailService(orderData.getEmail(), message);
+            SendMailService sendMailService = new SendMailService(orderData.getEmail(), message, "Prośba o założenie konta");
             sendMailService.send();
-            return ResponseEntity.status(HttpStatus.OK).body("Dodawanie zgłoszenia zakończone pomyślnie!");
+            generateNewUser.createNewUser(orderData);
+            return ResponseEntity.status(HttpStatus.OK).body("Dodawanie zgłoszenia zakończone pomyślnie! \nSprawdź swoją skrzynkę obiorczą\nw celu uzyskania dalszych instrukcji.");
         }catch (Exception e )
         {
             LOGGER.info("Coś poszło nie tak...");

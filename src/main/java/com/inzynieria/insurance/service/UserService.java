@@ -2,12 +2,15 @@ package com.inzynieria.insurance.service;
 
 
 import com.inzynieria.insurance.dto.UserDto;
+import com.inzynieria.insurance.model.Role;
 import com.inzynieria.insurance.model.User;
 import org.springframework.boot.context.config.ResourceNotFoundException;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.xml.bind.ValidationException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Interfejs zawierający
@@ -23,6 +26,8 @@ public interface UserService {
      * @throws ValidationException
      */
     void updateUser(UserDto user, Integer id) throws ValidationException;
+
+    void updatePassUser(UserDto user, Integer id, Set<Role> roles) throws ValidationException;
 
 //    User findOrCreateUserByUsername(String username) throws ResourceNotFoundException;
 //

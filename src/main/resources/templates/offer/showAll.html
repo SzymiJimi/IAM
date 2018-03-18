@@ -1,35 +1,34 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="app"  xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Dane użytkownika</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!DOCTYPE HTML>
 
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Zakład ubezpieczen</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../contract/newContractStyle.css">
+    <!--Ten navbar style musi być w każdym pliku html-->
     <link rel="stylesheet" href="../navBarStyle.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../client/clientDataStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-    <script src="/application/applicationDataController.js"  ></script>
+    <script src="/offer/showAllController.js"></script>
+    <!--Ten home service musi być zawsze-->
     <script src="../homeService.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
-
 </head>
 <body>
 
-<div class="container" ng-app="app">
+<div  class="container" ng-app="app">
 
-    <div ng-controller="applicationDataController" layout="column" ng-cloak>
+    <div ng-controller="showAllController" layout="column" ng-cloak>
 
         <!--Pasek nawigacji u góry-->
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
-                <a flex md-truncate href="/home" target="_self"> <h2 >Zakład ubezpieczeń</h2></a>
+                <a flex md-truncate href="/home"> <h2 >Zakład ubezpieczeń</h2></a>
                 <p>Zalogowany jako {{loggedUser.name}}</p>
                 <div class="dropdown">
                     <md-button ng-click="dropDown()" class="md-primary md-icon-button ">
@@ -37,7 +36,7 @@
                     </md-button>
                     <div id="myDropdown" class="dropdown-content">
                         <a th:href="@{/changePass}">Zmiana hasła</a>
-                        <a th:href="@{/logout}" target="_self">Wyloguj się</a>
+                        <a th:href="@{/logout}">Wyloguj się</a>
                     </div>
                 </div>
             </div>
@@ -64,59 +63,47 @@
                 </md-content>
             </md-sidenav>
 
+            <!--Tytuł strony pojawiający się na środku-->
             <md-content flex layout-padding>
-                <h3 style="color:blue; text-align: center;">Wyświetlanie danych wniosku</h3>
+                <h3 style="color:blue; text-align: center;">Dostępne oferty</h3>
                 <br><br>
-                <md-card md-theme="dark-blue" md-theme-watch>
+
+
+
+                <md-card ng-repeat="offer in offers | filter: {status: realStatus}"  md-theme-watch>
                     <md-card-title>
                         <md-card-title-text>
-                            <span class="md-headline">{{postResult.type}}</span>
-                            <span class="md-subhead">{{postResult.reason}}</span>
+
+                            <span class="md-headline">{{offer.name}}</span>
+                            <span class="md-subhead">{{offer.information}}</span>
                             <br><br>
-                            <span class="md-subhead">Data: <span class="md-headline">{{postResult.filling_date}}</span></span>
-                            <span class="md-subhead">Opis: <span class="md-headline">{{postResult.description}}</span></span>
-                            <span class="md-subhead">ID użytkownika <span class="md-headline">{{postResult.user_idUser}}</span></span>
+                            <span class="md-subhead">Typ: <span class="md-headline">{{offer.insurancetype}}</span></span>
+                            <span class="md-subhead">Czas trwania: <span class="md-headline">{{offer.duration}} miesięcy</span></span>
+                            <span class="md-subhead">Miesieczna skladka w pln: <span class="md-headline">{{offer.paymentAmount}}</span></span>
                         </md-card-title-text>
                     </md-card-title>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button>Action 1</md-button>
-                        <md-button>Action 2</md-button>
+                        <md-button ng-if="notification.status==='CREATED'"
+                                   ng-click="loadDetails(notification.idNotification)">Analizuj
+                        </md-button>
+                        <md-button ng-click="deleteFromList(offer.idOffer)">Ukryj</md-button>
+                        <md-button ng-click="interested(offer.idOffer, $event)">Zainteresowany(a)!</md-button>
                     </md-card-actions>
                 </md-card>
 
-
-
             </md-content>
-
-            <!--Wyświetlanie danych oferty-->
-
-            <!--<div  ng-controller="offerDataController" >-->
-            <!--<table >-->
-            <!--<tr>-->
-            <!--<td>Nazwa oferty:</td>-->
-            <!--<td>{{postResult.name}} </td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-            <!--<td>Informacje oferty:</td>-->
-            <!--<td>{{postResult.information}} </td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-            <!--<td>Czas trwania oferty:</td>-->
-            <!--<td>{{postResult.duration}} </td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-            <!--<td>Typ oferty:</td>-->
-            <!--<td>{{postResult.insurancetype}} </td>-->
-            <!--</tr>-->
-            <!--<tr>-->
-            <!--<td>Opłaty miesieczne:</td>-->
-            <!--<td>{{postResult.paymentAmount}}pln </td>-->
-            <!--</tr>-->
-
-            <!--</table>-->
         </section>
     </div>
-</div>
-</body>
 
+
+</div>
+
+
+
+
+
+
+
+
+</body>
 </html>

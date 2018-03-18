@@ -14,7 +14,7 @@ angular.module('app').service('homeService', function ($http, $window, $q) {
 
             var deffer = $q.defer();
 
-            var url = "http://localhost:8090/user/get";
+            var url = "/user/get";
 
             var config = {
                 headers : {
@@ -28,7 +28,7 @@ angular.module('app').service('homeService', function ($http, $window, $q) {
             }, function error(response) {
                 return null;
             }).then(function (roles) {
-                url = "http://localhost:8090/role/get";
+                url = "/role/get";
 
                 $http.post(url, roles ,config).then(function (response) {
                     angular.copy(response.data,commands);
@@ -50,7 +50,7 @@ angular.module('app').service('homeService', function ($http, $window, $q) {
                     Accept: undefined
                 }
             };
-        var url = "http://localhost:8090/role/run/"+idCommand;
+        var url = "/role/run/"+idCommand;
         $http.get(url, config).then(function (response) {
             $window.location.href =response.data;
         });

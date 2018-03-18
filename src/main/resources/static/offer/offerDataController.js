@@ -13,7 +13,7 @@ app.controller('offerDataController', ['$scope', '$location', '$http', 'homeServ
 
     var splitData = $location.path().split('/');
     var value = splitData[3];
-    var url = "http://localhost:8090/offer/show";
+    var url = "/offer/show";
 
     var config = {
         headers : {

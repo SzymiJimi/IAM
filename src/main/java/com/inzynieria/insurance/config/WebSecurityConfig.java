@@ -51,7 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/navBarStyle.css").anonymous()
+                .antMatchers("/loginController.js").anonymous()
                 .antMatchers("/navBarStyle.css").permitAll()
+                .antMatchers("/loginController.js").permitAll()
                 .antMatchers("/login/*").anonymous()
                 .antMatchers("/order/*").anonymous()
                 .antMatchers("/login").permitAll()
@@ -66,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe().tokenValiditySeconds(2419200).key("iamKey")
                 .and()
-                .logout().logoutSuccessUrl("/login");
+                .logout().logoutSuccessUrl("/");
     }
 
 }

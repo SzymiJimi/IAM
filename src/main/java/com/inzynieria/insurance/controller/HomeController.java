@@ -216,5 +216,16 @@ public class HomeController {
         return "client/homeReserve";
     }
 
+    @RequestMapping(value= "/show/offers")
+    public String showOffers()
+    {
+        return "offer/showAll";
+    }
+
+    @RequestMapping(value="/changePass")
+    public String changePassword(){
+        return "user/changePass";
+    }
+
 
 }

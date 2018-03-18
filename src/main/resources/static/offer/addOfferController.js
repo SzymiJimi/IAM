@@ -43,7 +43,7 @@ app.controller('addOfferController', function($scope, $http, $filter,$timeout, $
             .ok('Ok!');
 
         $mdDialog.show(confirm).then(function () {
-            $window.location.href = "http://localhost:8090/home"
+            $window.location.href = "/home"
         });
 
     };
@@ -58,7 +58,7 @@ app.controller('addOfferController', function($scope, $http, $filter,$timeout, $
             }
         };
 
-        var url = "http://localhost:8090/offer/add";
+        var url = "/offer/add";
         console.log("SubmitForm");
 
         // data.idOffer=idOffer;

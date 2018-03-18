@@ -14,6 +14,7 @@ import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Klasa serwisowa obsługująca użytkownika
@@ -43,13 +44,34 @@ public class UserServiceImpl implements UserService {
         for (RoleDto roleDto : dtoRoleList) {
             roleList.add(new Role(roleDto.getIdRole(), roleDto.getName()));
         }
-
         user.setRoles(new HashSet<>(roleList));
         user.setPassword(userDto.getPassword());
         user.setName(userDto.getName());
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
         userRepository.save(user);
+    }
+
+    @Override
+    public void updatePassUser(UserDto userDto, Integer id, Set<Role> roles) throws ValidationException{
+        if (id == null) {
+            throw new ValidationException("User ID cannot be null");
+        }
+        if (userDto == null) {
+            throw new ValidationException("usersDto cannot be null");
+        }
+        User user = userRepository.findOne(id);
+        user.setRoles(roles);
+        user.setPassword(userDto.getPassword());
+        user.setName(userDto.getName());
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        try{
+            userRepository.save(user);
+        }catch (Exception e)
+        {
+            LOGGER.info("Coś poszło nie tak: "+e.toString());
+        }
     }
 
     @Override

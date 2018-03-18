@@ -50,6 +50,8 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     User findOneClient(@Param("data") Integer data);
 
 
+    User findByPassword(String password);
+
 //    @Query(value= "SELECT  u.idUser, u.username, u.password, u.name, u.surname, u.email, u.idRole from User u, UserRoles where u.idUser=userRoles.USER_IDUSER AND userRoles.name = 'ROLE_CLIENT'", nativeQuery = true)
 //    List<User> findAllClients();
 

@@ -38,7 +38,7 @@ app.controller('findClientController', [
 
 
         $scope.submitForm = function(value){
-            var url = "http://localhost:8090/client/find";
+            var url = "/client/find";
 
             // var value = $scope.name;
             console.log(value);
@@ -56,7 +56,7 @@ app.controller('findClientController', [
         };
 
         $scope.selectUser = function(id){
-            url = "http://localhost:8090/client/show/"+id;
+            url = "/client/show/"+id;
             $window.location.href =url;
         }
     }]);

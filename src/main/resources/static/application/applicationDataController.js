@@ -13,7 +13,7 @@ app.controller('applicationDataController', ['$scope', '$location', '$http', 'ho
 
     var splitData = $location.path().split('/');
     var value = splitData[3];
-    var url = "http://localhost:8090/application/show";
+    var url = "/application/show";
 
     var config = {
         headers : {

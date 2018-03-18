@@ -45,7 +45,7 @@ public class ViewNotification implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/show/notifications";
+        return "/show/notifications";
     }
 
 }

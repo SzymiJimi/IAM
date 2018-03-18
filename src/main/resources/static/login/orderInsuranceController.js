@@ -13,25 +13,30 @@ app.controller('orderInsuranceController', function($scope, $http, $window, $mdD
     $scope.phone="";
     $scope.postalCode="";
     $scope.postResultMessage="";
+    $scope.orderLoading=false;
+    $scope.loadEmpty=true;
+
 
     $scope.showAlert= function (ev) {
 
         var confirm = $mdDialog.confirm()
             .title('Zamówienie zostało pomyślnie stworzone')
-            .textContent('Powróć na stronę główną')
+            .textContent($scope.postResultMessage)
             .ariaLabel('Alert Dialog Demo')
             .targetEvent(ev)
             .ok('Ok!');
 
         $mdDialog.show(confirm).then(function() {
-            $window.location.href ="http://localhost:8090"
+            $window.location.href ="/"
         });
 
     };
 
     $scope.submitOrder= function(ev){
-        var url = "http://localhost:8090/order/create";
-        console.log("jestem w dodawaniu");
+        $scope.orderLoading=true;
+        $scope.loadEmpty=false;
+        var url = "/order/create";
+
         var order= {
             name: $scope.name,
             surname: $scope.surname,
@@ -41,8 +46,8 @@ app.controller('orderInsuranceController', function($scope, $http, $window, $mdD
         };
 
         $http.post(url, order, config).then(function (response) {
+            $scope.orderLoading=false;
             $scope.postResultMessage = response.data;
-            console.log(response.data);
             $scope.showAlert(ev);
         }, function error(response) {
             $scope.postResultMessage = "Error with status: " +  response.statusText;

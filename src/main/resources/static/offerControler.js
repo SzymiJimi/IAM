@@ -6,7 +6,7 @@
         $scope.acceptForm = function () {
 
             $scope.postMessage = "";
-            var url = "http://localhost:8090/offer/add";
+            var url = "/offer/add";
             var config = {
                 headers: {
                     Accept: 'text/html'

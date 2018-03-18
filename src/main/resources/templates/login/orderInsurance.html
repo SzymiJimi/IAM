@@ -6,9 +6,9 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://localhost:8090/navBarStyle.css">
+    <link rel="stylesheet" type="text/css" href="../navBarStyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-    <script type="text/javascript" th:src="@{http://localhost:8090/login/orderInsuranceController.js}"></script>
+    <script type="text/javascript" th:src="@{../login/orderInsuranceController.js}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-aria.min.js"></script>
@@ -25,9 +25,9 @@
         <!--Pasek nawigacji u góry-->
         <md-toolbar class="md-hue-2 fixed-top">
             <div class="md-toolbar-tools">
-                <a flex md-truncate href="http://localhost:8090"><h2>Zakład ubezpieczeń</h2></a>
+                <a flex md-truncate href="/"><h2>Zakład ubezpieczeń</h2></a>
                 <!--<div flex-gt-sm="5" ></div>-->
-                <md-button md-truncate href="http://localhost:8090/login"
+                <md-button md-truncate href="/login"
                            title="Zaloguj się"
                            aria-label="Login"
                            class="md-icon-button"
@@ -100,7 +100,8 @@
                         </div>
                     </div>
                 </md-input-container>
-                <md-button md-no-ink ng-disabled="order.$invalid" ng-click="submitOrder($event)" class="md-raised md-primary">Zamów</md-button>
+                <div ng-if="orderLoading" class="loader"></div>
+                <md-button ng-if="loadEmpty" md-no-ink ng-disabled="order.$invalid" ng-click="submitOrder($event)" class="md-raised md-primary" style="margin-left: 40%">Zamów</md-button>
             </form>
                 <div flex-gt-sm="6">
                 </div>

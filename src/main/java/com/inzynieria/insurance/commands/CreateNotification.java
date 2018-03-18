@@ -45,6 +45,6 @@ public class CreateNotification implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/new/notification";
+        return "/new/notification";
     }
 }

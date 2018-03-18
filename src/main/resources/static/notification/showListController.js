@@ -31,13 +31,13 @@ app.controller('showListController', function ($scope, $http, $window, $timeout,
 
 
     function loadAll() {
-        var url = "http://localhost:8090/client/getList";
+        var url = "/client/getList";
         var tmp;
         var allStates = [];
         $http.get(url, config).then(function (response) {
             allStates = response.data;
             self.states = allStates.map(function (state) {
-                url = "http://localhost:8090/client/findOne/" + state.userId;
+                url = "/client/findOne/" + state.userId;
                 var value = $http.get(url, config).then(function (response) {
                     var deffer = $q.defer();
                     tmp = response.data;
@@ -137,7 +137,7 @@ app.controller('showListController', function ($scope, $http, $window, $timeout,
     };
 
     $scope.loadUserNotification = function (pesel) {
-        var url = "http://localhost:8090/notification/getUserNotification";
+        var url = "/notification/getUserNotification";
         $http.post(url, pesel, config).then(function (response) {
             $scope.notifications = response.data;
         }, function (error) {
@@ -145,13 +145,13 @@ app.controller('showListController', function ($scope, $http, $window, $timeout,
     };
 
     $scope.loadDetails = function (id) {
-        var url = "http://localhost:8090/notification/show/" + id;
+        var url = "/notification/show/" + id;
         $window.location.href = url;
     };
 
     $scope.loadNotifications = function () {
 
-        var url = "http://localhost:8090/notification/getList";
+        var url = "/notification/getList";
 
         $http.get(url, config).then(function (response) {
             $scope.notifications = response.data;

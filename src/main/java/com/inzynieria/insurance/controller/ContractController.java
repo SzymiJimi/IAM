@@ -74,7 +74,7 @@ public class ContractController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             User user = userRepository.findByUsername(currentPrincipalName);
-            SendMailService sendMailService = new SendMailService(user.getEmail(), "Dodano nową umowę o numerze: "+ contract.getIdContract()+ " \nDziękujemy za skorzystanie z usług naszej agencji ubezpieczeniowej");
+            SendMailService sendMailService = new SendMailService(user.getEmail(), "Dodano nową umowę o numerze: "+ contract.getIdContract()+ " \nDziękujemy za skorzystanie z usług naszej agencji ubezpieczeniowej", "Potwierdzenie utworzenia umowy");
             sendMailService.send();
             return "Zarejestrowano pomyślnie";
         }

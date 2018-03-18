@@ -33,13 +33,14 @@ public class CommandsConfig {
         CreateContract createContract = new CreateContract(2, "Stwórz umowę");
         FindApplications findApplications = new FindApplications(80, "Przeglądaj wnioski");
         AddApplication addApplication = new AddApplication(81, "Złóż wniosek");
-
         AddClient addClient=new AddClient(3, "Dodaj klienta");
         CreateNotification createNotification = new CreateNotification(5, "Zgłoszenie zdarzenia");
         ViewNotification viewNotification = new ViewNotification(6, "Przeglądaj zgłoszenia");
         CheckInsurance checkInsurance = new CheckInsurance(7, "Sprawdź czy ubezpieczony");
         AddOffer addOffer=new AddOffer(41, "Dodaj ofertę");
         FindOffer findOffer= new FindOffer(42, "Wyszukaj oferty");
+        ShowOffers showOffers= new ShowOffers(8, "Przeglądanie ofert");
+
         commandList.add(findClient);
         commandList.add(createContract);
         commandList.add(createNotification);
@@ -50,6 +51,7 @@ public class CommandsConfig {
         commandList.add(addClient);
         commandList.add(findApplications);
         commandList.add(addApplication);
+        commandList.add(showOffers);
     }
 
     /**

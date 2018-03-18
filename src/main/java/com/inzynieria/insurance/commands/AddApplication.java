@@ -52,6 +52,6 @@ public class AddApplication implements CommandInterface {
      */
     public String execute(){
         LOGGER.info("Jestem w wyłołaniu dodawania wniosku");
-        return "http://localhost:8090/application/applicationAdd";
+        return "/application/applicationAdd";
     }
 }

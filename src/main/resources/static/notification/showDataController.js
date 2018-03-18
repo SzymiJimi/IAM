@@ -44,19 +44,19 @@ app.controller('showDataController', function($scope, $http, $window,$location,$
     $scope.initialize= function () {
         var splitData = $location.path().split('/');
         var value = splitData[3];
-        var url = "http://localhost:8090/notification/show";
+        var url = "/notification/show";
         $http.post(url, value, config).then(function (response) {
             $scope.notificationData = response.data;
         }).then(function (id) {
-            url = "http://localhost:8090/contract/get/"+$scope.notificationData.idContract;
+            url = "/contract/get/"+$scope.notificationData.idContract;
             $http.get(url, config).then(function (response) {
                 $scope.contract = response.data;
             }).then(function (id) {
-                url = "http://localhost:8090/user/findOne/"+$scope.contract.idUser;
+                url = "/user/findOne/"+$scope.contract.idUser;
                 $http.get(url, config).then(function (response) {
                     $scope.userData = response.data;
                 }).then(function (id) {
-                    url = "http://localhost:8090/clientData/find/"+$scope.contract.idUser;
+                    url = "/clientData/find/"+$scope.contract.idUser;
                     $http.get(url, config).then(function (response) {
                         $scope.clientData = response.data;
                     })
@@ -75,12 +75,12 @@ app.controller('showDataController', function($scope, $http, $window,$location,$
             .ok('Powrót na stronę główną');
 
         $mdDialog.show(confirm).then(function () {
-            $window.location.href = "http://localhost:8090/home"
+            $window.location.href = "/home"
         });
     };
 
     $scope.delete = function (ev, id) {
-        var url = "http://localhost:8090/notification/delete";
+        var url = "/notification/delete";
         $http.post(url, id, config).then(function (response) {
             $scope.result="Sukces!";
             $scope.postResultMessage="Usunięcie zakończone pozytywnie!";
@@ -91,7 +91,7 @@ app.controller('showDataController', function($scope, $http, $window,$location,$
 
 
     $scope.redirectNotification = function (id, ev) {
-        var url = "http://localhost:8090/notification/redirect";
+        var url = "/notification/redirect";
         $http.post(url, id, config).then(function (response) {
             $scope.result="Sukces!";
             $scope.postResultMessage=response.data;

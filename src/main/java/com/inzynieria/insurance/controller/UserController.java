@@ -14,6 +14,8 @@ import com.inzynieria.insurance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -71,12 +74,14 @@ public class UserController {
     public String createUser(@RequestBody User user){
 
         LOGGER.info("Dodawanie informacji użytkownika do bazy");
+        String password= user.getPassword();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User userRet =userRepository.save(user);
         UserRoles userRoles = new UserRoles("Nowy",userRet.getIdUser() ,12);
         if(userRolesRepository.save(userRoles)!= null)
         {
-            SendMailService sendMailService = new SendMailService(user.getEmail(), "Witamy w agencji ubezpieczeniowej"+ user.getName()+ " " + user.getSurname() );
+            SendMailService sendMailService = new SendMailService(user.getEmail(), "Witamy w agencji ubezpieczeniowej "+ user.getName()+ " " + user.getSurname()+
+                    "\nTwoje dane do logowania to: \nLogin: "+ user.getUsername()+ "\nhasło: "+password+"\nZalecana jest zmiana hasła po pierwszym zalogowaniu", "Witaj w IAM" );
             sendMailService.send();
             return "Zarejestrowano pomyślnie";
         }else{
@@ -167,6 +172,65 @@ public class UserController {
 
         return new UserDto(user.getIdUser(), user.getUsername(), "#", user.getName(), user.getSurname(), user.getEmail(), list);
     }
+
+    @RequestMapping(value="/checkOldPass")
+    public ResponseEntity checkOldPass(@RequestBody String value) {
+        try{
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name= auth.getName();
+            User loggedUser = userRepository.findByUsername(name);
+//            LOGGER.info("Hasło z bazy: "+loggedUser.getPassword() );
+//            LOGGER.info("Hasło podane: "+value );
+            if(passwordEncoder.matches(value, loggedUser.getPassword()))
+            {
+                return ResponseEntity.status(HttpStatus.OK).body("Stare hasło poprawne!");
+            }else {
+                throw new Exception();
+            }
+        }catch(Exception e) {
+            LOGGER.info("Niepoprawne stare hasło...");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Niepoprawne stare hasło...");
+        }
+    }
+
+
+    @RequestMapping(value="/changePass")
+    public ResponseEntity changePass(@RequestBody String pass) {
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String name = auth.getName();
+            User loggedUser = userRepository.findByUsername(name);
+
+            UserDto userToUpdate = new UserDto();
+            userToUpdate.setIdUser(loggedUser.getIdUser());
+            userToUpdate.setUsername(loggedUser.getUsername());
+            String newPass= passwordEncoder.encode(pass);
+            LOGGER.info("Nowe hasło niezakodowane: "+ pass+"--");
+            LOGGER.info("Nowe hasło zakodowane: "+ newPass);
+            if(passwordEncoder.matches(pass, newPass))
+             {
+            LOGGER.info("Hasła pasują...");
+            }else {
+                LOGGER.info("Hasła niepasują...");
+
+            }
+            userToUpdate.setPassword(passwordEncoder.encode(pass));
+            userToUpdate.setName(loggedUser.getName());
+            userToUpdate.setSurname(loggedUser.getSurname());
+            userToUpdate.setEmail(loggedUser.getEmail());
+            userToUpdate.setRoles(new ArrayList<>());
+            try {
+                userService.updatePassUser(userToUpdate, loggedUser.getIdUser(), loggedUser.getRoles());
+                return ResponseEntity.status(HttpStatus.OK).body("Zaaktualizowano pomyślnie!");
+            } catch (Exception e) {
+                LOGGER.info("Nie można zaaktualizować: "+e.toString());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Błąd aktualizacji...");
+
+            }
+
+    }
+
 
 
 }

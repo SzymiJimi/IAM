@@ -44,7 +44,7 @@ public class ApplicationController {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             User user = userRepository.findByUsername(currentPrincipalName);
-            SendMailService sendMailService = new SendMailService(user.getEmail(), "Wysłano wniosek dnia: "+ application.getFilling_date() + "\nDziękujemy!");
+            SendMailService sendMailService = new SendMailService(user.getEmail(), "Wysłano wniosek dnia: "+ application.getFilling_date() + "\nDziękujemy!", "Zgłoszenie wyslania wniosku");
             sendMailService.send();
             return "Dodano wniosek pomyślnie";
         }

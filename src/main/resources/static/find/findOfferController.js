@@ -38,7 +38,7 @@ app.controller('findOfferController', [
             document.getElementById("myDropdown").classList.toggle("show");
         };
         $scope.submitForm = function(value){
-            var url = "http://localhost:8090/offer/find";
+            var url = "/offer/find";
             $scope.postResult=[];
 
             findOfferService.findOfferInDB(url, value, config).then(function (result) {
@@ -53,7 +53,7 @@ app.controller('findOfferController', [
         };
 
         $scope.selectOffer = function(id){
-            url = "http://localhost:8090/offer/show/"+id;
+            url = "/offer/show/"+id;
             $window.location.href =url;
         }
     }]);

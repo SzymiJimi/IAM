@@ -42,6 +42,6 @@ public class CreateContract implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/new/contract";
+        return "/new/contract";
     }
 }

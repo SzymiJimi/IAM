@@ -11,26 +11,16 @@ angular.module('app').service('notificationService', function ($http, $window, $
             Accept: undefined
         }
     };
-        //
-    // userResult:userResult,
-    // userLoaded:userLoaded,
-    // isInsuranced:isInsuranced,
-    // clientData:clientData,
-    // contracts:contracts,
+
 
         this.getUser=function (email) {
             console.log("getUser");
             console.log(email);
             var deffer = $q.defer();
-            var url = "http://localhost:8090/client/find";
+            var url = "/client/find";
             $http.post(url, email, config).then(function (response) {
                 this.userResult = response.data[0];
                 console.log( userResult);
-                // if (response.data.length !== 0) {
-                //     $scope.userResponse = "Znaleziono użytkownika";
-                // } else {
-                //     $scope.userResponse = "Nie znaleziono użytkownika";
-                // }
                 this.userLoaded = false;
                 console.log("Przed resolve w getUser");
                 console.log( userResult.idUser);
@@ -43,7 +33,7 @@ angular.module('app').service('notificationService', function ($http, $window, $
             console.log("loadContract");
             console.log(idUser);
             var deffer = $q.defer();
-            var url = "http://localhost:8090/contract/find/" + idUser;
+            var url = "/contract/find/" + idUser;
             $http.get(url, config).then(function (response) {
                 this.isInsuranced = response.data;
                 console.log("Przed resolve w loadContract");
@@ -58,7 +48,7 @@ angular.module('app').service('notificationService', function ($http, $window, $
             console.log("loadClientData");
             console.log(idUser);
             var deffer = $q.defer();
-            var url = "http://localhost:8090/clientData/find/" + idUser;
+            var url = "/clientData/find/" + idUser;
             $http.get(url, config).then(function (response) {
                 this.clientData = response.data;
                 console.log("Przed resolve w loadClientData");
@@ -73,7 +63,7 @@ angular.module('app').service('notificationService', function ($http, $window, $
             console.log("loadContractList");
             console.log(idUser);
             var deffer = $q.defer();
-            var url = "http://localhost:8090/contract/getList/" + idUser;
+            var url = "/contract/getList/" + idUser;
             $http.get(url, config).then(function (response) {
                 this.contracts = response.data;
                 console.log("Przed resolve w LoadContractList");

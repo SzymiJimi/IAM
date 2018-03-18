@@ -45,7 +45,7 @@ public class CheckInsurance implements CommandInterface {
     }
 
     public String execute(){
-        return "http://localhost:8090/client/checkInsurance";
+        return "/client/checkInsurance";
     }
 
 }

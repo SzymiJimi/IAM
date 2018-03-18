@@ -16,7 +16,7 @@ app.controller('clientDataController', ['$scope', '$location', '$http', 'homeSer
 
     var splitData = $location.path().split('/');
     var value = splitData[3];
-    var url = "http://localhost:8090/client/show";
+    var url = "/client/show";
 
 
         var config = {

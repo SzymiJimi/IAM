@@ -45,6 +45,6 @@ public class AddOffer implements CommandInterface {
 
     public String execute(){
         LOGGER.info("Wywolano  offeradd");
-        return "http://localhost:8090/new/offer";
+        return "/new/offer";
     }
 }

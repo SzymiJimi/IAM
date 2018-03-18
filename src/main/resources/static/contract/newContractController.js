@@ -63,13 +63,13 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
             .ok('Ok!');
 
         $mdDialog.show(confirm).then(function() {
-            $window.location.href ="http://localhost:8090/home"
+            $window.location.href ="/home"
         });
 
     };
     $scope.loadOffer = function (id){
 
-        var url = "http://localhost:8090/offer/findOne";
+        var url = "/offer/findOne";
         idOffer = id;
         $http.post(url,id, config).then(function (response) {
             $scope.offerResult = response.data;
@@ -80,7 +80,7 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
     };
 
     that.loadClientData= function (userId) {
-        var url = "http://localhost:8090/clientData/find/"+userId;
+        var url = "/clientData/find/"+userId;
         $http.get(url, config).then(function (response) {
             $scope.clientDataResponse = response.data;
             if(response.data.length!==0) {
@@ -101,7 +101,7 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
     $scope.loadUser = function (email){
 
         console.log(email);
-        var url = "http://localhost:8090/client/find";
+        var url = "/client/find";
         $http.post(url,email, config).then(function (response) {
             $scope.userResult = response.data;
             console.log(response.data[0]);
@@ -141,7 +141,7 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
             }
         };
 
-        var url = "http://localhost:8090/clientData/add";
+        var url = "/clientData/add";
         data.idUser=$scope.userId;
         data.idOffer=idOffer;
         console.log(data);
@@ -170,7 +170,7 @@ app.controller('newContractController', function($scope, $http, $filter,$timeout
         }
 
 
-        url = "http://localhost:8090/contract/add";
+        url = "/contract/add";
 
         $http.post(url, data, config).then(function (response) {
             $scope.postResultMessage = response.data;
