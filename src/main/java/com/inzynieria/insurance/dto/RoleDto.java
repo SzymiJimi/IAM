@@ -10,7 +10,6 @@ import lombok.Data;
  * Uławia to sparsowanie obiektu do JSONa.
  */
 @Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class RoleDto {
 
     private Integer idRole;

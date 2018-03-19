@@ -1,6 +1,7 @@
 package com.inzynieria.insurance.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Observable;
 
+@EqualsAndHashCode(callSuper=false)
 @Data
 @Entity
 public class Payments extends Observable {

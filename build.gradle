@@ -10,6 +10,7 @@ buildscript {
 	}
 }
 
+apply plugin: 'war'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -24,9 +25,16 @@ repositories {
 	mavenCentral()
 }
 
+war {
+	archiveName 'hello-gradle.war'
+}
+
 
 dependencies {
-
+	compile files("${System.properties['java.home']}/../lib/tools.jar")
+	compile 'javax.servlet:jstl:1.2'
+	providedCompile 'javax.servlet:servlet-api:2.5'
+	providedCompile 'org.apache.tomcat:tomcat-jsp-api:7.0.55'
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-cache')

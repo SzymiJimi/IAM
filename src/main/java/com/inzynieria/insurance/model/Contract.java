@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.inzynieria.insurance.service.GeneratePaymentsService;
 import com.inzynieria.insurance.service.GeneratePaymentsServiceImpl;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import java.util.Date;
  * Klasa modelowa, która odwzorowuje encję umowa (contract) w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
  */
 import java.util.Observable;
+@EqualsAndHashCode(callSuper=false)
 @Data
 @Entity
 public class Contract extends Observable {

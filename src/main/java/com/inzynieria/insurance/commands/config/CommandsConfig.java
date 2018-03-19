@@ -40,6 +40,8 @@ public class CommandsConfig {
         AddOffer addOffer=new AddOffer(41, "Dodaj ofertę");
         FindOffer findOffer= new FindOffer(42, "Wyszukaj oferty");
         ShowOffers showOffers= new ShowOffers(8, "Przeglądanie ofert");
+        ChangeAgentPermission changeAgentPermission = new ChangeAgentPermission(10,"Cofnij uprawnienia");
+        ChangeClientPermission changeClientPermission = new ChangeClientPermission(9, "Poproś o uprawnienia");
 
         commandList.add(findClient);
         commandList.add(createContract);
@@ -52,6 +54,10 @@ public class CommandsConfig {
         commandList.add(findApplications);
         commandList.add(addApplication);
         commandList.add(showOffers);
+        commandList.add(changeAgentPermission);
+        commandList.add(changeClientPermission);
+
+
     }
 
     /**

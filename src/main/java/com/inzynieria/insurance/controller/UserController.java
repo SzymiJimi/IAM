@@ -6,6 +6,7 @@ import com.inzynieria.insurance.dto.UserDto;
 import com.inzynieria.insurance.model.Role;
 import com.inzynieria.insurance.model.User;
 import com.inzynieria.insurance.model.UserRoles;
+import com.inzynieria.insurance.model.UserRolesPK;
 import com.inzynieria.insurance.repository.RoleRepository;
 import com.inzynieria.insurance.repository.UserRepository;
 import com.inzynieria.insurance.repository.UserRolesRepository;
@@ -59,6 +60,7 @@ public class UserController {
      */
     @Autowired
     UserRolesRepository userRolesRepository;
+
     /**
      * Wykorzystywane do szyfrowania hasła
      */
@@ -78,16 +80,18 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User userRet =userRepository.save(user);
         UserRoles userRoles = new UserRoles("Nowy",userRet.getIdUser() ,12);
-        if(userRolesRepository.save(userRoles)!= null)
-        {
+        try{
+            userRolesRepository.save(userRoles);
             SendMailService sendMailService = new SendMailService(user.getEmail(), "Witamy w agencji ubezpieczeniowej "+ user.getName()+ " " + user.getSurname()+
                     "\nTwoje dane do logowania to: \nLogin: "+ user.getUsername()+ "\nhasło: "+password+"\nZalecana jest zmiana hasła po pierwszym zalogowaniu", "Witaj w IAM" );
             sendMailService.send();
             return "Zarejestrowano pomyślnie";
-        }else{
-            return "Błąd tworzenia nowego użytkownika";
-        }
+        }catch(Exception e){
 
+            LOGGER.info("Nie udało się utworzyć nowego użytkownika...");
+            LOGGER.info(e.toString());
+            return "Nie udało się utworzyć nowego użytkownika...";
+        }
 
     }
 
@@ -229,6 +233,45 @@ public class UserController {
 
             }
 
+    }
+
+    @RequestMapping(value="/getPerks")
+    public ResponseEntity getPerks() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name= auth.getName();
+        try{
+
+            User loggedUser = userRepository.findByUsername(name);
+            userRolesRepository.deleteData(loggedUser.getIdUser());
+            UserRoles userRoles = new UserRoles("Aktualizacja",loggedUser.getIdUser() ,11);
+            UserRoles userRoles1 = new UserRoles("Aktualizacja",loggedUser.getIdUser() ,15);
+            userRolesRepository.save(userRoles);
+            userRolesRepository.save(userRoles1);
+            return ResponseEntity.status(HttpStatus.OK).body("Zaaktualizowano pomyślnie!");
+
+        }catch(Exception e) {
+            LOGGER.info(e.toString());
+            LOGGER.info("Nie udało się zaaktualizować");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nie udało się zaaktualizować...");
+        }
+    }
+
+    @RequestMapping(value="/removePerks")
+    public ResponseEntity removePerks() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name= auth.getName();
+        try{
+            User loggedUser = userRepository.findByUsername(name);
+            userRolesRepository.deleteData(loggedUser.getIdUser());
+            UserRoles userRoles = new UserRoles("Aktualizacja",loggedUser.getIdUser() ,12);
+            userRolesRepository.save(userRoles);
+            return ResponseEntity.status(HttpStatus.OK).body("Zaaktualizowano pomyślnie!");
+
+        }catch(Exception e) {
+            LOGGER.info(e.toString());
+            LOGGER.info("Nie udało się zaaktualizować");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nie udało się zaaktualizować...");
+        }
     }
 
 

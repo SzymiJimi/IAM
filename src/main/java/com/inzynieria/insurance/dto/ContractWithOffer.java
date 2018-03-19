@@ -15,7 +15,6 @@ import javax.persistence.Id;
  * encji wykonywane jest na poziomie kodu Javy unikając w ten sposób, łączenia tych obiektów w AngularzeJS.
  */
 @Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class ContractWithOffer {
 
     private Integer idContract;

@@ -6,8 +6,6 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
-
 /**
  * Klasa modelowa, która odwzorowuje encję wniosków w bazie danych. Jest ona niezbędna jeśli w projekcie chcemy korzystać z frameworka Hibrenate.
  */

@@ -11,7 +11,6 @@ import java.util.List;
  * z inną tabelą. Uławia to sparsowanie obiektu do JSONa.
  */
 @Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserDto {
 
     private Integer idUser;

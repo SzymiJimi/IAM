@@ -227,5 +227,17 @@ public class HomeController {
         return "user/changePass";
     }
 
+    @RequestMapping(value="/getPermission")
+    public String getPermission()
+    {
+        return "user/getPermission";
+    }
+
+    @RequestMapping(value="/removePermission")
+    public String removePermission()
+    {
+        return "user/removePermission";
+    }
+
 
 }
