@@ -38,8 +38,7 @@ public class SendMailService {
 
 //        final String username = "insurance.application@insurance.com";
 //        final String password = "fikcja";
-        final String username = "rekas1@tlen.pl";
-        final String password = "Rekas:2@";
+
 
 //        Properties props = new Properties();
 //        props.put("mail.smtp.auth", "true");
