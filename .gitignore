@@ -87,7 +87,7 @@ fabric.properties
 # .idea/misc.xml
 # *.ipr
 
-# src/**/SendMailService.java
+src/**/SendMailService.java
 
 # Sonarlint plugin
 .idea/sonarlint
