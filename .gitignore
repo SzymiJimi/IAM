@@ -9,7 +9,7 @@
 .project
 .settings
 .springBeans
-
+src/main/java/com/inzynieria/insurance/service/SendMailService.java
 ### IntelliJ IDEA ###
 .idea
 *.iws
